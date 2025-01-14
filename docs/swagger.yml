@@ -1,0 +1,263 @@
+openapi: 3.0.3
+info:
+  title: Author API
+  description: API para gestionar Authores.
+  version: 1.0.0
+
+servers:
+  - url: http://api.example.com/v1
+    description: Optional server description, e.g. Main (production) server
+  - url: http://staging-api.example.com
+    description: Optional server description, e.g. Internal staging server for testing
+
+paths:
+  /Authors:
+    get:
+      summary: Gets all Authors.
+      description: |
+        Devuelve una lista de todos los Authores disponibles.
+        Se puede usar Markdown para enriquecer el contenido.
+      operationId: getAllAuthors
+      tags:
+        - Authors
+      responses:
+        200:
+          description: Lista de Authores obtenida exitosamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/Author'
+    post:
+      summary: Creates a new Author.
+      description: >
+        A detailed description of the operation.
+        GitHub Flavored Markdown can be used for rich text representation,
+        such as **bold**, *italic* and [links](https://swagger.io).
+      operationId: createAuthor
+      tags:
+        - Authors
+      requestBody:
+        description: Datos del Author a crear.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/Author'
+      responses:
+        201:
+          description: Author creado exitosamente.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Author'
+  /Authors/{id}:
+    get:
+      summary: Gets an Author by ID.
+      description: Obtiene los detalles de un Author específico.
+      operationId: getAuthorById
+      tags:
+        - Authors
+      parameters:
+        - name: id
+          in: path
+          description: ID del Author.
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Author obtenido exitosamente.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Author'
+        404:
+          description: Author no encontrado.
+    put:
+      summary: Updates an Author by ID.
+      description: Actualiza la información de un Author existente.
+      operationId: updateAuthor
+      tags:
+        - Authors
+      parameters:
+        - name: id
+          in: path
+          description: ID del Author a actualizar.
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Datos actualizados del Author.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/Author'
+      responses:
+        200:
+          description: Author actualizado exitosamente.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Author'
+        404:
+          description: Author no encontrado.
+    delete:
+      summary: Deletes an Author by ID.
+      description: Elimina un Author específico por su ID.
+      operationId: deleteAuthor
+      tags:
+        - Authors
+      parameters:
+        - name: id
+          in: path
+          description: ID del Author a eliminar.
+          required: true
+          schema:
+            type: integer
+      responses:
+        204:
+          description: Author eliminado exitosamente.
+        404:
+          description: Author no encontrado.
+  /Books:
+    get:
+      summary: Gets all Books.
+      description: |
+        Devuelve una lista de todos los libros disponibles.
+        Se puede usar Markdown para enriquecer el contenido.
+      operationId: getAllBooks
+      tags:
+        - Books
+      responses:
+        200:
+          description: Lista de libros obtenida exitosamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/Book'
+    post:
+      summary: Creates a new Book.
+      description: Agrega un nuevo libro al sistema.
+      operationId: createBook
+      tags:
+        - Books
+      requestBody:
+        description: Datos del libro a crear.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/Book'
+      responses:
+        201:
+          description: Libro creado exitosamente.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Book'
+  /Books/{id}:
+    get:
+      summary: Gets a Book by ID.
+      description: Obtiene los detalles de un libro específico.
+      operationId: getBookById
+      tags:
+        - Books
+      parameters:
+        - name: id
+          in: path
+          description: ID del libro.
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Libro obtenido exitosamente.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Book'
+        404:
+          description: Libro no encontrado.
+    put:
+      summary: Updates a Book by ID.
+      description: Actualiza la información de un libro existente.
+      operationId: updateBook
+      tags:
+        - Books
+      parameters:
+        - name: id
+          in: path
+          description: ID del libro a actualizar.
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Datos actualizados del libro.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/Book'
+      responses:
+        200:
+          description: Libro actualizado exitosamente.
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Book'
+        404:
+          description: Libro no encontrado.
+    delete:
+      summary: Deletes a Book by ID.
+      description: Elimina un libro específico por su ID.
+      operationId: deleteBook
+      tags:
+        - Books
+      parameters:
+        - name: id
+          in: path
+          description: ID del libro a eliminar.
+          required: true
+          schema:
+            type: integer
+      responses:
+        204:
+          description: Libro eliminado exitosamente.
+        404:
+          description: Libro no encontrado.
+
+definitions:
+  Author:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    required:
+      - id
+      - name
+  Book:
+    type: object
+    properties:
+      id:
+        type: integer
+        example: 101
+      title:
+        type: string
+        example: Cien Años de Soledad
+      author:
+        type: string
+        example: Gabriel García Márquez
+      publishedDate:
+        type: string
+        format: date
+        example: 1967-05-30
+    required:
+      - id
+      - title

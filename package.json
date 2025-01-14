@@ -1,0 +1,48 @@
+{
+  "name": "back.hexagonal",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "migrate:dev": "npx prisma migrate dev --name init",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint  --fix",
+    "prepare": "husky install",
+    "start": "node dist/main.js",
+    "build": "npx tsc ./src/main.ts --outDir ./dist/",
+    "dev": "tsx --inspect --watch ./src/main.ts",
+    "tsc": "tsc"
+  },
+  "compilerOptions": {
+    "moduleResolution": "nodenext"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@prisma/client": "^6.1.0",
+    "@types/express": "^5.0.0",
+    "@types/morgan": "^1.9.9",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.7",
+    "@typescript-eslint/eslint-plugin": "^8.18.1",
+    "@typescript-eslint/parser": "^8.18.1",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "husky": "^8.0.0",
+    "prettier": "^3.4.2",
+    "prisma": "^6.1.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "import": "^0.0.6",
+    "morgan": "^1.10.0",
+    "tslog": "^4.9.3"
+  }
+}
