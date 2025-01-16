@@ -23,7 +23,14 @@
     [
       "@semantic-release/release-notes-generator",
       {
-        "preset": "conventionalcommits"
+        "preset": "conventionalcommits",
+        "writerOpts": {
+          "commitsSort": false,
+          "ignoreReverted": false,
+          "reverse": true,
+          "includeDetails": true,
+          "commitGroupsSort": false
+        }
       }
     ],
     [
