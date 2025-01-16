@@ -2,6 +2,13 @@
 
 Todos los cambios notables en este proyecto serán documentados en este archivo.
 
+# [1.2.0](https://github.com/github-delfosti/pacasmayo-hexagonal/compare/v1.1.0...v1.2.0) (2025-01-16)
+
+
+### Features
+
+* añade nueva funcionalidad ([00a36e7](https://github.com/github-delfosti/pacasmayo-hexagonal/commit/00a36e70a32969cbc863a3d630c18f35285ce847))
+
 # [1.1.0](https://github.com/github-delfosti/pacasmayo-hexagonal/compare/v1.0.0...v1.1.0) (2025-01-16)
 
 
