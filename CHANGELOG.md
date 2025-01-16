@@ -2,6 +2,13 @@
 
 Todos los cambios notables en este proyecto serán documentados en este archivo.
 
+## [1.2.1](https://github.com/github-delfosti/pacasmayo-hexagonal/compare/v1.2.0...v1.2.1) (2025-01-16)
+
+
+### Bug Fixes
+
+* Se borró configuraciones de librerias ([513a187](https://github.com/github-delfosti/pacasmayo-hexagonal/commit/513a1871a46e9b7d267d44d35d54f10680b3f842))
+
 # [1.2.0](https://github.com/github-delfosti/pacasmayo-hexagonal/compare/v1.1.0...v1.2.0) (2025-01-16)
 
 
