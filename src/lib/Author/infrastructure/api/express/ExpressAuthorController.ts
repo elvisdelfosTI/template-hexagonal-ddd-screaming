@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from 'express';
-import { AuthorNotFoundError } from 'src/lib/Author/domain/AuthorNotFoundError';
 import ServiceContainer from 'src/lib/shared/infrastructure/serviceContainer';
 
 export class ExpressAuthorController {

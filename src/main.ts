@@ -15,7 +15,7 @@ app.use(express.json());
 const log: Logger<ILogObj> = new Logger();
 const customTinyFormat = ':method :url :status :response-time ms';
 const customMorgan = morgan(customTinyFormat, {
-  skip: (req, res) => false,
+  skip: (_, _res) => false,
   stream: {
     write: (message) => {
       console.log(`🌐 ${message.trim()}`);
@@ -30,7 +30,7 @@ app.use(responseFormatter);
 app.use(authorRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.use((err: unknown, req: Request, res: Response, _next: NextFunction) => {
+app.use((err: unknown, _: Request, res: Response, _next: NextFunction) => {
   log.error(err);
   if (err instanceof Error) {
     res.status(502).json(err.message);

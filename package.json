@@ -11,7 +11,13 @@
     "start": "node dist/main.js",
     "build": "npx tsc ./src/main.ts --outDir ./dist/",
     "dev": "tsx --inspect --watch ./src/main.ts",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "release": "semantic-release --no-ci",
+    "release:minor": "standard-version --release-as minor",
+    "release:patch": "standard-version --release-as patch",
+    "release:major": "standard-version --release-as major",
+    "changelog": "release-please changelog --release-type=node --changelog-path=CHANGELOG.md",
+    "release:dry": "semantic-release --dry-run --no-ci"
   },
   "compilerOptions": {
     "moduleResolution": "nodenext"
@@ -20,6 +26,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@eslint/js": "^9.18.0",
     "@prisma/client": "^6.1.0",
     "@types/express": "^5.0.0",
     "@types/morgan": "^1.9.9",
@@ -27,17 +34,25 @@
     "@types/swagger-ui-express": "^4.1.7",
     "@typescript-eslint/eslint-plugin": "^8.18.1",
     "@typescript-eslint/parser": "^8.18.1",
-    "eslint": "^9.17.0",
+    "eslint": "^9.18.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
+    "globals": "^15.14.0",
     "husky": "^8.0.0",
     "prettier": "^3.4.2",
     "prisma": "^6.1.0",
+    "release-please": "^16.15.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
     "ts-node": "^10.9.2",
     "tsx": "^4.19.2",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.20.0",
+    "semantic-release": "^22.0.0",
+    "@semantic-release/changelog": "^6.0.0",
+    "@semantic-release/git": "^10.0.0",
+    "@semantic-release/commit-analyzer": "^11.0.0",
+    "@semantic-release/release-notes-generator": "^12.0.0"
   },
   "dependencies": {
     "express": "^4.21.2",

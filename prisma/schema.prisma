@@ -15,14 +15,16 @@ model Author {
   email String  @unique
   name  String
   password String
+  age Int
   books Book[]
 }
 
 model Book {
   id        Int     @id @default(autoincrement())
   title     String
-  content   String?
-  published Boolean @default(true)
+  publishedDate Boolean @default(true)
+  pagesCount Int
+  ISBN String
   author    Author    @relation(fields: [authorId], references: [id])
   authorId  Int
 }

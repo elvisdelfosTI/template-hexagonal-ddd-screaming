@@ -1,3 +1,4 @@
+import { AuthorAge } from '../../domain/AuthorAge';
 import { AuthorEmail } from '../../domain/AuthorEmail';
 import { AuthorId } from '../../domain/AuthorId';
 import { AuthorName } from '../../domain/AuthorName';
@@ -8,13 +9,13 @@ import { PrismaClient } from 'node_modules/.prisma/client/index';
 
 export class PrismaAuthorRepository implements IAuthorRepository {
   constructor(private _prisma: PrismaClient) {}
-  getById(id: AuthorId): Promise<Author | undefined> {
+  getById(_id: AuthorId): Promise<Author | undefined> {
     throw new Error('Method not implemented.');
   }
-  edit(id: AuthorId): Promise<Author | undefined> {
+  edit(_id: AuthorId): Promise<Author | undefined> {
     throw new Error('Method not implemented.');
   }
-  delete(id: AuthorId): Promise<Author | undefined> {
+  delete(_id: AuthorId): Promise<Author | undefined> {
     throw new Error('Method not implemented.');
   }
   async save(author: Author): Promise<void> {
@@ -24,6 +25,7 @@ export class PrismaAuthorRepository implements IAuthorRepository {
         name: author.name.value,
         email: author.email.value,
         password: author.password.value,
+        age: author.age.value,
       },
     });
   }
@@ -37,6 +39,7 @@ export class PrismaAuthorRepository implements IAuthorRepository {
           new AuthorName(author.name),
           new AuthorEmail(author.email),
           new AuthorPassword(author.password),
+          new AuthorAge(author.age),
         ),
     );
   }

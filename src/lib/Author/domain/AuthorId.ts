@@ -1,12 +1,16 @@
 export class AuthorId {
-  value: number;
+  private _value: number;
   constructor(id: number) {
-    this.value = id;
+    this._value = id;
     this.ensureMajorToZero();
   }
   private ensureMajorToZero() {
-    if (this.value < 0) {
+    if (this._value < 0) {
       throw new Error('Author ID must be a positive integer');
     }
+  }
+
+  get value(): number {
+    return this._value;
   }
 }

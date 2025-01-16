@@ -4,7 +4,7 @@ import { AuthorDelete } from '../../Author/application/UsesCases/AuthorDelete/Au
 import { AuthorGetAll } from '../../Author/application/UsesCases/AuthorGetAll/AuthorGetAll';
 import { AuthorSave } from '../../Author/application/UsesCases/UserSave/AuthorSave';
 import { prismaClient } from 'src/prisma';
-import { InMemoryAuthorRepository } from 'src/lib/Author/infrastructure/api/Memory/inMemoryAuthorRepository';
+//import { InMemoryAuthorRepository } from 'src/lib/Author/infrastructure/api/Memory/inMemoryAuthorRepository';
 
 //const AuthorRepository = new InMemoryAuthorRepository();
 const AuthorRepository = new PrismaAuthorRepository(prismaClient);

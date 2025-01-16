@@ -1,5 +1,5 @@
 import { prismaClient } from 'src/prisma';
-import { Book } from '../../domain/Book';
+import { Book } from '../../domain/entities/Book';
 
 export class PrismaBookRepository {
   async getById(id: string): Promise<Book | null> {

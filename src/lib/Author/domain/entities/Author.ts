@@ -1,12 +1,13 @@
+import { AuthorAge } from '../AuthorAge';
 import { AuthorEmail } from '../AuthorEmail';
 import { AuthorId } from '../AuthorId';
 import { AuthorName } from '../AuthorName';
 import { AuthorPassword } from '../AuthorPassword';
-import { AuthorDto } from './AuthorDto';
 
 export class Author {
   id: AuthorId;
   name: AuthorName;
+  age: AuthorAge;
   email: AuthorEmail;
   password: AuthorPassword;
 
@@ -15,11 +16,13 @@ export class Author {
     name: AuthorName,
     email: AuthorEmail,
     password: AuthorPassword,
+    age: AuthorAge,
   ) {
     this.id = id;
     this.name = name;
     this.email = email;
     this.password = password;
+    this.age = age;
   }
 
   public nameAndEmail(): string {
@@ -29,6 +32,7 @@ export class Author {
     return {
       id: this.id.value,
       name: this.name.value,
+      age: this.age.value,
       email: this.email.value,
       password: this.password.value,
     };

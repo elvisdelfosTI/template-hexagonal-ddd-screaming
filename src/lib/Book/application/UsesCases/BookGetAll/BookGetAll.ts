@@ -1,14 +1,10 @@
-import { PrismaBookRepository } from 'src/lib/Book/infrastructure/database/PrismaBookRepository';
-import { Book } from '../../../domain/Book';
+import { Book } from '../../../domain/entities/Book';
+import { IBookRepository } from 'src/lib/Book/domain/BookRepository';
 
 export class BookGetAll {
-  private bookRepository: PrismaBookRepository;
-
-  constructor(bookRepository: PrismaBookRepository) {
-    this.bookRepository = bookRepository;
-  }
+  constructor(private _repository: IBookRepository) {}
 
   async getAll(): Promise<Book[]> {
-    return await this.bookRepository.findAll();
+    return await this._repository.getAll();
   }
 }

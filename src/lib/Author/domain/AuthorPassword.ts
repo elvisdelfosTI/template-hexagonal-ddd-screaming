@@ -1,7 +1,7 @@
 export class AuthorPassword {
-  value: string;
+  private _value: string;
   constructor(password: string) {
-    this.value = password;
+    this._value = password;
   }
   ensurePassword(password: string): void {
     if (password.length < 8 || password.length > 20) {
@@ -18,5 +18,8 @@ export class AuthorPassword {
         'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character',
       );
     }
+  }
+  get value(): string {
+    return this._value;
   }
 }
