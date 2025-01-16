@@ -28,10 +28,11 @@
         "changelogTitle": "# 📋 Changelog\n\nTodos los cambios notables en este proyecto serán documentados en este archivo."
       }
     ],
+    "@semantic-release/npm",
     [
       "@semantic-release/git",
       {
-        "assets": ["CHANGELOG.md"],
+        "assets": ["package.json", "CHANGELOG.md"],
         "message": "chore(release): 📦 ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }
     ]
