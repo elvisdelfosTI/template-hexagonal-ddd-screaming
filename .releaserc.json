@@ -20,7 +20,37 @@
         ]
       }
     ],
-    "@semantic-release/release-notes-generator",
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "preset": "conventionalcommits",
+        "presetConfig": {
+          "types": [
+            {
+              "type": "feat",
+              "section": "✨ Nuevas Características",
+              "hidden": false
+            },
+            { "type": "fix", "section": "🐛 Correcciones", "hidden": false },
+            { "type": "docs", "section": "📚 Documentación", "hidden": false },
+            { "type": "style", "section": "💅 Estilos", "hidden": false },
+            {
+              "type": "refactor",
+              "section": "♻️ Refactorización",
+              "hidden": false
+            },
+            { "type": "perf", "section": "⚡ Rendimiento", "hidden": false },
+            { "type": "test", "section": "✅ Pruebas", "hidden": false },
+            { "type": "build", "section": "📦 Build", "hidden": false },
+            { "type": "ci", "section": "👷 CI", "hidden": false },
+            { "type": "chore", "section": "🔧 Mantenimiento", "hidden": false }
+          ]
+        },
+        "writerOpts": {
+          "commitsSort": ["subject", "scope"]
+        }
+      }
+    ],
     [
       "@semantic-release/changelog",
       {
@@ -28,12 +58,11 @@
         "changelogTitle": "# 📋 Changelog\n\nTodos los cambios notables en este proyecto serán documentados en este archivo."
       }
     ],
-    "@semantic-release/npm",
     [
       "@semantic-release/git",
       {
-        "assets": ["package.json", "CHANGELOG.md"],
-        "message": "chore(release): 📦 ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        "assets": ["CHANGELOG.md"],
+        "message": "chore(release): 📦 ${nextRelease.version}\n\n${nextRelease.notes}"
       }
     ]
   ],
