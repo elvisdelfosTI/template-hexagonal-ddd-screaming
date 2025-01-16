@@ -1,59 +1,42 @@
 {
   "branches": ["main"],
+  "tagFormat": "v${version}",
   "plugins": [
     [
       "@semantic-release/commit-analyzer",
       {
-        "preset": "conventionalcommits",
+        "preset": "angular",
         "releaseRules": [
           { "type": "feat", "release": "minor" },
           { "type": "fix", "release": "patch" },
-          { "type": "refactor", "release": "patch" },
-          { "type": "style", "release": "patch" },
           { "type": "docs", "release": "patch" },
-          { "type": "chore", "release": "patch" },
-          { "type": "backup", "release": "patch" },
-          { "scope": "no-release", "release": false },
-          { "message": "*", "release": "patch" }
-        ]
-      }
-    ],
-    [
-      "@semantic-release/release-notes-generator",
-      {
-        "preset": "conventionalcommits",
-        "presetConfig": {
-          "types": [
-            { "type": "feat", "section": "✨ Features" },
-            { "type": "fix", "section": "🐛 Bug Fixes" },
-            { "type": "refactor", "section": "♻️ Code Refactoring" },
-            { "type": "style", "section": "💄 Styles" },
-            { "type": "docs", "section": "📝 Documentation" },
-            { "type": "chore", "section": "🔧 Maintenance" },
-            { "type": "backup", "section": "💾 Backup" }
-          ]
-        },
-        "writerOpts": {
-          "groupBy": "type",
-          "commitGroupsSort": "title",
-          "commitsSort": "header"
+          { "type": "style", "release": "patch" },
+          { "type": "refactor", "release": "patch" },
+          { "type": "perf", "release": "patch" },
+          { "type": "test", "release": "patch" }
+        ],
+        "parserOpts": {
+          "noteKeywords": ["BREAKING CHANGE", "BREAKING CHANGES"]
         }
       }
     ],
+    "@semantic-release/release-notes-generator",
     [
       "@semantic-release/changelog",
       {
         "changelogFile": "CHANGELOG.md",
-        "changelogTitle": "# 📋 Changelog\n\nAll notable changes to this project will be documented in this file."
+        "changelogTitle": "# 📋 Changelog\n\nTodos los cambios notables en este proyecto serán documentados en este archivo."
       }
     ],
+    "@semantic-release/npm",
     [
       "@semantic-release/git",
       {
-        "assets": ["CHANGELOG.md", "package.json"],
-        "message": "chore(release): 📦 version ${nextRelease.version}\n\n${nextRelease.notes}"
+        "assets": ["package.json", "package-lock.json", "CHANGELOG.md"],
+        "message": "chore(release): 📦 ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }
     ]
   ],
-  "ci": false
+  "ci": false,
+  "debug": true
 }
