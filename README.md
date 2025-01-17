@@ -20,6 +20,7 @@ Este proyecto es un servicio para la gestión de libros, que permite realizar op
 - **src/infrastructure/database/**: Implementa la lógica para interactuar con la base de datos.
 
   - **PrismaBookRepository.ts**: Implementa la lógica de acceso a datos utilizando Prisma.
+    B
 
 - **src/serviceContainer.ts**: Configura y exporta los servicios de libros.
 

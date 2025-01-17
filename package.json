@@ -14,7 +14,7 @@
     "tsc": "tsc",
     "version": "npx conventional-changelog -p angular -i CHANGELOG.md -s",
     "version:generate": "npx conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
-    "release": "semantic-release"
+    "release": "semantic-release --no-ci --force"
   },
   "release": {
     "branches": [
@@ -23,7 +23,8 @@
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
-      "@semantic-release/changelog"
+      "@semantic-release/changelog",
+      "@semantic-release/git"
     ]
   },
   "compilerOptions": {
