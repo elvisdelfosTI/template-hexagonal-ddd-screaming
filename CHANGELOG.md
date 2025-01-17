@@ -1,3 +1,12 @@
+# Changelog
+
+## [2.1.1](https://github.com/github-delfosti/pacasmayo-hexagonal/compare/v2.1.0...v2.1.1) (2025-01-17)
+
+
+### Bug Fixes
+
+* changes news ([b0f31d4](https://github.com/github-delfosti/pacasmayo-hexagonal/commit/b0f31d4c4635af4b25cf473f74065d4bf4e6b5d9))
+
 ## 1.0.0 (2025-01-17)
 
 
@@ -81,6 +90,3 @@
 
 * backup for change of desktop ([e6b6eb5](https://github.com/github-delfosti/pacasmayo-hexagonal/commit/e6b6eb5))
 * first commit ([2408907](https://github.com/github-delfosti/pacasmayo-hexagonal/commit/2408907))
-
-
-
