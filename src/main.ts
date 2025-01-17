@@ -27,7 +27,8 @@ app.use(customMorgan);
 // * ROUTES
 app.use(express.json());
 app.use(responseFormatter);
-app.use(authorRouter);
+app.use('/api/v1', authorRouter);
+//app.use('/api/v1', bookRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use((err: unknown, _: Request, res: Response, _next: NextFunction) => {

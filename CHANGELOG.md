@@ -1,5 +1,7 @@
 ## 1.0.0 (2025-01-17)
 
+* feat:(changelog): change library of changelog ([481fa1e](https://github.com/github-delfosti/pacasmayo-hexagonal/commit/481fa1e))
+* refactor(changelog): change library of changelog ([30dc7fa](https://github.com/github-delfosti/pacasmayo-hexagonal/commit/30dc7fa))
 
 
 
@@ -55,6 +57,11 @@
 * chore: change logic in release ([2eea537](https://github.com/github-delfosti/pacasmayo-hexagonal/commit/2eea537))
 * chore(release): 1.0.0 ([09ff94a](https://github.com/github-delfosti/pacasmayo-hexagonal/commit/09ff94a))
 * refactor: change logic in all modules ([76299d9](https://github.com/github-delfosti/pacasmayo-hexagonal/commit/76299d9))
+
+
+
+## 0.0.0 (2025-01-14)
+
 * backup for change of desktop ([e6b6eb5](https://github.com/github-delfosti/pacasmayo-hexagonal/commit/e6b6eb5))
 * first commit ([2408907](https://github.com/github-delfosti/pacasmayo-hexagonal/commit/2408907))
 
