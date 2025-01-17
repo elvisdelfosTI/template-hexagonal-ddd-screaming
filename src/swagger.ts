@@ -13,5 +13,4 @@ const options: swaggerJSDoc.Options = {
   apis: ['./docs/swagger.yml'],
 };
 const swaggerSpec = swaggerJSDoc(options);
-
 export default swaggerSpec;
