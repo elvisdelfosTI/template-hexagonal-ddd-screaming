@@ -12,14 +12,8 @@
     "build": "npx tsc ./src/main.ts --outDir ./dist/",
     "dev": "tsx --inspect --watch ./src/main.ts",
     "tsc": "tsc",
-    "release": "semantic-release --no-ci",
-    "release:minor": "standard-version --release-as minor",
-    "release:patch": "standard-version --release-as patch",
-    "release:major": "standard-version --release-as major",
-    "changelog": "release-please changelog --release-type=node --changelog-path=CHANGELOG.md",
-    "release:dry": "semantic-release --dry-run --no-ci",
-    "changelog:generate": "conventional-changelog -p conventionalcommits -i CHANGELOG.md -s -r 0",
-    "changelog:preview": "conventional-changelog -p conventionalcommits -i CHANGELOG.md -s -r 0 --dry-run"
+    "version": "npx conventional-changelog -p angular -i CHANGELOG.md -s",
+    "version:generate": "npx conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
   },
   "compilerOptions": {
     "moduleResolution": "nodenext"
@@ -34,6 +28,7 @@
     "@semantic-release/commit-analyzer": "^10.0.1",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/release-notes-generator": "^11.0.7",
+    "@types/conventional-changelog-core": "^4.2.8",
     "@types/express": "^5.0.0",
     "@types/morgan": "^1.9.9",
     "@types/swagger-jsdoc": "^6.0.4",
