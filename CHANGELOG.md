@@ -1,7 +1,7 @@
-# Changelog
-
 ## 1.0.0 (2025-01-17)
 
+* docs: correct docs ([02c3a31](https://github.com/github-delfosti/pacasmayo-hexagonal/commit/02c3a31))
+* docs: correct spelling of CHANGELOG ([f27ff4c](https://github.com/github-delfosti/pacasmayo-hexagonal/commit/f27ff4c))
 * fix: add docker ([2146be0](https://github.com/github-delfosti/pacasmayo-hexagonal/commit/2146be0))
 * refactor: add docker ([15282a8](https://github.com/github-delfosti/pacasmayo-hexagonal/commit/15282a8))
 
