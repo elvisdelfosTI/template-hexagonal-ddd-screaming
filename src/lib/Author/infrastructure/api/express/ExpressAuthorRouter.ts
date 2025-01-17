@@ -3,7 +3,7 @@ import { ExpressAuthorController } from './ExpressAuthorController';
 const controller = new ExpressAuthorController();
 const authorRouter = Router();
 
-authorRouter.get('/user/', controller.getAll);
-authorRouter.post('/user/', controller.save);
+authorRouter.get('/author/', controller.getAll);
+authorRouter.post('/author/', controller.save);
 
 export { authorRouter };

@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import { AuthorDto } from 'src/lib/Author/application/UsesCases/UserSave/AuthorSaveDTO';
 import ServiceContainer from 'src/lib/shared/infrastructure/serviceContainer';
 
 export class ExpressAuthorController {
@@ -31,12 +32,16 @@ export class ExpressAuthorController {
     next: NextFunction,
   ): Promise<void> {
     try {
-      const Author = await ServiceContainer.AuthorService.save.handler(
-        request.body.id,
-        request.body.name,
-        request.body.email,
-        request.body.password,
-      );
+      const authorData: AuthorDto = {
+        id: request.body.id,
+        name: request.body.name,
+        email: request.body.email,
+        password: request.body.password,
+        age: request.body.age,
+      };
+      const Author =
+        await ServiceContainer.AuthorService.save.handler(authorData);
+
       res.json(Author).status(201);
     } catch (error) {
       next(error);
