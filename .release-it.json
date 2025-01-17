@@ -1,0 +1,31 @@
+{
+  "scripts": {
+    "release": "release-it"
+  },
+  "release-it": {
+    "git": {
+      "push": true,
+      "tag": true,
+      "commitMessage": "chore: release v${version}",
+      "requireCleanWorkingDir": true,
+      "tagName": "v${version}"
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "preset": "angular",
+        "infile": "CHANGELOG.md"
+      }
+    },
+    "hooks": {
+      "before:init": ["git fetch --tags"]
+    },
+    "github": {
+      "release": false
+    },
+    "npm": false,
+    "version": {
+      "conventionalCommits": true
+    },
+    "packageJson": false
+  }
+}
