@@ -1,5 +1,7 @@
 # Changelog
 
+## [2.1.4](https://github.com/github-delfosti/pacasmayo-hexagonal/compare/v2.1.3...v2.1.4) (2025-01-17)
+
 ## [2.1.3](https://github.com/github-delfosti/pacasmayo-hexagonal/compare/v2.1.2...v2.1.3) (2025-01-17)
 
 ## [2.1.2](https://github.com/github-delfosti/pacasmayo-hexagonal/compare/v2.1.1...v2.1.2) (2025-01-17)
