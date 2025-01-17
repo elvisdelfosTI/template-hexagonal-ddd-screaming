@@ -12,7 +12,7 @@
     "build": "npx tsc ./src/main.ts --outDir ./dist/",
     "dev": "tsx --inspect --watch ./src/main.ts",
     "tsc": "tsc",
-    "release": "release-it --no-npm"
+    "release": "release-it --no-npm --ci --no-git.requireUpstream --verbose --no-questions"
   },
   "compilerOptions": {
     "moduleResolution": "nodenext"

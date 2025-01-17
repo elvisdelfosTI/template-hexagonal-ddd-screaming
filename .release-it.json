@@ -4,7 +4,8 @@
     "tag": true,
     "commitMessage": "chore: release v${version}",
     "requireCleanWorkingDir": true,
-    "tagName": "v${version}"
+    "tagName": "v${version}",
+    "requireUpstream": false
   },
   "plugins": {
     "@release-it/conventional-changelog": {
@@ -20,6 +21,7 @@
   },
   "npm": false,
   "packageJson": false,
+  "ci": true,
   "version": {
     "conventionalCommits": true,
     "preset": "angular",
