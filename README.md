@@ -28,6 +28,10 @@ Este proyecto es un servicio para la gestión de libros, que permite realizar op
 
 1. Clona el repositorio.
 2. Ejecuta `npm install` para instalar las dependencias.
+3. Clona el repositorio.
+4. Ejecuta `npm install` para instalar las dependencias.
+5. Clona el repositorio.
+6. Ejecuta `npm install` para instalar las dependencias.
 
 ## Uso
 
