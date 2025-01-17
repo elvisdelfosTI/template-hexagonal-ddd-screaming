@@ -12,20 +12,7 @@
     "build": "npx tsc ./src/main.ts --outDir ./dist/",
     "dev": "tsx --inspect --watch ./src/main.ts",
     "tsc": "tsc",
-    "version": "npx conventional-changelog -p angular -i CHANGELOG.md -s",
-    "version:generate": "npx conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
-    "release": "semantic-release --no-ci --force"
-  },
-  "release": {
-    "branches": [
-      "main"
-    ],
-    "plugins": [
-      "@semantic-release/commit-analyzer",
-      "@semantic-release/release-notes-generator",
-      "@semantic-release/changelog",
-      "@semantic-release/git"
-    ]
+    "release": "release-it --no-npm"
   },
   "compilerOptions": {
     "moduleResolution": "nodenext"
@@ -37,10 +24,6 @@
     "@eslint/js": "^9.18.0",
     "@prisma/client": "^6.1.0",
     "@release-it/conventional-changelog": "^10.0.0",
-    "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/commit-analyzer": "^10.0.4",
-    "@semantic-release/git": "^10.0.1",
-    "@semantic-release/release-notes-generator": "^11.0.7",
     "@types/conventional-changelog-core": "^4.2.8",
     "@types/express": "^5.0.0",
     "@types/morgan": "^1.9.9",
@@ -58,7 +41,6 @@
     "prisma": "^6.1.0",
     "release-it": "^18.1.1",
     "release-please": "^16.15.0",
-    "semantic-release": "^21.1.2",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
     "ts-node": "^10.9.2",

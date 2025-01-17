@@ -8,7 +8,9 @@
   },
   "plugins": {
     "@release-it/conventional-changelog": {
-      "preset": "angular",
+      "preset": {
+        "name": "angular"
+      },
       "infile": "CHANGELOG.md"
     }
   },
@@ -22,7 +24,9 @@
   "packageJson": false,
   "version": {
     "conventionalCommits": true,
-    "preset": "angular",
+    "preset": {
+      "name": "angular"
+    },
     "skipPrompt": true,
     "skipVersionPrompt": true,
     "skipQuestions": true
