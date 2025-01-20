@@ -1,5 +1,5 @@
 export class BookISBN {
-  _value: string;
+  private _value: string;
   constructor(ISBN: string) {
     this._value = ISBN;
     this.ensureISBN(ISBN);
@@ -11,5 +11,9 @@ export class BookISBN {
   }
   get value(): string {
     return this._value;
+  }
+  set value(ISBN: string) {
+    this.ensureISBN(ISBN);
+    this._value = ISBN;
   }
 }

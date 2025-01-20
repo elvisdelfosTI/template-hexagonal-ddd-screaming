@@ -4,7 +4,7 @@ import { Book } from './entities/Book';
 export interface IBookRepository {
   save(book: Book): Promise<void>;
   getAll(): Promise<Book[]>;
-  getById(id: Book): Promise<Book | undefined>;
-  edit(id: BookId): Promise<Book | undefined>;
+  getById(id: BookId): Promise<Book | undefined>;
+  edit(book: Book): Promise<Book | undefined>;
   delete(id: BookId): Promise<Book | undefined>;
 }

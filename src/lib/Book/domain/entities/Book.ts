@@ -6,12 +6,12 @@ import { BookPublishedDate } from '../BookPublishDate';
 import { BookTitle } from '../BookTitle';
 
 export class Book {
-  private id: BookId;
-  private title: BookTitle;
-  private publishedDate: BookPublishedDate;
-  private pagesCount: BookPagesCount;
-  private ISBN: BookISBN;
-  private authorId: BookAuthorId;
+  id: BookId;
+  title: BookTitle;
+  publishedDate: BookPublishedDate;
+  pagesCount: BookPagesCount;
+  ISBN: BookISBN;
+  authorId: BookAuthorId;
 
   constructor(
     id: BookId,

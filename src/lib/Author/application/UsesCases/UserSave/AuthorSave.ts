@@ -4,12 +4,12 @@ import { AuthorId } from '../../../domain/AuthorId';
 import { AuthorName } from '../../../domain/AuthorName';
 import { AuthorPassword } from '../../../domain/AuthorPassword';
 import { IAuthorRepository } from '../../../domain/AuthorRepository';
-import { AuthorAge } from 'src/lib/Author/domain/AuthorAge';
+import { AuthorAge } from '../../../domain/AuthorAge';
 import { AuthorDto } from './AuthorSaveDTO';
 
 export class AuthorSave {
   constructor(private _repository: IAuthorRepository) {}
-  async handler(dto: AuthorDto): Promise<void> {
+  async execute(dto: AuthorDto): Promise<void> {
     const author = new Author(
       new AuthorId(dto.id),
       new AuthorName(dto.name),

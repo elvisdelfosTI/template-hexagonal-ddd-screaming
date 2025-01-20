@@ -1,25 +1,34 @@
-# Usa una imagen base oficial de Node.js
-FROM node:18-alpine AS builder
+    #Etapa base
+    FROM node:20-alpine AS base
+    WORKDIR /app
+    ENV NODE_ENV=production \
+        NEXT_TELEMETRY_DISABLED=1
+    RUN apk add --no-cache openssl && \
+        addgroup --system --gid 1001 nodejs && \
+        rm -rf /var/cache/apk/*
 
-WORKDIR /app
+    # Etapa deps
+    FROM base AS deps
+    COPY package.json package-lock.json ./
+    RUN npm install --frozen-lockfile --production=false && \
+        npm cache clean
 
-COPY package*.json ./
+    # Etapa builder
+    FROM base AS builder
+    COPY --from=deps /app/node_modules ./node_modules
+    COPY . .
+    RUN npm build
 
-RUN npm install
-
-COPY . .
-
-RUN npm run build
-
-FROM node:18-alpine
-
-WORKDIR /app
-
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/dist ./dist
-
-COPY .env .env
-
-EXPOSE 3000
-
-CMD ["node", "dist/index.js"]
+    # Etapa runner
+    FROM base AS runner
+    WORKDIR /app
+    COPY --from=builder /app/package.json /app/yarn.lock ./
+    COPY --from=builder /app/next.config.mjs ./
+    COPY --from=builder /app/public ./public
+    COPY --from=builder /app/.next ./.next
+    COPY --from=builder /app/prisma ./prisma
+    RUN yarn install --production --frozen-lockfile --ignore-scripts && \
+        yarn cache clean
+    USER nextjs
+    EXPOSE 3000
+    CMD ["yarn", "start"]

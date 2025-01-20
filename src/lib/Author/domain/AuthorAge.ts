@@ -9,6 +9,9 @@ export class AuthorAge {
       throw new Error('Age must be between 18 and 100');
     }
   }
+  set value(value: number) {
+    this._value = value;
+  }
   get value(): number {
     return this._value;
   }

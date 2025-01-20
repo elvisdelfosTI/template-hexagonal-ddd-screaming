@@ -3,10 +3,10 @@ import { AuthorId } from '../../../domain/AuthorId';
 import { AuthorNotFoundError } from '../../../domain/errors/AuthorNotFoundError';
 import { IAuthorRepository } from '../../../domain/AuthorRepository';
 
-export class AuthorById {
+export class AuthorGetById {
   constructor(private readonly _repository: IAuthorRepository) {}
 
-  async handler(id: number): Promise<Author> {
+  async execute(id: number): Promise<Author> {
     const Author = await this._repository.getById(new AuthorId(id));
     if (!Author) throw new AuthorNotFoundError('Author not found');
     return Author;

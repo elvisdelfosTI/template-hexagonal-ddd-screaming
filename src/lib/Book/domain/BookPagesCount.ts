@@ -1,5 +1,5 @@
 export class BookPagesCount {
-  _value: number;
+  private _value: number;
   constructor(pagesCount: number) {
     this._value = pagesCount;
     this.ensurePagesCount(pagesCount);
@@ -14,5 +14,9 @@ export class BookPagesCount {
   }
   get value(): number {
     return this._value;
+  }
+  set value(pagesCount: number) {
+    this.ensurePagesCount(pagesCount);
+    this._value = pagesCount;
   }
 }

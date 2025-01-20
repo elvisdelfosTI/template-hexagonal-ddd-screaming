@@ -12,6 +12,10 @@ export class BookPublishedDate {
       throw new Error('Published date cannot be in the future');
     }
   }
+  set value(publishedDate: Date) {
+    this.ensurePublishedDate(publishedDate);
+    this._value = publishedDate;
+  }
   get value(): Date {
     return this._value;
   }

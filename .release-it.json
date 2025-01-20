@@ -1,16 +1,21 @@
 {
   "git": {
-    "push": false,
+    "push": true,
     "tag": true,
-    "commitMessage": "chore: release v${version}",
+    "commitMessage": "chore(${env.environment}): release ${env.TAG_PREFIX}${version}",
     "requireCleanWorkingDir": true,
-    "tagName": "v${version}",
-    "requireUpstream": false
+    "tagName": "${env.TAG_PREFIX}${version}",
+    "requireUpstream": true,
+    "requireBranch": ["main", "develop", "qa"],
+    "requireCommits": true,
+    "getLatestTagFromAllRefs": true,
+    "pushArgs": ["--force"]
   },
   "plugins": {
     "@release-it/conventional-changelog": {
       "preset": "angular",
-      "infile": "CHANGELOG.md"
+      "infile": "CHANGELOG.md",
+      "releaseCount": 0
     }
   },
   "hooks": {
@@ -24,14 +29,17 @@
   "ci": true,
   "version": {
     "conventionalCommits": true,
-    "preset": {
-      "name": "angular",
-      "types": [
-        { "type": "feat", "section": "Features" },
-        { "type": "fix", "section": "Bug Fixes" },
-        { "type": "perf", "section": "Performance Improvements" }
-      ]
-    },
+    "releaseRules": [
+      { "type": "feat", "release": "minor" },
+      { "type": "fix", "release": "patch" },
+      { "type": "perf", "release": "patch" },
+      { "type": "docs", "release": false },
+      { "type": "style", "release": false },
+      { "type": "refactor", "release": false },
+      { "type": "test", "release": false },
+      { "type": "chore", "release": false },
+      { "type": "ci", "release": false }
+    ],
     "skipPrompt": true,
     "skipVersionPrompt": true,
     "skipQuestions": true

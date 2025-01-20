@@ -9,7 +9,9 @@ export class AuthorId {
       throw new Error('Author ID must be a positive integer');
     }
   }
-
+  set value(value: number) {
+    this._value = value;
+  }
   get value(): number {
     return this._value;
   }

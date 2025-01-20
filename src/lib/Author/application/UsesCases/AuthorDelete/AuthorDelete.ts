@@ -1,10 +1,11 @@
-import { Author } from '../../../domain/entities/Author';
-import { AuthorId } from '../../../domain/AuthorId';
 import { IAuthorRepository } from '../../../domain/AuthorRepository';
+import { AuthorId } from '../../../domain/AuthorId';
 
 export class AuthorDelete {
   constructor(private readonly _repository: IAuthorRepository) {}
-  async handler(id: number): Promise<Author | undefined> {
-    return this._repository.delete(new AuthorId(id));
+
+  async execute(id: number): Promise<void> {
+    const authorId = new AuthorId(id);
+    await this._repository.delete(authorId);
   }
 }

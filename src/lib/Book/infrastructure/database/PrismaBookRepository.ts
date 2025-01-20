@@ -1,26 +1,91 @@
-import { prismaClient } from 'src/prisma';
 import { Book } from '../../domain/entities/Book';
+import { IBookRepository } from '../../domain/BookRepository';
+import { PrismaClient } from 'node_modules/.prisma/client/index';
+import { BookId } from '../../domain/BookId';
+import { BookTitle } from '../../domain/BookTitle';
+import { BookISBN } from '../../domain/BookISBN';
+import { BookPublishedDate } from '../../domain/BookPublishDate';
+import { BookPagesCount } from '../../domain/BookPagesCount';
+import { BookAuthorId } from '../../domain/BookIdAuthorId';
 
-export class PrismaBookRepository {
-  async getById(id: string): Promise<Book | null> {
-    return await prismaClient.book.findUnique({
-      where: { id },
+export class PrismaBookRepository implements IBookRepository {
+  constructor(private _prisma: PrismaClient) {}
+
+  async edit(book: Book): Promise<Book | undefined> {
+    const updatedBook = await this._prisma.book.update({
+      where: { id: book.id.value },
+      data: {
+        title: book.title.value,
+        publishedDate: book.publishedDate.value,
+        pagesCount: book.pagesCount.value,
+        ISBN: book.ISBN.value,
+        authorId: book.authorId.value,
+      },
     });
+    return new Book(
+      new BookId(updatedBook.id),
+      new BookTitle(updatedBook.title),
+      new BookPublishedDate(updatedBook.publishedDate),
+      new BookPagesCount(updatedBook.pagesCount),
+      new BookISBN(updatedBook.ISBN),
+      new BookAuthorId(updatedBook.authorId),
+    );
+  }
+
+  async getById(id: BookId): Promise<Book | undefined> {
+    const book = await this._prisma.book.findUnique({
+      where: { id: id.value },
+    });
+    if (!book) return undefined;
+    return new Book(
+      new BookId(book.id),
+      new BookTitle(book.title),
+      new BookPublishedDate(book.publishedDate),
+      new BookPagesCount(book.pagesCount),
+      new BookISBN(book.ISBN),
+      new BookAuthorId(book.authorId),
+    );
   }
 
   async getAll(): Promise<Book[]> {
-    return await prismaClient.book.findMany();
+    const books = await this._prisma.book.findMany();
+    return books.map(
+      (book) =>
+        new Book(
+          new BookId(book.id),
+          new BookTitle(book.title),
+          new BookPublishedDate(book.publishedDate),
+          new BookPagesCount(book.pagesCount),
+          new BookISBN(book.ISBN),
+          new BookAuthorId(book.authorId),
+        ),
+    );
   }
 
-  async save(book: Book): Promise<Book> {
-    return await prismaClient.book.create({
-      data: book,
+  async save(book: Book): Promise<void> {
+    await this._prisma.book.create({
+      data: {
+        id: book.id.value,
+        title: book.title.value,
+        publishedDate: book.publishedDate.value,
+        pagesCount: book.pagesCount.value,
+        ISBN: book.ISBN.value,
+        authorId: book.authorId.value,
+      },
     });
   }
 
-  async delete(id: string): Promise<void> {
-    await prismaClient.book.delete({
-      where: { id },
+  async delete(id: BookId): Promise<Book | undefined> {
+    const deletedBook = await this._prisma.book.delete({
+      where: { id: id.value },
     });
+    return new Book(
+      new BookId(deletedBook.id),
+      new BookTitle(deletedBook.title),
+      new BookPublishedDate(deletedBook.publishedDate),
+      new BookPagesCount(deletedBook.pagesCount),
+      new BookISBN(deletedBook.ISBN),
+      new BookAuthorId(deletedBook.authorId),
+    );
   }
 }

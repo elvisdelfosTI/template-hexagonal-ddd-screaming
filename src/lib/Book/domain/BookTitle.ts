@@ -1,5 +1,5 @@
 export class BookTitle {
-  _value: string;
+  private _value: string;
   constructor(title: string) {
     this._value = title;
     this.ensureTitle(title);
@@ -11,5 +11,9 @@ export class BookTitle {
   }
   get value(): string {
     return this._value;
+  }
+  set value(title: string) {
+    this.ensureTitle(title);
+    this._value = title;
   }
 }

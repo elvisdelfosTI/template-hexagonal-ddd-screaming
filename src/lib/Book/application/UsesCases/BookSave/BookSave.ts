@@ -1,16 +1,17 @@
 import { Book } from '../../../domain/entities/Book';
 import { IBookRepository } from 'src/lib/Book/domain/BookRepository';
 import { BookSaveDTO } from './BookSaveDTO';
-import { BookPublishedDate } from 'src/lib/Book/domain/BookPublishDate';
-import { BookPagesCount } from 'src/lib/Book/domain/BookPagesCount';
-import { BookId } from 'src/lib/Book/domain/BookId';
-import { BookTitle } from 'src/lib/Book/domain/BookTitle';
-import { BookISBN } from 'src/lib/Book/domain/BookISBN';
-import { BookAuthorId } from 'src/lib/Book/domain/BookIdAuthorId';
+import { BookId } from '../../../domain/BookId';
+import { BookTitle } from '../../../domain/BookTitle';
+import { BookPublishedDate } from '../../../domain/BookPublishDate';
+import { BookPagesCount } from '../../../domain/BookPagesCount';
+import { BookISBN } from '../../../domain/BookISBN';
+import { BookAuthorId } from '../../../domain/BookIdAuthorId';
 
 export class BookSave {
   constructor(private _repository: IBookRepository) {}
-  async handler(dto: BookSaveDTO): Promise<void> {
+
+  async execute(dto: BookSaveDTO): Promise<void> {
     const book = new Book(
       new BookId(dto.id),
       new BookTitle(dto.title),

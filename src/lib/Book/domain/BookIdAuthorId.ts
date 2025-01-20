@@ -12,4 +12,8 @@ export class BookAuthorId {
   get value(): number {
     return this._value;
   }
+  set value(authorId: number) {
+    this.ensureAuthorId(authorId);
+    this._value = authorId;
+  }
 }

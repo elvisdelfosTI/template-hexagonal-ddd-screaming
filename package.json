@@ -5,14 +5,17 @@
   "type": "module",
   "scripts": {
     "migrate:dev": "npx prisma migrate dev --name init",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "lint": "eslint  --fix",
     "prepare": "husky install",
     "start": "node dist/main.js",
     "build": "npx tsc ./src/main.ts --outDir ./dist/",
     "dev": "tsx --inspect --watch ./src/main.ts",
     "tsc": "tsc",
-    "release": "release-it --no-npm --ci --no-git.requireUpstream --verbose --no-questions"
+    "release": "release-it --no-npm --ci --no-git.requireUpstream --verbose --no-questions",
+    "release:prod": "release-it --no-npm --ci --verbose --no-questions",
+    "release:qa": "release-it --no-npm --ci --verbose --no-questions",
+    "release:dev": "release-it --no-npm --ci --verbose --no-questions"
   },
   "compilerOptions": {
     "moduleResolution": "nodenext"
@@ -24,10 +27,13 @@
     "@commitlint/cli": "^19.6.1",
     "@commitlint/config-conventional": "^19.6.0",
     "@eslint/js": "^9.18.0",
+    "@ngneat/falso": "^7.3.0",
     "@prisma/client": "^6.1.0",
     "@release-it/conventional-changelog": "^10.0.0",
     "@types/conventional-changelog-core": "^4.2.8",
     "@types/express": "^5.0.0",
+    "@types/jest": "^29.5.14",
+    "@types/jsonwebtoken": "^9.0.7",
     "@types/morgan": "^1.9.9",
     "@types/node": "^22.10.7",
     "@types/swagger-jsdoc": "^6.0.4",
@@ -41,12 +47,14 @@
     "eslint-plugin-prettier": "^5.2.1",
     "globals": "^15.14.0",
     "husky": "^8.0.0",
+    "jest": "^29.7.0",
     "prettier": "^3.4.2",
     "prisma": "^6.1.0",
     "release-it": "^18.1.1",
     "release-please": "^16.15.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
+    "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2",
@@ -54,8 +62,11 @@
   },
   "dependencies": {
     "express": "^4.21.2",
+    "http-status-codes": "^2.3.0",
     "import": "^0.0.6",
+    "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
+    "supertest": "^7.0.0",
     "tslog": "^4.9.3"
   }
 }

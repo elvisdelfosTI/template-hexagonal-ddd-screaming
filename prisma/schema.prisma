@@ -22,7 +22,7 @@ model Author {
 model Book {
   id        Int     @id @default(autoincrement())
   title     String
-  publishedDate Boolean @default(true)
+  publishedDate DateTime
   pagesCount Int
   ISBN String
   author    Author    @relation(fields: [authorId], references: [id])

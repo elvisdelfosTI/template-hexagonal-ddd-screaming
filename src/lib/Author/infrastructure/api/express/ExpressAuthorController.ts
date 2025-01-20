@@ -18,7 +18,7 @@ export class ExpressAuthorController {
     next: NextFunction,
   ): Promise<void> {
     try {
-      const Author = await ServiceContainer.AuthorService.getById.handler(
+      const Author = await ServiceContainer.AuthorService.getById.execute(
         parseInt(req.params.id),
       );
       res.json(Author).status(200);
@@ -40,7 +40,7 @@ export class ExpressAuthorController {
         age: request.body.age,
       };
       const Author =
-        await ServiceContainer.AuthorService.save.handler(authorData);
+        await ServiceContainer.AuthorService.save.execute(authorData);
 
       res.json(Author).status(201);
     } catch (error) {

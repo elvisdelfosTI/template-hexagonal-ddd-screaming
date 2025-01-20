@@ -9,6 +9,9 @@ export class AuthorName {
       throw new Error('Name must be between 2 and 50 characters long');
     }
   }
+  set value(value: string) {
+    this._value = value;
+  }
   get value(): string {
     return this._value;
   }
