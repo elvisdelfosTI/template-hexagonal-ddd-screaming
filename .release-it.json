@@ -2,10 +2,10 @@
   "git": {
     "push": true,
     "tag": true,
-    "commitMessage": "chore(${env.environment}): release ${env.TAG_PREFIX}${version}",
+    "commitMessage": "chore: release v${version}",
     "requireCleanWorkingDir": true,
-    "tagName": "${env.TAG_PREFIX}${version}",
-    "requireUpstream": true,
+    "tagName": "v${version}",
+    "requireUpstream": false,
     "requireBranch": ["main", "develop", "qa"],
     "requireCommits": true,
     "getLatestTagFromAllRefs": true,
