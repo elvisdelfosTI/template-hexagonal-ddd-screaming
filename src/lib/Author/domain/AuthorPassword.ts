@@ -3,6 +3,7 @@ export class AuthorPassword {
   constructor(password: string) {
     this._value = password;
   }
+
   ensurePassword(password: string): void {
     if (password.length < 8 || password.length > 20) {
       throw new Error('Password must be between 8 and 20 characters long');

@@ -1,14 +1,25 @@
-import { Router } from 'express';
-import { ExpressAuthorController } from './lib/Author/infrastructure/api/express/ExpressAuthorController';
+import express from 'express';
 import swaggerUi from 'swagger-ui-express';
-import swaggerSpec from './swagger';
-const controller = new ExpressAuthorController();
-const route = Router();
+import swaggerDocument from './swagger.js';
 
+import { ExpressAuthController } from './lib/Auth/infrastructure/express/ExpressAuthController';
+import { authorRouter } from './lib/Author/infrastructure/api/express/ExpressAuthorRouter';
+import { bookRouter } from './lib/Book/infrastructure/api/express/ExpressBookRouter';
+
+const authController = new ExpressAuthController();
+
+const route = express.Router();
 //author
-route.get('/author/', controller.getAll);
-route.post('/author/', controller.save);
+route.use('/author', authorRouter);
 
-route.get('/documentation', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+//book
+route.use('/book', bookRouter);
 
-export { route  };
+//auth
+route.post('/auth/login', authController.login);
+
+if (process.env.ENV !== 'production') {
+  route.use('/documentation', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+}
+
+export default route;

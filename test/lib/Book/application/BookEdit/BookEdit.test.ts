@@ -1,26 +1,26 @@
-import { BookGetById } from '../../../../../src/lib/Book/application/UsesCases/BookGetById/BookGetById';
-import { BookSave } from '../../../../../src/lib/Book/application/UsesCases/BookSave/BookSave';
+import { BookGetById } from 'src/lib/Book/application/UsesCases/BookGetById/BookGetById';
+import { BookSave } from 'src/lib/Book/application/UsesCases/BookSave/BookSave';
 import { BookStub } from '../../domain/BookStub';
-import { InMemoryBookRepository } from '../../infrastructure/__mocks__/InMemoryBookRepository';
-import { BookEdit } from '../../../../../src/lib/Book/application/UsesCases/BookEdit/BookEdit';
-import { BookId } from '../../../../../src/lib/Book/domain/BookId';
-import { BookTitle } from '../../../../../src/lib/Book/domain/BookTitle';
-import { BookPublishedDate } from '../../../../../src/lib/Book/domain/BookPublishDate';
-import { BookPagesCount } from '../../../../../src/lib/Book/domain/BookPagesCount';
-import { BookISBN } from '../../../../../src/lib/Book/domain/BookISBN';
-import { BookAuthorId } from '../../../../../src/lib/Book/domain/BookIdAuthorId';
+import { InMemoryBookRepository } from '../../infrastructure/InMemoryBookRepository';
+import { BookEdit } from 'src/lib/Book/application/UsesCases/BookEdit/BookEdit';
+import { BookId } from 'src/lib/Book/domain/BookId';
+import { BookTitle } from 'src/lib/Book/domain/BookTitle';
+import { BookPublishedDate } from 'src/lib/Book/domain/BookPublishDate';
+import { BookPagesCount } from 'src/lib/Book/domain/BookPagesCount';
+import { BookISBN } from 'src/lib/Book/domain/BookISBN';
+import { BookAuthorId } from 'src/lib/Book/domain/BookIdAuthorId';
 
 describe('BookEdit', () => {
   test('should edit a book', async () => {
     const bookRepository = new InMemoryBookRepository([]);
     const saveUseCase = new BookSave(bookRepository);
-    const book = BookStub.generate();
+    const book = BookStub.generateDTO();
     await saveUseCase.execute(book);
 
     const bookToEdit = await bookRepository.getById(new BookId(book.id));
     if (!bookToEdit) throw new Error('Book not found');
     const editUseCase = new BookEdit(bookRepository);
-    const updatedBook = BookStub.generate();
+    const updatedBook = BookStub.generateDTO();
 
     await editUseCase.execute({
       id: new BookId(book.id),

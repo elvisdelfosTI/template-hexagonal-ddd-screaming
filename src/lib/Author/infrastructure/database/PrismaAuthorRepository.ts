@@ -1,39 +1,91 @@
-import { AuthorAge } from '../../domain/AuthorAge';
-import { AuthorEmail } from '../../domain/AuthorEmail';
+import { Encrypt } from '@common/encrypt/encrypt';
+import { AuthorAge } from '@author/domain/AuthorAge';
+import { AuthorEmail } from '@author/domain/AuthorEmail';
 import { AuthorId } from '../../domain/AuthorId';
 import { AuthorName } from '../../domain/AuthorName';
 import { AuthorPassword } from '../../domain/AuthorPassword';
 import { IAuthorRepository } from '../../domain/AuthorRepository';
 import { Author } from '../../domain/entities/Author';
 import { PrismaClient } from 'node_modules/.prisma/client/index';
+import { AuthorDto } from '@author/application/UsesCases/UserSave/AuthorSaveDTO';
 
 export class PrismaAuthorRepository implements IAuthorRepository {
   constructor(private _prisma: PrismaClient) {}
-  getById(_id: AuthorId): Promise<Author | undefined> {
-    throw new Error('Method not implemented.');
+  async getById(_id: AuthorId): Promise<Author | undefined> {
+    const author = await this._prisma.author.findUnique({
+      where: {
+        id: _id.value,
+      },
+    });
+    if (author) {
+      return new Author(
+        new AuthorId(author.id),
+        new AuthorName(author.name),
+        new AuthorEmail(author.email),
+        new AuthorPassword(author.password),
+        new AuthorAge(author.age),
+      );
+    }
+    return undefined;
   }
-  edit(_id: AuthorId): Promise<Author | undefined> {
-    throw new Error('Method not implemented.');
+  async edit(_author: Author): Promise<Author | undefined> {
+    const author = await this._prisma.author.update({
+      where: {
+        id: _author.id.value,
+      },
+      data: {
+        name: _author.name.value,
+        email: _author.email.value,
+        password: await Encrypt.encryptPassword(_author.password.value),
+        age: _author.age.value,
+      },
+    });
+
+    if (author) {
+      return new Author(
+        new AuthorId(author.id),
+        new AuthorName(author.name),
+        new AuthorEmail(author.email),
+        new AuthorPassword(author.password),
+        new AuthorAge(author.age),
+      );
+    }
+
+    return undefined;
   }
-  delete(_id: AuthorId): Promise<Author | undefined> {
-    throw new Error('Method not implemented.');
+  async delete(_id: AuthorId): Promise<Author | undefined> {
+    const author = await this._prisma.author.delete({
+      where: {
+        id: _id.value,
+      },
+    });
+    if (author) {
+      return new Author(
+        new AuthorId(author.id),
+        new AuthorName(author.name),
+        new AuthorEmail(author.email),
+        new AuthorPassword(author.password),
+        new AuthorAge(author.age),
+      );
+    }
+    return undefined;
   }
-  async save(author: Author): Promise<void> {
-    await this._prisma.author.create({
+  async save(author: Author): Promise<number | void> {
+    const response = await this._prisma.author.create({
       data: {
         id: author.id.value,
         name: author.name.value,
         email: author.email.value,
-        password: author.password.value,
+        password: await Encrypt.encryptPassword(author.password.value),
         age: author.age.value,
       },
     });
+    return response.id;
   }
-
   async getAll(): Promise<Author[]> {
     const authors = await this._prisma.author.findMany();
     return authors.map(
-      (author) =>
+      (author:AuthorDto) =>
         new Author(
           new AuthorId(author.id),
           new AuthorName(author.name),
@@ -42,5 +94,22 @@ export class PrismaAuthorRepository implements IAuthorRepository {
           new AuthorAge(author.age),
         ),
     );
+  }
+  async getByEmail(email: AuthorEmail): Promise<Author | undefined> {
+    const author = await this._prisma.author.findUnique({
+      where: {
+        email: email.value,
+      },
+    });
+    if (author) {
+      return new Author(
+        new AuthorId(author.id),
+        new AuthorName(author.name),
+        new AuthorEmail(author.email),
+        new AuthorPassword(author.password),
+        new AuthorAge(author.age),
+      );
+    }
+    return undefined;
   }
 }

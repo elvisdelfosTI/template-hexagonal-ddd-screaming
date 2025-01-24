@@ -1,2 +1,7 @@
-import { PrismaClient } from 'node_modules/.prisma/client/index';
-export const prismaClient: PrismaClient = new PrismaClient();
+import { PrismaClient } from '@prisma/client';
+
+const prismaClient = new PrismaClient({
+  log: [{ level: 'query', emit: 'event' }]
+});
+
+export { prismaClient };

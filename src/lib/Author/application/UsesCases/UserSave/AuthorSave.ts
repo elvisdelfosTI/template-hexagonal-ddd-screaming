@@ -9,14 +9,16 @@ import { AuthorDto } from './AuthorSaveDTO';
 
 export class AuthorSave {
   constructor(private _repository: IAuthorRepository) {}
-  async execute(dto: AuthorDto): Promise<void> {
+  async execute(dto: AuthorDto): Promise<void|number> {
     const author = new Author(
       new AuthorId(dto.id),
       new AuthorName(dto.name),
       new AuthorEmail(dto.email),
-      new AuthorPassword(dto.password),
+      new AuthorPassword(
+        dto.password
+      ),
       new AuthorAge(dto.age),
     );
-    return this._repository.save(author);
+    return await this._repository.save(author);
   }
 }

@@ -1,8 +1,12 @@
-import { Author } from 'src/lib/Author/domain/entities/Author';
-import { AuthorId } from 'src/lib/Author/domain/AuthorId';
-import { IAuthorRepository } from 'src/lib/Author/domain/AuthorRepository';
+import { Author } from '@author/domain/entities/Author';
+import { AuthorId } from '@author/domain/AuthorId';
+import { IAuthorRepository } from '@author/domain/AuthorRepository';
+import { AuthorEmail } from '@author/domain/AuthorEmail';
 
 export class InMemoryAuthorRepository implements IAuthorRepository {
+  getByEmail(_email: AuthorEmail): Promise<Author | undefined> {
+    throw new Error('Method not implemented.');
+  }
   private Authors: Author[] = [];
   save(author: Author): Promise<void> {
     this.Authors.push(author);
@@ -14,15 +18,13 @@ export class InMemoryAuthorRepository implements IAuthorRepository {
     return Promise.resolve(listAuthor);
   }
   getById(id: AuthorId): Promise<Author | undefined> {
-    console.log(id);
     return Promise.resolve(
       this.Authors.find((u: Author) => u.id.value === id.value),
     );
   }
-  edit(id: AuthorId): Promise<Author | undefined> {
+  edit(_author: Author): Promise<Author | undefined> {
     console.log('Method not implemented.');
-    console.log(id);
-    throw new Error(`Method not implemented.${id}`);
+    throw new Error(`Method not implemented`);
   }
   delete(id: AuthorId): Promise<Author | undefined> {
     const index = this.Authors.findIndex(

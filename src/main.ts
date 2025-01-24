@@ -1,12 +1,16 @@
-import express, { Response, Request, NextFunction } from 'express';
-import { Logger, ILogObj } from 'tslog';
+import 'module-alias/register';
+import express from 'express';
+import { Logger } from 'tslog';
 import morgan from 'morgan';
-import { responseFormatter } from './lib/Author/infrastructure/api/express/middleware/ResponseFormatter';
-import { route } from './route';
+import { Response, Request, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
+import route from './route';
+import * as grpc from '@grpc/grpc-js';
+import { ReflectionService } from '@grpc/reflection';
 
+import { AuthorGrpcServer } from './lib/Author/infrastructure/api/gRPC/ProtoAuthorServer';
 const app = express();
-const log: Logger<ILogObj> = new Logger();
+const log = new Logger();
 
 function configureMiddlewares() {
   app.use(express.json());
@@ -17,7 +21,6 @@ function configureMiddlewares() {
       },
     }),
   );
-  app.use(responseFormatter);
   app.use('/api/v1', route);
 }
 
@@ -34,16 +37,50 @@ function configureErrorHandling() {
 }
 
 function startServer() {
-  const PORT = process.env.PORT || 3000;
+  const PORT = process.env.PORT_REST || 3000;
   const baseUrl = `http://localhost`;
   app.listen(PORT, () => {
-    console.log(`🚀 Server is running at ${baseUrl}:${PORT}`);
-    console.log(
-      `📜 Documentation is running at http://localhost:${PORT}/api/v1/documentation`,
-    );
+    if (process.env.ENV !== 'PROD') {
+      console.log(`🗄️  Database: ${process.env.DATABASE_URL}`);
+      console.log(`🚀 Server is running at ${baseUrl}:${PORT}`);
+      console.log(
+        `📜 Documentation is running at http://localhost:${PORT}/api/v1/documentation`,
+      );
+    }
   });
+}
+
+async function bootstrap() {
+  try {
+    const server = new grpc.Server();
+    server.addService(AuthorGrpcServer.proto.service, AuthorGrpcServer.Service);
+    const reflection = new ReflectionService(
+      AuthorGrpcServer.protoWithReflection,
+    );
+    reflection.addToServer(server);
+
+    await new Promise<void>((resolve, reject) => {
+      server.bindAsync(
+        `0.0.0.0:${process.env.PORT_GRPC}`,
+        grpc.ServerCredentials.createInsecure(),
+        (error) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+          console.log(
+            `🥾 gRPC Server running at grpc://localhost:${process.env.PORT_GRPC}`,
+          );
+          resolve();
+        },
+      );
+    });
+  } catch (error) {
+    console.error('Error setting up reflection:', error);
+  }
 }
 
 configureMiddlewares();
 configureErrorHandling();
 startServer();
+bootstrap();

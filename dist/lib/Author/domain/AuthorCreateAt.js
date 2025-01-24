@@ -1,4 +1,8 @@
-export class AuthorCreatedAt {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AuthorCreatedAt = void 0;
+class AuthorCreatedAt {
+    createAt;
     constructor(createAt) {
         this.createAt = createAt;
     }
@@ -8,3 +12,4 @@ export class AuthorCreatedAt {
         }
     }
 }
+exports.AuthorCreatedAt = AuthorCreatedAt;

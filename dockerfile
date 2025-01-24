@@ -1,34 +1,38 @@
-    #Etapa base
-    FROM node:20-alpine AS base
-    WORKDIR /app
-    ENV NODE_ENV=production \
-        NEXT_TELEMETRY_DISABLED=1
-    RUN apk add --no-cache openssl && \
-        addgroup --system --gid 1001 nodejs && \
-        rm -rf /var/cache/apk/*
+FROM node:20-alpine AS base
 
-    # Etapa deps
-    FROM base AS deps
-    COPY package.json package-lock.json ./
-    RUN npm install --frozen-lockfile --production=false && \
-        npm cache clean
+WORKDIR /app
 
-    # Etapa builder
-    FROM base AS builder
-    COPY --from=deps /app/node_modules ./node_modules
-    COPY . .
-    RUN npm build
+ENV ENV=production \
+    PORT=3000
 
-    # Etapa runner
-    FROM base AS runner
-    WORKDIR /app
-    COPY --from=builder /app/package.json /app/yarn.lock ./
-    COPY --from=builder /app/next.config.mjs ./
-    COPY --from=builder /app/public ./public
-    COPY --from=builder /app/.next ./.next
-    COPY --from=builder /app/prisma ./prisma
-    RUN yarn install --production --frozen-lockfile --ignore-scripts && \
-        yarn cache clean
-    USER nextjs
-    EXPOSE 3000
-    CMD ["yarn", "start"]
+RUN apk add --no-cache openssl curl && \
+    addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 nodeuser && \
+    adduser nodeuser nodejs && \
+    chown -R nodeuser:nodejs /app
+
+FROM base AS deps
+COPY package*.json ./
+RUN npm pkg delete scripts.prepare && \
+    npm ci && \
+    npm cache clean --force
+
+FROM base AS builder
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+RUN npm run build && \
+    npm ci --omit=dev
+
+FROM base AS runner
+COPY --from=builder --chown=nodeuser:nodejs /app/dist ./dist
+COPY --from=builder --chown=nodeuser:nodejs /app/node_modules ./node_modules
+COPY --from=builder --chown=nodeuser:nodejs /app/package.json ./
+
+USER nodeuser
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s \
+    CMD curl -f http://localhost:${PORT}/health || exit 1
+
+EXPOSE ${PORT}
+CMD ["npm", "start"]

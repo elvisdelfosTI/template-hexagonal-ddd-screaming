@@ -1,14 +1,15 @@
-import { AuthorGetById } from '../../../../../src/lib/Author/application/UsesCases/AuthorById/AuthorById';
-import { AuthorSave } from '../../../../../src/lib/Author/application/UsesCases/UserSave/AuthorSave';
-import { AuthorStub } from '../../domain/UserStub';
-import { InMemoryAuthorRepository } from '../../infrastructure/__mocks__/InMemoryAuthorRespository';
+import { AuthorSave } from "../../../../../src/lib/Author/application/UsesCases/UserSave/AuthorSave";
+import { AuthorId } from "../../../../../src/lib/Author/domain/AuthorId";
+import { AuthorStub } from "../../domain/AuthorStub";
+import { InMemoryAuthorRepository } from "../../infrastructure/InMemoryAuthorRespository";
 import { AuthorEdit } from '../../../../../src/lib/Author/application/UsesCases/AuthorEdit/AuthorEdit';
-import { AuthorId } from '../../../../../src/lib/Author/domain/AuthorId';
+import { AuthorGetById } from '../../../../../src/lib/Author/application/UsesCases/AuthorById/AuthorById';
+
 describe('AuthorEdit', () => {
   test('should edit an author', async () => {
     const authorRepository = new InMemoryAuthorRepository([]);
     const saveUseCase = new AuthorSave(authorRepository);
-    const author = AuthorStub.generate();
+    const author = AuthorStub.generateDTO();
     await saveUseCase.execute(author);
 
     const authorToEdit = await authorRepository.getById(
@@ -16,7 +17,7 @@ describe('AuthorEdit', () => {
     );
     if (!authorToEdit) throw new Error('Author not found');
     const editUseCase = new AuthorEdit(authorRepository);
-    const updatedAuthor = AuthorStub.generate();
+    const updatedAuthor = AuthorStub.generateDTO();
 
     await editUseCase.execute({
       id: author.id,

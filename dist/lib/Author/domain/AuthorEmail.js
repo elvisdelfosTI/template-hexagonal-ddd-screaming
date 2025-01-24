@@ -1,6 +1,10 @@
-export class AuthorEmail {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AuthorEmail = void 0;
+class AuthorEmail {
+    _value;
     constructor(email) {
-        this.value = email;
+        this._value = email;
     }
     ensureName(email) {
         if (email.length < 2 || email.length > 50) {
@@ -12,4 +16,11 @@ export class AuthorEmail {
             throw new Error('Invalid email address');
         }
     }
+    set value(value) {
+        this._value = value;
+    }
+    get value() {
+        return this._value;
+    }
 }
+exports.AuthorEmail = AuthorEmail;

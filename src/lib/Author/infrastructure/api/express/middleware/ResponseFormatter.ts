@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 
 export const responseFormatter = (
-  req: Request,
+  _: Request,
   res: Response,
   next: NextFunction,
 ) => {

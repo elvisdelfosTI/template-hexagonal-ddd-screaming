@@ -32,9 +32,17 @@ export class Author {
     return {
       id: this.id.value,
       name: this.name.value,
-      age: this.age.value,
       email: this.email.value,
       password: this.password.value,
+      age: this.age.value,
+    };
+  }
+  public mapToPrimitivesWithoutPassword() {
+    return {
+      id: this.id.value,
+      name: this.name.value,
+      age: this.age.value,
+      email: this.email.value,
     };
   }
 }

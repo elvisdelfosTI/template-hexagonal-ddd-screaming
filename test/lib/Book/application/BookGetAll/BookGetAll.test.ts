@@ -1,5 +1,5 @@
-import { BookGetAll } from '../../../../../src/lib/Book/application/UsesCases/BookGetAll/BookGetAll';
-import { InMemoryBookRepository } from '../../infrastructure/__mocks__/InMemoryBookRepository';
+import { BookGetAll } from '@book/application/UsesCases/BookGetAll/BookGetAll';
+import { InMemoryBookRepository } from '../../infrastructure/InMemoryBookRepository';
 
 describe('BookGetAll should return all books', () => {
   test('should return all books', async () => {

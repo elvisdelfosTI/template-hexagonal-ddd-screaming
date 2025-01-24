@@ -1,6 +1,10 @@
-export class AuthorPassword {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AuthorPassword = void 0;
+class AuthorPassword {
+    _value;
     constructor(password) {
-        this.value = password;
+        this._value = password;
     }
     ensurePassword(password) {
         if (password.length < 8 || password.length > 20) {
@@ -12,4 +16,11 @@ export class AuthorPassword {
             throw new Error('Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character');
         }
     }
+    set value(value) {
+        this._value = value;
+    }
+    get value() {
+        return this._value;
+    }
 }
+exports.AuthorPassword = AuthorPassword;
