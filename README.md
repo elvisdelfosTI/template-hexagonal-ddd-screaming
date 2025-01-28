@@ -61,6 +61,18 @@ Este proyecto es un servicio para la gestión de libros y autores, que permite r
 - **`tsc`**: Ejecuta el compilador de TypeScript.
 - **`release`**: Realiza un proceso de liberación utilizando `release-it`.
 
+## Extensiones Recomendadas de VS Code
+
+Este proyecto incluye un archivo `.vscode/extensions.json` con extensiones recomendadas. VS Code te sugerirá instalarlas cuando abras el proyecto por primera vez.
+
+Principales extensiones:
+
+- ESLint: Linting de código
+- Prettier: Formateo de código
+- Prisma: Soporte para Prisma
+- Docker: Soporte para Docker
+- Y más...
+
 ## Contribuciones
 
 Las contribuciones son bienvenidas. Por favor, abre un issue o envía un pull request para discutir cambios.
