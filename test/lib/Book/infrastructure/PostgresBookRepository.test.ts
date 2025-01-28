@@ -4,8 +4,8 @@ import { prismaClient } from 'src/prisma';
 import { BookId } from 'src/lib/Book/domain/BookId';
 import { BookTitle } from 'src/lib/Book/domain/BookTitle';
 import { AuthorStub } from 'test/lib/Author/domain/UserStub';
-import { PrismaAuthorRepository } from '@author/infrastructure/database/PrismaAuthorRepository';
-import { AuthorId } from '@author/domain/AuthorId';
+import { PrismaAuthorRepository } from '#author/infrastructure/database/PrismaAuthorRepository';
+import { AuthorId } from '#author/domain/AuthorId';
 import { BookAuthorId } from 'src/lib/Book/domain/BookIdAuthorId';
 
 describe('PostgresBookRepository', () => {

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import ServiceContainer from 'src/lib/shared/infrastructure/serviceContainer';
+import ServiceContainer from '#shared/infrastructure/serviceContainer';
 
 export class ExpressBookController {
   async getAll(_: Request, res: Response, next: NextFunction): Promise<void> {

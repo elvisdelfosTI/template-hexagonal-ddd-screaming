@@ -19,7 +19,6 @@ describe('ExpressAuthorRouter', () => {
       },
     });
     expect(responseGet.status).toBe(200);
-    console.log(responseLogin.data);
     await axios.delete(`${API_URL}/author/${author.id}`, {
       headers: {
         Authorization: responseLogin.data.token,

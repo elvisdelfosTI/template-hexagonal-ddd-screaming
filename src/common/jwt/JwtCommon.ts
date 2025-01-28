@@ -31,7 +31,9 @@ export class JwtCommon implements IAuthRepository {
           data: auth.mapToPrimitives(),
         },
         process.env.API_JWT_SECRET || 'SECRET',
-        { expiresIn: process.env.API_JWT_EXPIRES || '1h' },
+        {
+          expiresIn: parseInt(process.env.API_JWT_EXPIRES || '5') * 3600,
+        },
       );
       return new AuthTokenDto(`Bearer ${token}`);
     } catch (error) {

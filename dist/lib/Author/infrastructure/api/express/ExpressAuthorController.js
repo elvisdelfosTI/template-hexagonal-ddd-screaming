@@ -2,11 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ExpressAuthorController = void 0;
 const tslib_1 = require("tslib");
-const serviceContainer_1 = tslib_1.__importDefault(require("src/lib/shared/infrastructure/serviceContainer"));
+const serviceContainer_1 = tslib_1.__importDefault(require("#shared/infrastructure/serviceContainer"));
 class ExpressAuthorController {
     async getAll(_, res, next) {
         try {
-            console.log('getAll');
             const authors = await serviceContainer_1.default.AuthorService.getAll.execute();
             res.json(authors.map((a) => a.mapToPrimitives())).status(200);
         }
@@ -41,8 +40,8 @@ class ExpressAuthorController {
     }
     async update(req, res, next) {
         try {
-            const author = await serviceContainer_1.default.AuthorService.update.execute(req.body);
-            res.json(author).status(200);
+            await serviceContainer_1.default.AuthorService.update.execute(req.body);
+            res.json({ id: req.body.id }).status(200);
         }
         catch (error) {
             next(error);
@@ -50,8 +49,8 @@ class ExpressAuthorController {
     }
     async delete(req, res, next) {
         try {
-            const author = await serviceContainer_1.default.AuthorService.delete.execute(+req.params.id);
-            res.json(author).status(200);
+            await serviceContainer_1.default.AuthorService.delete.execute(+req.params.id);
+            res.json({ id: req.params.id }).status(200);
         }
         catch (error) {
             next(error);

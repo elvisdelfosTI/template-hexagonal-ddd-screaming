@@ -3,7 +3,7 @@
     /* Visit https://aka.ms/tsconfig to read more about this file */
 
     /* Projects */
-    // "incremental": true,                              /* Save .tsbuildinfo files to allow for incremental compilation of projects. */
+    "incremental": false /* Save .tsbuildinfo files to allow for incremental compilation of projects. */,
     // "composite": true,                                /* Enable constraints that allow a TypeScript project to be used with project references. */
     // "tsBuildInfoFile": "./.tsbuildinfo",              /* Specify the path to .tsbuildinfo incremental compilation file. */
     // "disableSourceOfProjectReferenceRedirect": true,  /* Disable preferring source files instead of declaration files when referencing composite projects. */
@@ -30,12 +30,11 @@
     "moduleResolution": "node",
     "baseUrl": ".",
     "paths": {
-      "@author/*": ["src/lib/Author/*"],
-      "@book/*": ["src/lib/Book/*"],
-      "@auth/*": ["src/lib/Auth/*"],
-      "@shared/*": ["src/lib/shared/*"],
-      "@common/*": ["src/common/*"],
-      "@prisma": ["src/prisma"]
+      "#author/*": ["src/lib/Author/*"],
+      "#book/*": ["src/lib/Book/*"],
+      "#auth/*": ["src/lib/Auth/*"],
+      "#shared/*": ["src/lib/shared/*"],
+      "#common/*": ["src/common/*"]
     },
     //  "paths": []
     // Specify a set of entries that re-map imports to additional lookup locations. */,
@@ -54,7 +53,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
     "allowJs": true,
-    "declaration": true,
+    "declaration": false,
 
     /* Type Checking */
     "strict": true /* Enable all strict type-checking options. */,
@@ -83,11 +82,8 @@
     "skipLibCheck": true /* Skip type checking all .d.ts files. */,
     "outDir": "./dist",
     "rootDir": "./src",
-    "rootDirs": [
-      "./src"
-    ],
+    "rootDirs": ["./src"],
 
-    /* Optimizaciones de tamaño y rendimiento */
     "removeComments": true,
     "importHelpers": true,
     "noEmitHelpers": true,
@@ -97,14 +93,6 @@
   /* "ts-node": {
     "require": ["tsconfig-paths/register"]
   },*/
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "test",
-    "**/*.test.ts",
-    "**/*.spec.ts",
-    "dist"
-  ]
+  "include": ["src/**/*", "src/**/*.proto"],
+  "exclude": ["node_modules", "test", "**/*.test.ts", "**/*.spec.ts", "dist"]
 }

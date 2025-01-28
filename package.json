@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "main": "index.js",
   "scripts": {
+    "doc": "tsx docs/swagger.ts",
     "generate": "npx prisma generate",
     "migrate": "npx prisma migrate dev",
     "migrate:prod": "npx prisma migrate deploy",
@@ -12,10 +13,9 @@
     "test:unit": "jest --config ./test/config/jest.unit.config.ts",
     "test:e2e": "jest --config ./test/config/jest.e2e.config.ts",
     "lint": "eslint  --fix",
-    "prepare": "husky install",
     "start": "node dist/main.js",
-    "build": "tsc ",
-    "dev": "tsx --inspect --watch ./src/main.ts",
+    "build": "tsc && cpx \"src/**/*.proto\" dist/",
+    "dev": "tsx --require tsconfig-paths/register --inspect --watch ./src/main.ts",
     "dev:docker": "docker-compose -f docker-compose.test.yml up -d &&  sleep 3 && npm run migrate &&tsx --inspect --watch ./src/main.ts",
     "tsc": "tsc",
     "release": "release-it --no-npm --ci --no-git.requireUpstream --verbose --no-questions"
@@ -34,8 +34,10 @@
     "@protobuf-ts/grpc-transport": "^2.9.4",
     "@protobuf-ts/plugin": "^2.9.4",
     "@protobuf-ts/runtime": "^2.9.4",
+    "bcrypt": "^5.1.1",
     "bcrypt-ts": "^5.0.3",
     "express": "^4.21.2",
+    "express-validator": "^7.2.1",
     "google-protobuf": "^3.21.4",
     "grpc-server-reflection": "^0.1.5",
     "grpc-tools": "^1.12.4",
@@ -45,6 +47,7 @@
     "morgan": "^1.10.0",
     "pg": "^8.13.1",
     "prisma": "^6.1.0",
+    "tslib": "^2.8.1",
     "tslog": "^4.9.3",
     "typescript": "^5.7.2"
   },
@@ -72,7 +75,7 @@
     "@typescript-eslint/parser": "^8.18.1",
     "axios": "^1.7.9",
     "babel-jest": "^29.7.0",
-    "bcrypt": "^5.1.1",
+    "cpx": "^1.2.1",
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
@@ -93,10 +96,10 @@
     "yaml": "^2.7.0"
   },
   "_moduleAliases": {
-    "@author": "dist/lib/Author",
-    "@book": "dist/lib/Book",
-    "@auth": "dist/lib/Auth",
-    "@shared": "dist/lib/shared",
-    "@common": "dist/common"
+    "#author": "dist/lib/Author",
+    "#book": "dist/lib/Book",
+    "#auth": "dist/lib/Auth",
+    "#shared": "dist/lib/shared",
+    "#common": "dist/common"
   }
 }

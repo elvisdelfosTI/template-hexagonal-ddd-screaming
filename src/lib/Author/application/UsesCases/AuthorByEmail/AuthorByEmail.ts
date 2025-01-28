@@ -1,7 +1,7 @@
-import { IAuthorRepository } from "@author/domain/AuthorRepository";
-import { AuthorDto } from "../UserSave/AuthorSaveDTO";
-import { AuthorEmail } from "@author/domain/AuthorEmail";
-import { AuthorNotFoundError } from "@author/domain/errors/AuthorNotFoundError";
+import { IAuthorRepository } from '#author/domain/AuthorRepository';
+import { AuthorDto } from '../UserSave/AuthorSaveDTO';
+import { AuthorEmail } from '#author/domain/AuthorEmail';
+import { AuthorNotFoundError } from '#author/domain/errors/AuthorNotFoundError';
 
 export class AuthorGetByEmail {
   constructor(private readonly _repository: IAuthorRepository) {}

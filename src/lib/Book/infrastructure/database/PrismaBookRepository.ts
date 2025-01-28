@@ -50,14 +50,14 @@ export class PrismaBookRepository implements IBookRepository {
   async getAll(): Promise<Book[]> {
     const books = await this._prisma.book.findMany();
     return books.map(
-      (book) =>
+      (book: Record<string, unknown>) =>
         new Book(
-          new BookId(book.id),
-          new BookTitle(book.title),
-          new BookPublishedDate(book.publishedDate),
-          new BookPagesCount(book.pagesCount),
-          new BookISBN(book.ISBN),
-          new BookAuthorId(book.authorId),
+          new BookId(book.id as number),
+          new BookTitle(book.title as string),
+          new BookPublishedDate(book.publishedDate as Date),
+          new BookPagesCount(book.pagesCount as number),
+          new BookISBN(book.ISBN as string),
+          new BookAuthorId(book.authorId as number),
         ),
     );
   }

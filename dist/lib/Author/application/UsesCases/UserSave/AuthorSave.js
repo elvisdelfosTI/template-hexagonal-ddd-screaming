@@ -13,6 +13,10 @@ class AuthorSave {
         this._repository = _repository;
     }
     async execute(dto) {
+        const isExist = await this._repository.getByEmail(new AuthorEmail_1.AuthorEmail(dto.email));
+        if (isExist) {
+            throw new Error('Author already exist');
+        }
         const author = new Author_1.Author(new AuthorId_1.AuthorId(dto.id), new AuthorName_1.AuthorName(dto.name), new AuthorEmail_1.AuthorEmail(dto.email), new AuthorPassword_1.AuthorPassword(dto.password), new AuthorAge_1.AuthorAge(dto.age));
         return await this._repository.save(author);
     }

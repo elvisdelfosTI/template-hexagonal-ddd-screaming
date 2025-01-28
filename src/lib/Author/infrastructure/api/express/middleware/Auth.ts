@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { JwtCommon } from 'src/common/jwt/JwtCommon';
-import { AuthTokenDto } from 'src/lib/Auth/domain/AuthTokenDTO';
+import { JwtCommon } from '#common/jwt/JwtCommon';
+import { AuthTokenDto } from '#auth/domain/AuthTokenDTO';
 
 export class AuthMiddleware {
   constructor() {}

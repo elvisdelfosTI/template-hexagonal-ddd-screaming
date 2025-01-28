@@ -1,7 +1,7 @@
-import { Author } from '@author/domain/entities/Author';
-import { AuthorId } from '@author/domain/AuthorId';
-import { IAuthorRepository } from '@author/domain/AuthorRepository';
-import { AuthorEmail } from '@author/domain/AuthorEmail';
+import { Author } from '#author/domain/entities/Author';
+import { AuthorId } from '#author/domain/AuthorId';
+import { IAuthorRepository } from '#author/domain/AuthorRepository';
+import { AuthorEmail } from '#author/domain/AuthorEmail';
 
 export class InMemoryAuthorRepository implements IAuthorRepository {
   getByEmail(_email: AuthorEmail): Promise<Author | undefined> {

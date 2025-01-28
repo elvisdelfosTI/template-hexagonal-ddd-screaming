@@ -1,34 +1,27 @@
 version: '3.8'
 
 services:
-  postgres:
+  db:
     image: postgres:12-alpine
     environment:
-      POSTGRES_USER: testuser
-      POSTGRES_PASSWORD: testpassword
-      POSTGRES_DB: testdb
+      POSTGRES_USER: TEST_USER
+      POSTGRES_PASSWORD: TEST_PASSWORD
+      POSTGRES_DB: TEST_DB
     ports:
       - '5432:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U testuser -d testdb']
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
   api:
     build:
       context: .
       target: runner
     ports:
+      - '3000:3000'
       - '3001:3001'
     environment:
-      - DATABASE_URL=postgresql://testuser:testpassword@postgres:5432/testdb?schema=public
+      - DATABASE_URL=postgresql://TEST_USER:TEST_PASSWORD@db:5432/TEST_DB?schema=public
       - PORT=3001
     depends_on:
-      postgres:
-        condition: service_healthy
-
+      - db
 volumes:
   postgres_data:

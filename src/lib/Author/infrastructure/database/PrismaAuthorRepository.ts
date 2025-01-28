@@ -1,13 +1,13 @@
-import { Encrypt } from '@common/encrypt/encrypt';
-import { AuthorAge } from '@author/domain/AuthorAge';
-import { AuthorEmail } from '@author/domain/AuthorEmail';
-import { AuthorId } from '../../domain/AuthorId';
-import { AuthorName } from '../../domain/AuthorName';
-import { AuthorPassword } from '../../domain/AuthorPassword';
-import { IAuthorRepository } from '../../domain/AuthorRepository';
-import { Author } from '../../domain/entities/Author';
-import { PrismaClient } from 'node_modules/.prisma/client/index';
-import { AuthorDto } from '@author/application/UsesCases/UserSave/AuthorSaveDTO';
+import { Encrypt } from '#common/encrypt/encrypt';
+import { AuthorAge } from '#author/domain/AuthorAge';
+import { AuthorEmail } from '#author/domain/AuthorEmail';
+import { AuthorId } from '#author/domain/AuthorId';
+import { AuthorName } from '#author/domain/AuthorName';
+import { AuthorPassword } from '#author/domain/AuthorPassword';
+import { IAuthorRepository } from '#author/domain/AuthorRepository';
+import { Author } from '#author/domain/entities/Author';
+import { AuthorDto } from '#author/application/UsesCases/UserSave/AuthorSaveDTO';
+import { PrismaClient } from '@prisma/client';
 
 export class PrismaAuthorRepository implements IAuthorRepository {
   constructor(private _prisma: PrismaClient) {}
@@ -85,7 +85,7 @@ export class PrismaAuthorRepository implements IAuthorRepository {
   async getAll(): Promise<Author[]> {
     const authors = await this._prisma.author.findMany();
     return authors.map(
-      (author:AuthorDto) =>
+      (author: AuthorDto) =>
         new Author(
           new AuthorId(author.id),
           new AuthorName(author.name),
@@ -96,7 +96,7 @@ export class PrismaAuthorRepository implements IAuthorRepository {
     );
   }
   async getByEmail(email: AuthorEmail): Promise<Author | undefined> {
-    const author = await this._prisma.author.findUnique({
+    const author = await this._prisma.author.findFirst({
       where: {
         email: email.value,
       },

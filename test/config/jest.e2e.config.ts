@@ -15,12 +15,12 @@ const config: Config.InitialOptions = {
     ],
   },
   moduleNameMapper: {
-    '^@author/(.*)$': '<rootDir>/../src/lib/Author/$1',
-    '^@book/(.*)$': '<rootDir>/../src/lib/Book/$1',
-    '^@auth/(.*)$': '<rootDir>/../src/lib/Auth/$1',
-    '^@shared/(.*)$': '<rootDir>/../src/lib/shared/$1',
-    '^@common/(.*)$': '<rootDir>/../src/common/$1',
-    '^@prisma$': '<rootDir>/../src/prisma'
+    '^#author/(.*)$': '<rootDir>/../src/lib/Author/$1',
+    '^#book/(.*)$': '<rootDir>/../src/lib/Book/$1',
+    '^#auth/(.*)$': '<rootDir>/../src/lib/Auth/$1',
+    '^#shared/(.*)$': '<rootDir>/../src/lib/shared/$1',
+    '^#common/(.*)$': '<rootDir>/../src/common/$1',
+    '^#prisma$': '<rootDir>/../src/prisma',
   },
   moduleDirectories: ['node_modules', 'src'],
   verbose: true,

@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PrismaAuthorRepository = void 0;
-const encrypt_1 = require("@common/encrypt/encrypt");
-const AuthorAge_1 = require("@author/domain/AuthorAge");
-const AuthorEmail_1 = require("@author/domain/AuthorEmail");
-const AuthorId_1 = require("../../domain/AuthorId");
-const AuthorName_1 = require("../../domain/AuthorName");
-const AuthorPassword_1 = require("../../domain/AuthorPassword");
-const Author_1 = require("../../domain/entities/Author");
+const encrypt_1 = require("#common/encrypt/encrypt");
+const AuthorAge_1 = require("#author/domain/AuthorAge");
+const AuthorEmail_1 = require("#author/domain/AuthorEmail");
+const AuthorId_1 = require("#author/domain/AuthorId");
+const AuthorName_1 = require("#author/domain/AuthorName");
+const AuthorPassword_1 = require("#author/domain/AuthorPassword");
+const Author_1 = require("#author/domain/entities/Author");
 class PrismaAuthorRepository {
     _prisma;
     constructor(_prisma) {
@@ -69,7 +69,7 @@ class PrismaAuthorRepository {
         return authors.map((author) => new Author_1.Author(new AuthorId_1.AuthorId(author.id), new AuthorName_1.AuthorName(author.name), new AuthorEmail_1.AuthorEmail(author.email), new AuthorPassword_1.AuthorPassword(author.password), new AuthorAge_1.AuthorAge(author.age)));
     }
     async getByEmail(email) {
-        const author = await this._prisma.author.findUnique({
+        const author = await this._prisma.author.findFirst({
             where: {
                 email: email.value,
             },

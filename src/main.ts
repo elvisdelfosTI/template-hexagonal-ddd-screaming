@@ -40,12 +40,9 @@ function startServer() {
   const PORT = process.env.PORT_REST || 3000;
   const baseUrl = `http://localhost`;
   app.listen(PORT, () => {
-    if (process.env.ENV !== 'PROD') {
+    if (process.env.ENV !== 'production') {
       console.log(`🗄️  Database: ${process.env.DATABASE_URL}`);
       console.log(`🚀 Server is running at ${baseUrl}:${PORT}`);
-      console.log(
-        `📜 Documentation is running at http://localhost:${PORT}/api/v1/documentation`,
-      );
     }
   });
 }

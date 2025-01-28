@@ -8,11 +8,11 @@ import {
 } from '@grpc/grpc-js';
 import * as protoLoader from '@grpc/proto-loader';
 import path from 'path';
-import ServiceContainer from '@shared/infrastructure/serviceContainer';
-import { AuthorDto } from '@author/application/UsesCases/UserSave/AuthorSaveDTO';
+import ServiceContainer from '#shared/infrastructure/serviceContainer';
+import { AuthorDto } from '#author/application/UsesCases/UserSave/AuthorSaveDTO';
 import { dirname } from 'path';
 
-const __dirname = dirname(require.resolve('./Author.proto'));
+const url = dirname(require.resolve('./Author.proto'));
 
 interface CreateAuthorRequest {
   id: number;
@@ -39,7 +39,7 @@ interface AuthorListResponse {
 }
 
 export class AuthorGrpcServer {
-  private static PROTO_PATH = path.resolve(__dirname, '../gRPC/Author.proto');
+  private static PROTO_PATH = path.resolve(url, './Author.proto');
   public static proto = (
     loadPackageDefinition(
       protoLoader.loadSync(this.PROTO_PATH, {

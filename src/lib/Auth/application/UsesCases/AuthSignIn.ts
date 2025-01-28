@@ -1,22 +1,19 @@
-import { Encrypt } from '@common/encrypt/encrypt';
+import { Encrypt } from '#common/encrypt/encrypt';
 import { AuthInvalidCredentialsError } from '../../domain/errors/AuthInvalidCredentialsError';
-import { IAuthorRepository } from '@author/domain/AuthorRepository';
-import { AuthorEmail } from '@author/domain/AuthorEmail';
+import { IAuthorRepository } from '#author/domain/AuthorRepository';
+import { AuthorEmail } from '#author/domain/AuthorEmail';
 import { Auth } from '../../domain/entities/Auth';
 import { AuthTokenDto } from '../../domain/AuthTokenDTO';
 import { AuthorName } from '../../domain/AuthorName';
 import { AuthId } from '../../domain/AuthId';
 import { AuthEmail } from '../../domain/AuthEmail';
-import { JwtCommon } from '@common/jwt/JwtCommon';
+import { JwtCommon } from '#common/jwt/JwtCommon';
 
 export class AuthSignIn {
-  constructor(
-    private readonly authorRepository: IAuthorRepository,
-  ) {}
+  constructor(private readonly authorRepository: IAuthorRepository) {}
 
   async execute(email: string, password: string): Promise<AuthTokenDto> {
     const user = await this.authorRepository.getByEmail(new AuthorEmail(email));
-
     if (!user) {
       throw new AuthInvalidCredentialsError();
     }
