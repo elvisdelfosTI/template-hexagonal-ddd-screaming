@@ -73,7 +73,7 @@ export class PrismaAuthorRepository implements IAuthorRepository {
   async save(author: Author): Promise<number | void> {
     const response = await this._prisma.author.create({
       data: {
-        id: author.id.value,
+        //id: author.id.value,
         name: author.name.value,
         email: author.email.value,
         password: await Encrypt.encryptPassword(author.password.value),

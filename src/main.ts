@@ -1,4 +1,9 @@
-import 'module-alias/register';
+(async () => {
+  if (process.env.NODE_ENV === 'production') {
+    await import('module-alias/register');
+  }
+})();
+
 import express from 'express';
 import { Logger } from 'tslog';
 import morgan from 'morgan';
