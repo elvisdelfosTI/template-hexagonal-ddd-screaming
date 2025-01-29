@@ -1,12 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
 import { AuthorDto } from '#author/application/UsesCases/UserSave/AuthorSaveDTO';
 import ServiceContainer from '#shared/infrastructure/serviceContainer';
+import { StatusCodes } from 'http-status-codes';
 
 export class ExpressAuthorController {
   async getAll(_: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const authors = await ServiceContainer.AuthorService.getAll.execute();
-      res.json(authors.map((a) => a.mapToPrimitives())).status(200);
+      res.json(authors.map((a) => a.mapToPrimitives())).status(StatusCodes.OK);
     } catch (error) {
       next(error);
     }
@@ -20,7 +21,7 @@ export class ExpressAuthorController {
       const Author = await ServiceContainer.AuthorService.getById.execute(
         parseInt(req.params.id),
       );
-      res.json(Author.mapToPrimitivesWithoutPassword()).status(200);
+      res.json(Author.mapToPrimitivesWithoutPassword()).status(StatusCodes.OK);
     } catch (error) {
       next(error);
     }
@@ -40,7 +41,7 @@ export class ExpressAuthorController {
       };
       const Author =
         await ServiceContainer.AuthorService.save.execute(authorData);
-      res.json(Author).status(201);
+      res.status(201).json(Author);
     } catch (error) {
       next(error);
     }
@@ -49,7 +50,7 @@ export class ExpressAuthorController {
     try {
       await ServiceContainer.AuthorService.update.execute(req.body);
 
-      res.json({ id: req.body.id }).status(200);
+      res.json({ id: req.body.id }).status(StatusCodes.OK);
     } catch (error) {
       next(error);
     }
@@ -57,7 +58,7 @@ export class ExpressAuthorController {
   async delete(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       await ServiceContainer.AuthorService.delete.execute(+req.params.id);
-      res.json({ id: req.params.id }).status(200);
+      res.json({ id: req.params.id }).status(StatusCodes.OK);
     } catch (error) {
       next(error);
     }

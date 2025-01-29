@@ -12,12 +12,20 @@ import { StatusCodes } from 'http-status-codes';
 import route from './route';
 import * as grpc from '@grpc/grpc-js';
 import { ReflectionService } from '@grpc/reflection';
+import cors from 'cors';
 
 import { AuthorGrpcServer } from './lib/Author/infrastructure/api/gRPC/ProtoAuthorServer';
 const app = express();
 const log = new Logger();
 
 function configureMiddlewares() {
+  app.use(
+    cors({
+      origin: '*',
+      methods: ['GET', 'POST', 'PUT', 'DELETE'],
+      allowedHeaders: ['Content-Type', 'Authorization'],
+    }),
+  );
   app.use(express.json());
   app.use(
     morgan(':method :url :status :response-time ms', {

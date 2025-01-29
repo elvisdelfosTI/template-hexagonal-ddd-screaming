@@ -1,11 +1,12 @@
 import { NextFunction, Request, Response } from 'express';
 import ServiceContainer from '#shared/infrastructure/serviceContainer';
+import { StatusCodes } from 'http-status-codes';
 
 export class ExpressBookController {
   async getAll(_: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const books = await ServiceContainer.BookService.getAll.execute();
-      res.json(books).status(200);
+      res.json(books.map((b) => b.mapToPrimitive())).status(StatusCodes.OK);
     } catch (error) {
       next(error);
     }
@@ -18,7 +19,7 @@ export class ExpressBookController {
     try {
       const bookId = parseInt(req.params.id);
       const book = await ServiceContainer.BookService.getById.execute(bookId);
-      res.json(book).status(200);
+      res.json(book).status(StatusCodes.OK);
     } catch (error) {
       next(error);
     }
@@ -33,8 +34,8 @@ export class ExpressBookController {
   }
   async update(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const book = await ServiceContainer.BookService.save.execute(req.body);
-      res.json(book).status(201);
+      const book = await ServiceContainer.BookService.update.execute(req.body);
+      res.json(book.mapToPrimitive()).status(201);
     } catch (error) {
       next(error);
     }
@@ -42,10 +43,12 @@ export class ExpressBookController {
 
   async delete(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const book = await ServiceContainer.BookService.delete.execute(
-        +req.params.id,
-      );
-      res.json(book).status(200);
+      const bookId = parseInt(req.params.id);
+      if (!bookId || isNaN(bookId)) {
+        throw new Error('Invalid book ID');
+      }
+      const book = await ServiceContainer.BookService.delete.execute(bookId);
+      res.json(book).status(StatusCodes.OK);
     } catch (error) {
       next(error);
     }

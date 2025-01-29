@@ -4,11 +4,6 @@ import { BookStub } from '../../domain/BookStub';
 import { InMemoryBookRepository } from '../../infrastructure/InMemoryBookRepository';
 import { BookEdit } from 'src/lib/Book/application/UsesCases/BookEdit/BookEdit';
 import { BookId } from 'src/lib/Book/domain/BookId';
-import { BookTitle } from 'src/lib/Book/domain/BookTitle';
-import { BookPublishedDate } from 'src/lib/Book/domain/BookPublishDate';
-import { BookPagesCount } from 'src/lib/Book/domain/BookPagesCount';
-import { BookISBN } from 'src/lib/Book/domain/BookISBN';
-import { BookAuthorId } from 'src/lib/Book/domain/BookIdAuthorId';
 
 describe('BookEdit', () => {
   test('should edit a book', async () => {
@@ -23,12 +18,12 @@ describe('BookEdit', () => {
     const updatedBook = BookStub.generateDTO();
 
     await editUseCase.execute({
-      id: new BookId(book.id),
-      title: new BookTitle(updatedBook.title),
-      publishedDate: new BookPublishedDate(updatedBook.publishedDate),
-      pagesCount: new BookPagesCount(updatedBook.pagesCount),
-      ISBN: new BookISBN(updatedBook.ISBN),
-      authorId: new BookAuthorId(updatedBook.authorId),
+      id: book.id,
+      title: updatedBook.title,
+      publishedDate: updatedBook.publishedDate,
+      pagesCount: updatedBook.pagesCount,
+      ISBN: updatedBook.ISBN,
+      authorId: updatedBook.authorId,
     });
 
     const getByIdUseCase = new BookGetById(bookRepository);

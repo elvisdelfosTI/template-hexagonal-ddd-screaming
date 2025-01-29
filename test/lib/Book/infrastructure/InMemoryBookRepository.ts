@@ -1,9 +1,15 @@
-import { Book } from 'src/lib/Book/domain/entities/Book';
-import { IBookRepository } from 'src/lib/Book/domain/BookRepository';
-import { BookId } from 'src/lib/Book/domain/BookId';
+import { BookSaveDTO } from '../../../../src/lib/Book/application/UsesCases/BookSave/BookSaveDTO';
+import { BookTitle } from '../../../../src/lib/Book/domain/BookTitle';
+import { BookPublishedDate } from '../../../../src/lib/Book/domain/BookPublishDate';
+import { BookPagesCount } from '../../../../src/lib/Book/domain/BookPagesCount';
+import { BookISBN } from '../../../../src/lib/Book/domain/BookISBN';
+import { BookAuthorId } from '../../../../src/lib/Book/domain/BookIdAuthorId';
+import { Book } from '../../../../src/lib/Book/domain/entities/Book';
+import { BookId } from '../../../../src/lib/Book/domain/BookId';
+import { IBookRepository } from '../../../../src/lib/Book/domain/BookRepository';
 
 export class InMemoryBookRepository implements IBookRepository {
-  private books: Book[];
+  private books: Book[] = [];
 
   constructor(books: Book[] = []) {
     this.books = books;
@@ -24,13 +30,21 @@ export class InMemoryBookRepository implements IBookRepository {
     );
   }
 
-  edit(book: Book): Promise<Book | undefined> {
-    const index = this.books.findIndex((b) => b.id.value === book.id.value);
+  async edit(bookDto: BookSaveDTO): Promise<Book | undefined> {
+    const index = this.books.findIndex((b) => b.id.value === bookDto.id);
     if (index !== -1) {
-      this.books[index] = book;
-      return Promise.resolve(this.books[index]);
+      const updatedBook = new Book(
+        new BookId(bookDto.id),
+        new BookTitle(bookDto.title),
+        new BookPublishedDate(bookDto.publishedDate),
+        new BookPagesCount(bookDto.pagesCount),
+        new BookISBN(bookDto.ISBN),
+        new BookAuthorId(bookDto.authorId),
+      );
+      this.books[index] = updatedBook;
+      return updatedBook;
     }
-    return Promise.resolve(undefined);
+    return undefined;
   }
 
   delete(id: BookId): Promise<Book | undefined> {

@@ -3,7 +3,7 @@ export class BookId {
 
   constructor(id: number) {
     this._value = id;
-    this.ensureId(id);
+    //    this.ensureId(id);
   }
 
   ensureId(id: number): void {

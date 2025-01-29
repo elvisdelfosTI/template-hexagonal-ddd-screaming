@@ -7,28 +7,29 @@ import { BookISBN } from '../../domain/BookISBN';
 import { BookPublishedDate } from '../../domain/BookPublishDate';
 import { BookPagesCount } from '../../domain/BookPagesCount';
 import { BookAuthorId } from '../../domain/BookIdAuthorId';
+import { BookSaveDTO } from '#book/application/UsesCases/BookSave/BookSaveDTO';
 
 export class PrismaBookRepository implements IBookRepository {
   constructor(private _prisma: PrismaClient) {}
 
-  async edit(book: Book): Promise<Book | undefined> {
-    const updatedBook = await this._prisma.book.update({
-      where: { id: book.id.value },
+  async edit(book: BookSaveDTO): Promise<Book | undefined> {
+    await this._prisma.book.update({
+      where: { id: book.id },
       data: {
-        title: book.title.value,
-        publishedDate: book.publishedDate.value,
-        pagesCount: book.pagesCount.value,
-        ISBN: book.ISBN.value,
-        authorId: book.authorId.value,
+        title: book.title,
+        publishedDate: book.publishedDate,
+        pagesCount: book.pagesCount,
+        ISBN: book.ISBN,
+        authorId: book.authorId,
       },
     });
     return new Book(
-      new BookId(updatedBook.id),
-      new BookTitle(updatedBook.title),
-      new BookPublishedDate(updatedBook.publishedDate),
-      new BookPagesCount(updatedBook.pagesCount),
-      new BookISBN(updatedBook.ISBN),
-      new BookAuthorId(updatedBook.authorId),
+      new BookId(book.id),
+      new BookTitle(book.title),
+      new BookPublishedDate(book.publishedDate),
+      new BookPagesCount(book.pagesCount),
+      new BookISBN(book.ISBN),
+      new BookAuthorId(book.authorId),
     );
   }
 
@@ -65,7 +66,7 @@ export class PrismaBookRepository implements IBookRepository {
   async save(book: Book): Promise<void> {
     await this._prisma.book.create({
       data: {
-        id: book.id.value,
+        //id: book.id.value,
         title: book.title.value,
         publishedDate: book.publishedDate.value,
         pagesCount: book.pagesCount.value,

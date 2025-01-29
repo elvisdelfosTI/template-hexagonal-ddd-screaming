@@ -1,12 +1,29 @@
 import { Router } from 'express';
-import { AuthMiddleware } from '#author/infrastructure/api/express/middleware/Auth';
 import { ExpressBookController } from './ExpressBookController';
+import { responseFormatter } from '#author/infrastructure/api/express/middleware/ResponseFormatter';
+
 const controller = new ExpressBookController();
 const bookRouter = Router();
 
-bookRouter.get('/book/', controller.getAll);
-bookRouter.put('/book/', controller.update);
-bookRouter.post('/book/:id', controller.save);
-bookRouter.delete('book/:id', AuthMiddleware.verifyToken, controller.delete);
+bookRouter.get(
+  '/',
+  responseFormatter,
+  controller.getAll,
+);
+bookRouter.put(
+  '/',
+  responseFormatter,
+  controller.update,
+);
+bookRouter.delete(
+  '/:id',
+  responseFormatter,
+  controller.delete,
+);
+bookRouter.post(
+  '/',
+  responseFormatter,
+  controller.save,
+);
 
 export { bookRouter };
