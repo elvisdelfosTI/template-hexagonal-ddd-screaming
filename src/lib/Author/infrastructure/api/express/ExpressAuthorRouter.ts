@@ -1,38 +1,28 @@
 import { Router } from 'express';
 import { ExpressAuthorController } from './ExpressAuthorController';
-import { AuthMiddleware } from './middleware/Auth';
 import {
-  validateCreateAuthorDto,
-  validateEditAuthorDto,
+	validateCreateAuthorDto,
+	validateEditAuthorDto,
 } from './middleware/Validation';
 import { responseFormatter } from './middleware/ResponseFormatter';
+import { verifyToken } from './middleware/Auth';
 const controller = new ExpressAuthorController();
 const authorRouter = Router();
 
 authorRouter.get('/', responseFormatter, controller.getAll);
-authorRouter.get(
-  '/:id',
-  AuthMiddleware.verifyToken,
-  responseFormatter,
-  controller.getById,
-);
+authorRouter.get('/:id', verifyToken, responseFormatter, controller.getById);
 authorRouter.put(
-  '/',
-  AuthMiddleware.verifyToken,
-  validateEditAuthorDto,
-  responseFormatter,
-  controller.update,
+	'/',
+	verifyToken,
+	validateEditAuthorDto,
+	responseFormatter,
+	controller.update,
 );
-authorRouter.delete(
-  '/:id',
-  AuthMiddleware.verifyToken,
-  responseFormatter,
-  controller.delete,
-);
+authorRouter.delete('/:id', verifyToken, responseFormatter, controller.delete);
 authorRouter.post(
-  '/',
-  validateCreateAuthorDto,
-  responseFormatter,
-  controller.save,
+	'/',
+	validateCreateAuthorDto,
+	responseFormatter,
+	controller.save,
 );
 export { authorRouter };

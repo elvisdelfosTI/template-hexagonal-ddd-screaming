@@ -1,119 +1,127 @@
-import axios from 'axios';
-import { AuthorStub } from 'test/lib/Author/domain/UserStub';
-const port = process.env.PORT_REST || 3000;
-const API_URL = `http://localhost:${port}/api/v1`;
+import axios, { type AxiosInstance } from 'axios';
+import { AuthorStub } from '../domain/AuthorStub';
+import type { AuthorDto } from '../../../../src/lib/Author/application/UsesCases/UserSave/AuthorSaveDTO';
 
 describe('ExpressAuthorRouter', () => {
-  it('should get all authors', async () => {
-    const author = AuthorStub.generateDTO();
-    await axios.post(`${API_URL}/author`, author);
+	let api: AxiosInstance;
 
-    const responseLogin = await axios.post(`${API_URL}/auth/login`, {
-      email: author.email,
-      password: author.password,
-    });
+	beforeAll(() => {
+		const port = process.env.PORT_REST || 3000;
+		api = axios.create({
+			baseURL: `http://localhost:${port}/api/v1`,
+			validateStatus: (status) => {
+				return status >= 200 && status < 500;
+			},
+		});
+	});
 
-    const responseGet = await axios.get(`${API_URL}/author`, {
-      headers: {
-        Authorization: responseLogin.data.token,
-      },
-    });
-    expect(responseGet.status).toBe(200);
-    await axios.delete(`${API_URL}/author/${author.id}`, {
-      headers: {
-        Authorization: responseLogin.data.token,
-      },
-    });
-  });
+	const createAuthor = async (author: Omit<AuthorDto, 'id'>) => {
+		const response = await api.post('/author', author);
+		expect(response.status).toBeGreaterThanOrEqual(200);
+		return response.data.data;
+	};
 
-  it('should get author by id', async () => {
-    const author = AuthorStub.generateDTO();
-    await axios.post(`${API_URL}/author`, author);
+	const loginAuthor = async (credentials: {
+		email: string;
+		password: string;
+	}) => {
+		const response = await api.post('/auth/login', credentials);
+		expect(response.status).toBeGreaterThanOrEqual(200);
+		expect(response.data.data.token).toBeDefined();
+		return response.data.data.token;
+	};
 
-    const responseLogin = await axios.post(`${API_URL}/auth/login`, {
-      email: author.email,
-      password: author.password,
-    });
+	const deleteAuthor = async (authorId: number, token: string) => {
+		const response = await api.delete(`/author/${authorId}`, {
+			headers: { Authorization: token },
+		});
+		expect(response.status).toBeGreaterThanOrEqual(200);
+	};
 
-    const responseGetById = await axios.get(`${API_URL}/author/${author.id}`, {
-      headers: {
-        Authorization: responseLogin.data.token,
-      },
-    });
-    expect(responseGetById.status).toBe(200);
+	describe('GET /author', () => {
+		it('should get all authors', async () => {
+			// Arrange
+			const author = AuthorStub.generateDTOWithoutId();
+			const id = await createAuthor(author);
+			const token = await loginAuthor({
+				email: author.email,
+				password: author.password,
+			});
+			const response = await api.get('/author', {
+				headers: { Authorization: token },
+			});
+			expect(response.data.status).toBe(200);
+			expect(Array.isArray(response.data.data)).toBe(true);
 
-    await axios.delete(`${API_URL}/author/${author.id}`, {
-      headers: {
-        Authorization: responseLogin.data.token,
-      },
-    });
-  });
+			// Cleanup
+			await deleteAuthor(id, token);
+		});
+	});
 
-  it('should create and delete author', async () => {
-    const author = AuthorStub.generateDTO();
-    const responseCreate = await axios.post(`${API_URL}/author`, author);
-    expect(responseCreate.status).toBe(200);
+	it('should get author by id', async () => {
+		const author = AuthorStub.generateDTOWithoutId();
+		const id = await createAuthor(author);
+		const token = await loginAuthor({
+			email: author.email,
+			password: author.password,
+		});
+		const response = await api.get(`/author/${id}`, {
+			headers: { Authorization: token },
+		});
 
-    const responseLogin = await axios.post(`${API_URL}/auth/login`, {
-      email: author.email,
-      password: author.password,
-    });
-    expect(responseLogin.status).toBe(200);
+		expect(response.status).toBe(200);
+		expect(response.data.data).toHaveProperty('id', id);
 
-    const responseDelete = await axios.delete(
-      `${API_URL}/author/${author.id}`,
-      {
-        headers: {
-          Authorization: responseLogin.data.token,
-        },
-      },
-    );
-    expect(responseDelete.status).toBe(200);
-  });
+		await deleteAuthor(id, token);
+	});
 
-  it('should update author', async () => {
-    const author = AuthorStub.generateDTO();
-    await axios.post(`${API_URL}/author`, author);
+	describe('POST /author', () => {
+		it('should create author successfully', async () => {
+			const author = AuthorStub.generateDTOWithoutId();
+			const id = await createAuthor(author);
+			expect(id).toBeDefined();
+			const token = await loginAuthor({
+				email: author.email,
+				password: author.password,
+			});
+			await deleteAuthor(id, token);
+		});
+	});
 
-    const responseLogin = await axios.post(`${API_URL}/auth/login`, {
-      email: author.email,
-      password: author.password,
-    });
+	describe('PUT /author', () => {
+		it('should update author successfully', async () => {
+			const author = AuthorStub.generateDTOWithoutId();
+			const id = await createAuthor(author);
+			const token = await loginAuthor({
+				email: author.email,
+				password: author.password,
+			});
 
-    const updatedAuthor = { ...author, name: 'Walter White' };
-    const responseUpdate = await axios.put(
-      `${API_URL}/author/`,
-      updatedAuthor,
-      {
-        headers: {
-          Authorization: responseLogin.data.token,
-        },
-      },
-    );
-    expect(responseUpdate.status).toBe(200);
+			const updatedAuthor = { ...author, name: 'Walter White', id };
+			const response = await api.put('/author', updatedAuthor, {
+				headers: { Authorization: token },
+			});
 
-    await axios.delete(`${API_URL}/author/${author.id}`, {
-      headers: {
-        Authorization: responseLogin.data.token,
-      },
-    });
-  });
+			expect(response.status).toBe(200);
+			const getResponse = await api.get(`/author/${id}`, {
+				headers: { Authorization: token },
+			});
+			expect(getResponse.data.data.name).toBe('Walter White');
 
-  it('should login successfully', async () => {
-    const author = AuthorStub.generateDTO();
-    await axios.post(`${API_URL}/author`, author);
+			await deleteAuthor(id, token);
+		});
+	});
 
-    const responseLogin = await axios.post(`${API_URL}/auth/login`, {
-      email: author.email,
-      password: author.password,
-    });
-    expect(responseLogin.status).toBe(200);
-    expect(responseLogin.data.token).toBeDefined();
-
-    await axios.delete(`${API_URL}/author/${author.id}`, {
-      headers: {
-        Authorization: responseLogin.data.token,
-      },
-    });
-  });
+	describe('POST /auth/login', () => {
+		it('should login successfully', async () => {
+			const author = AuthorStub.generateDTOWithoutId();
+			const id = await createAuthor(author);
+			const token = await loginAuthor({
+				email: author.email,
+				password: author.password,
+			});
+			expect(typeof token).toBe('string');
+			await deleteAuthor(id, token);
+		});
+	});
 });

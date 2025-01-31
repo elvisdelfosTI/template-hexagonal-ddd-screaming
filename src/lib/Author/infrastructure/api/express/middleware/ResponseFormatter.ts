@@ -1,21 +1,21 @@
-import { Request, Response, NextFunction } from 'express';
+import type { Request, Response, NextFunction } from 'express';
 
 export const responseFormatter = (
-  _: Request,
-  res: Response,
-  next: NextFunction,
+	_: Request,
+	res: Response,
+	next: NextFunction,
 ) => {
-  const oldJson = res.json;
+	const oldJson = res.json;
 
-  res.json = function (data: unknown) {
-    const response = {
-      status: res.statusCode,
-      data: res.statusCode >= 400 ? null : data,
-      errors: res.statusCode >= 400 ? data : null,
-    };
-    oldJson.call(this, response);
-    return this;
-  };
+	res.json = function (data: unknown) {
+		const response = {
+			status: res.statusCode,
+			data: res.statusCode >= 400 ? null : data,
+			errors: res.statusCode >= 400 ? data : null,
+		};
+		oldJson.call(this, response);
+		return this;
+	};
 
-  next();
+	next();
 };

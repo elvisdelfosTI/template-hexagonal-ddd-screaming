@@ -18,22 +18,22 @@ import { BookEdit } from '#book/application/UsesCases/BookEdit/BookEdit';
 const BookRepository = new PrismaBookRepository(prismaClient);
 const AuthorRepository = new PrismaAuthorRepository(prismaClient);
 export default {
-  AuthorService: {
-    getAll: new AuthorGetAll(AuthorRepository),
-    getById: new AuthorGetById(AuthorRepository),
-    save: new AuthorSave(AuthorRepository),
-    delete: new AuthorDelete(AuthorRepository),
-    getByEmail: new AuthorGetByEmail(AuthorRepository),
-    update: new AuthorEdit(AuthorRepository),
-  },
-  BookService: {
-    getAll: new BookGetAll(BookRepository),
-    getById: new BookGetById(BookRepository),
-    save: new BookSave(BookRepository),
-    delete: new BookDelete(BookRepository),
-    update: new BookEdit(BookRepository),
-  },
-  AuthenticationService: {
-    login: new AuthSignIn(AuthorRepository),
-  },
+	AuthorService: {
+		getAll: new AuthorGetAll(AuthorRepository),
+		getById: new AuthorGetById(AuthorRepository),
+		save: new AuthorSave(AuthorRepository),
+		delete: new AuthorDelete(AuthorRepository),
+		getByEmail: new AuthorGetByEmail(AuthorRepository),
+		update: new AuthorEdit(AuthorRepository),
+	},
+	BookService: {
+		getAll: new BookGetAll(BookRepository),
+		getById: new BookGetById(BookRepository),
+		save: new BookSave(BookRepository),
+		delete: new BookDelete(BookRepository),
+		update: new BookEdit(BookRepository),
+	},
+	AuthenticationService: {
+		login: new AuthSignIn(AuthorRepository),
+	},
 };

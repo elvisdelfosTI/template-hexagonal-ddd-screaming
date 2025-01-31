@@ -3,13 +3,13 @@ import { AuthorSave } from '../../../../../src/lib/Author/application/UsesCases/
 import { AuthorStub } from '../../domain/AuthorStub';
 
 describe('AuthorCreate', () => {
-  test('should create an author', async () => {
-    const authorRepository = new InMemoryAuthorRepository([]);
-    const userCase = new AuthorSave(authorRepository);
-    const author = AuthorStub.generateDTO();
-    await userCase.execute(author);
+	test('should create an author', async () => {
+		const authorRepository = new InMemoryAuthorRepository([]);
+		const userCase = new AuthorSave(authorRepository);
+		const author = AuthorStub.generateDTO();
+		await userCase.execute(author);
 
-    const authors = await authorRepository.getAll();
-    expect(authors).toHaveLength(1);
-  });
+		const authors = await authorRepository.getAll();
+		expect(authors).toHaveLength(1);
+	});
 });

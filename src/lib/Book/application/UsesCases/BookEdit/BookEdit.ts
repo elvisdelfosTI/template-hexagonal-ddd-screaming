@@ -1,20 +1,20 @@
-import { Book } from '../../../domain/entities/Book';
-import { IBookRepository } from '../../../domain/BookRepository';
-import { BookSaveDTO } from '../BookSave/BookSaveDTO';
+import type { Book } from '../../../domain/entities/Book';
+import type { IBookRepository } from '../../../domain/BookRepository';
+import type { BookSaveDTO } from '../BookSave/BookSaveDTO';
 import { BookId } from '#book/domain/BookId';
 
 class BookEdit {
-  constructor(private readonly bookRepository: IBookRepository) {}
+	constructor(private readonly bookRepository: IBookRepository) {}
 
-  async execute(updatedData: BookSaveDTO): Promise<Book> {
-    const book = await this.bookRepository.getById(new BookId(updatedData.id));
-    if (!book) {
-      throw new Error('Book not found');
-    }
-    await this.bookRepository.edit(updatedData);
+	async execute(updatedData: BookSaveDTO): Promise<Book> {
+		const book = await this.bookRepository.getById(new BookId(updatedData.id));
+		if (!book) {
+			throw new Error('Book not found');
+		}
+		await this.bookRepository.edit(updatedData);
 
-    return book;
-  }
+		return book;
+	}
 }
 
 export { BookEdit };
