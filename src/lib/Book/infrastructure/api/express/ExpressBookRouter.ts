@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { ExpressBookController } from './ExpressBookController';
 import { responseFormatter } from '#author/infrastructure/api/express/middleware/ResponseFormatter';
+import { ExpressBookController } from './ExpressBookController';
 
 const controller = new ExpressBookController();
 const bookRouter = Router();

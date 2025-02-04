@@ -1,18 +1,18 @@
+import { AuthSignIn } from '#auth/application/UsesCases/AuthSignIn';
+import { AuthorGetByEmail } from '#author/application/UsesCases/AuthorByEmail/AuthorByEmail';
 import { AuthorGetById } from '#author/application/UsesCases/AuthorById/AuthorById';
 import { AuthorDelete } from '#author/application/UsesCases/AuthorDelete/AuthorDelete';
+import { AuthorEdit } from '#author/application/UsesCases/AuthorEdit/AuthorEdit';
 import { AuthorGetAll } from '#author/application/UsesCases/AuthorGetAll/AuthorGetAll';
 import { AuthorSave } from '#author/application/UsesCases/UserSave/AuthorSave';
-import { prismaClient } from '../../../prisma';
-import { AuthorGetByEmail } from '#author/application/UsesCases/AuthorByEmail/AuthorByEmail';
-import { BookGetAll } from '#book/application/UsesCases/BookGetAll/BookGetAll';
-import { PrismaBookRepository } from '#book/infrastructure/database/PrismaBookRepository';
 import { PrismaAuthorRepository } from '#author/infrastructure/database/PrismaAuthorRepository';
+import { BookDelete } from '#book/application/UsesCases/BookDelete/BookDelete';
+import { BookEdit } from '#book/application/UsesCases/BookEdit/BookEdit';
+import { BookGetAll } from '#book/application/UsesCases/BookGetAll/BookGetAll';
 import { BookGetById } from '#book/application/UsesCases/BookGetById/BookGetById';
 import { BookSave } from '#book/application/UsesCases/BookSave/BookSave';
-import { BookDelete } from '#book/application/UsesCases/BookDelete/BookDelete';
-import { AuthSignIn } from '#auth/application/UsesCases/AuthSignIn';
-import { AuthorEdit } from '#author/application/UsesCases/AuthorEdit/AuthorEdit';
-import { BookEdit } from '#book/application/UsesCases/BookEdit/BookEdit';
+import { PrismaBookRepository } from '#book/infrastructure/database/PrismaBookRepository';
+import { prismaClient } from '../../../prisma';
 
 //const AuthorRepository = new InMemoryAuthorRepository();
 const BookRepository = new PrismaBookRepository(prismaClient);

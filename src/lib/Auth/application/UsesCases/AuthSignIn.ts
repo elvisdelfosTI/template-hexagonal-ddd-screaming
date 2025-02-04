@@ -1,13 +1,13 @@
-import { AuthInvalidCredentialsError } from '../../domain/errors/AuthInvalidCredentialsError';
-import type { IAuthorRepository } from '#author/domain/AuthorRepository';
 import { AuthorEmail } from '#author/domain/AuthorEmail';
-import { Auth } from '../../domain/entities/Auth';
+import type { IAuthorRepository } from '#author/domain/AuthorRepository';
+import { encrypt } from '#common/encrypt/encrypt';
+import { JwtCommon } from '#common/jwt/JwtCommon';
+import { AuthEmail } from '../../domain/AuthEmail';
+import { AuthId } from '../../domain/AuthId';
 import type { AuthTokenDto } from '../../domain/AuthTokenDTO';
 import { AuthorName } from '../../domain/AuthorName';
-import { AuthId } from '../../domain/AuthId';
-import { AuthEmail } from '../../domain/AuthEmail';
-import { JwtCommon } from '#common/jwt/JwtCommon';
-import { encrypt } from '#common/encrypt/encrypt';
+import { Auth } from '../../domain/entities/Auth';
+import { AuthInvalidCredentialsError } from '../../domain/errors/AuthInvalidCredentialsError';
 
 export class AuthSignIn {
 	constructor(private readonly authorRepository: IAuthorRepository) {}

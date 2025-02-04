@@ -1,12 +1,12 @@
-import { BookStub } from 'test/lib/Book/domain/BookStub';
-import { PrismaBookRepository } from 'src/lib/Book/infrastructure/database/PrismaBookRepository';
-import { prismaClient } from 'src/prisma';
-import { BookId } from 'src/lib/Book/domain/BookId';
-import { BookTitle } from 'src/lib/Book/domain/BookTitle';
-import { AuthorStub } from 'test/lib/Author/domain/UserStub';
-import { PrismaAuthorRepository } from '#author/infrastructure/database/PrismaAuthorRepository';
-import { AuthorId } from '#author/domain/AuthorId';
-import { BookAuthorId } from 'src/lib/Book/domain/BookIdAuthorId';
+import { AuthorId } from '../../../../src/lib/Author/domain/AuthorId';
+import { PrismaAuthorRepository } from '../../../../src/lib/Author/infrastructure/database/PrismaAuthorRepository';
+import { BookId } from '../../../../src/lib/Book/domain/BookId';
+import { BookAuthorId } from '../../../../src/lib/Book/domain/BookIdAuthorId';
+import { BookTitle } from '../../../../src/lib/Book/domain/BookTitle';
+import { PrismaBookRepository } from '../../../../src/lib/Book/infrastructure/database/PrismaBookRepository';
+import { prismaClient } from '../../../../src/prisma';
+import { AuthorStub } from '../../Author/domain/AuthorStub';
+import { BookStub } from '../../Book/domain/BookStub';
 
 describe('PostgresBookRepository', () => {
 	let authorId: number;

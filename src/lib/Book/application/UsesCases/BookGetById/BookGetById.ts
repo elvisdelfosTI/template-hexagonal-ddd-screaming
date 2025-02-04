@@ -1,7 +1,7 @@
-import type { Book } from '../../../domain/entities/Book';
 import { BookId } from '../../../domain/BookId';
-import { BookNotFoundError } from '../../../domain/errors/BookNotFoundError';
 import type { IBookRepository } from '../../../domain/BookRepository';
+import type { Book } from '../../../domain/entities/Book';
+import { BookNotFoundError } from '../../../domain/errors/BookNotFoundError';
 
 export class BookGetById {
 	constructor(private readonly _repository: IBookRepository) {}

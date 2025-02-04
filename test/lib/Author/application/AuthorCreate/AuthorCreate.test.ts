@@ -1,6 +1,6 @@
-import { InMemoryAuthorRepository } from '../../infrastructure/InMemoryAuthorRespository';
 import { AuthorSave } from '../../../../../src/lib/Author/application/UsesCases/UserSave/AuthorSave';
 import { AuthorStub } from '../../domain/AuthorStub';
+import { InMemoryAuthorRepository } from '../../infrastructure/InMemoryAuthorRespository';
 
 describe('AuthorCreate', () => {
 	test('should create an author', async () => {

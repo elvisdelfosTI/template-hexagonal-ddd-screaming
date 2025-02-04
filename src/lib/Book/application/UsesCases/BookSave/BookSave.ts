@@ -1,12 +1,12 @@
-import { Book } from '../../../domain/entities/Book';
 import type { IBookRepository } from 'src/lib/Book/domain/BookRepository';
-import type { BookSaveDTO } from './BookSaveDTO';
-import { BookId } from '../../../domain/BookId';
-import { BookTitle } from '../../../domain/BookTitle';
-import { BookPublishedDate } from '../../../domain/BookPublishDate';
-import { BookPagesCount } from '../../../domain/BookPagesCount';
 import { BookISBN } from '../../../domain/BookISBN';
+import { BookId } from '../../../domain/BookId';
 import { BookAuthorId } from '../../../domain/BookIdAuthorId';
+import { BookPagesCount } from '../../../domain/BookPagesCount';
+import { BookPublishedDate } from '../../../domain/BookPublishDate';
+import { BookTitle } from '../../../domain/BookTitle';
+import { Book } from '../../../domain/entities/Book';
+import type { BookSaveDTO } from './BookSaveDTO';
 
 export class BookSave {
 	constructor(private _repository: IBookRepository) {}

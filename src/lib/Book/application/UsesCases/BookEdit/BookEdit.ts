@@ -1,7 +1,7 @@
-import type { Book } from '../../../domain/entities/Book';
+import { BookId } from '../../../domain/BookId';
 import type { IBookRepository } from '../../../domain/BookRepository';
+import type { Book } from '../../../domain/entities/Book';
 import type { BookSaveDTO } from '../BookSave/BookSaveDTO';
-import { BookId } from '#book/domain/BookId';
 
 class BookEdit {
 	constructor(private readonly bookRepository: IBookRepository) {}

@@ -1,5 +1,5 @@
+import type { NextFunction, Request, Response } from 'express';
 import { check, validationResult } from 'express-validator';
-import type { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
 export const validateCreateAuthorDto = [

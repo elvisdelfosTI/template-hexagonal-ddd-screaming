@@ -1,7 +1,7 @@
-import type { Author } from '#author/domain/entities/Author';
+import type { AuthorEmail } from '#author/domain/AuthorEmail';
 import type { AuthorId } from '#author/domain/AuthorId';
 import type { IAuthorRepository } from '#author/domain/AuthorRepository';
-import type { AuthorEmail } from '#author/domain/AuthorEmail';
+import type { Author } from '#author/domain/entities/Author';
 
 export class InMemoryAuthorRepository implements IAuthorRepository {
 	private Authors: Author[] = [];

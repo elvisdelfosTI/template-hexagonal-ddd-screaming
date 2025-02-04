@@ -1,8 +1,8 @@
-import { BookSave } from 'src/lib/Book/application/UsesCases/BookSave/BookSave';
-import { InMemoryBookRepository } from '../../infrastructure/InMemoryBookRepository';
+import { BookDelete } from '../../../../../src/lib/Book/application/UsesCases/BookDelete/BookDelete';
+import { BookSave } from '../../../../../src/lib/Book/application/UsesCases/BookSave/BookSave';
+import { BookId } from '../../../../../src/lib/Book/domain/BookId';
 import { BookStub } from '../../domain/BookStub';
-import { BookDelete } from 'src/lib/Book/application/UsesCases/BookDelete/BookDelete';
-import { BookId } from 'src/lib/Book/domain/BookId';
+import { InMemoryBookRepository } from '../../infrastructure/InMemoryBookRepository';
 
 describe('BookDelete', () => {
 	test('should delete a book', async () => {

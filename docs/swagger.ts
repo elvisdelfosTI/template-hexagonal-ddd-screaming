@@ -1,7 +1,7 @@
-import swaggerUi from 'swagger-ui-express';
-import express from 'express';
-import yaml from 'yaml';
 import fs from 'node:fs';
+import express from 'express';
+import swaggerUi from 'swagger-ui-express';
+import yaml from 'yaml';
 
 const app = express();
 

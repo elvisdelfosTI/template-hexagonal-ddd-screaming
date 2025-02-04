@@ -4,15 +4,15 @@
 	}
 })();
 
-import express from 'express';
-import { Logger } from 'tslog';
-import morgan from 'morgan';
-import type { Response, Request, NextFunction } from 'express';
-import { StatusCodes } from 'http-status-codes';
-import route from './route';
 import * as grpc from '@grpc/grpc-js';
 import { ReflectionService } from '@grpc/reflection';
 import cors from 'cors';
+import express from 'express';
+import type { NextFunction, Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
+import morgan from 'morgan';
+import { Logger } from 'tslog';
+import route from './route';
 
 import { AuthorGrpcServer } from './lib/Author/infrastructure/api/gRPC/ProtoAuthorServer';
 const app = express();

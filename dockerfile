@@ -31,8 +31,8 @@ COPY --from=builder --chown=nodeuser:nodejs /app/package.json ./
 USER nodeuser
 
 # Health check
-HEALTHCHECK --interval=30s --timeout=3s \
-    CMD curl -f http://localhost:${PORT}/health || exit 1
+#HEALTHCHECK --interval=30s --timeout=3s \
+#    CMD curl -f http://localhost:${PORT}/health || exit 1
 
 EXPOSE ${PORT}
 CMD ["npm", "start"]

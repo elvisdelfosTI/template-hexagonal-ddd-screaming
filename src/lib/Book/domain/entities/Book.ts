@@ -1,6 +1,6 @@
+import type { BookISBN } from '../BookISBN';
 import type { BookId } from '../BookId';
 import type { BookAuthorId } from '../BookIdAuthorId';
-import type { BookISBN } from '../BookISBN';
 import type { BookPagesCount } from '../BookPagesCount';
 import type { BookPublishedDate } from '../BookPublishDate';
 import type { BookTitle } from '../BookTitle';

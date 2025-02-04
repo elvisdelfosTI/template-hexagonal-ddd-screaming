@@ -1,7 +1,7 @@
-import type { Author } from '../../../domain/entities/Author';
 import { AuthorId } from '../../../domain/AuthorId';
-import { AuthorNotFoundError } from '../../../domain/errors/AuthorNotFoundError';
 import type { IAuthorRepository } from '../../../domain/AuthorRepository';
+import type { Author } from '../../../domain/entities/Author';
+import { AuthorNotFoundError } from '../../../domain/errors/AuthorNotFoundError';
 
 export class AuthorGetById {
 	constructor(private readonly _repository: IAuthorRepository) {}

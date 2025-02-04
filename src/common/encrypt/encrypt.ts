@@ -1,6 +1,6 @@
 import * as bcrypt from 'bcrypt';
+import { type ILogObj, Logger } from 'tslog';
 import { EncryptError } from './errors/EncryptError';
-import { Logger, type ILogObj } from 'tslog';
 
 const log: Logger<ILogObj> = new Logger();
 

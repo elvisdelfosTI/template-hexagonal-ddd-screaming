@@ -1,9 +1,8 @@
-import { PrismaAuthorRepository } from '../../../../src/lib/Author/infrastructure/database/PrismaAuthorRepository';
-import { prismaClient } from '../../../../src/prisma';
-import { AuthorName } from '../../../../src/lib/Author/domain/AuthorName';
-import { AuthorId } from '../../../../src/lib/Author/domain/AuthorId';
-import { AuthorStub } from '../domain/AuthorStub';
 import { PrismaClient } from '@prisma/client';
+import { AuthorId } from '../../../../src/lib/Author/domain/AuthorId';
+import { AuthorName } from '../../../../src/lib/Author/domain/AuthorName';
+import { PrismaAuthorRepository } from '../../../../src/lib/Author/infrastructure/database/PrismaAuthorRepository';
+import { AuthorStub } from '../domain/AuthorStub';
 
 describe('PostgresAuthorRepository', () => {
 	let prisma: PrismaClient;

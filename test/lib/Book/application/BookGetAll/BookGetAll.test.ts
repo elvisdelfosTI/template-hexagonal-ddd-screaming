@@ -1,4 +1,4 @@
-import { BookGetAll } from '#book/application/UsesCases/BookGetAll/BookGetAll';
+import { BookGetAll } from '../../../../../src/lib/Book/application/UsesCases/BookGetAll/BookGetAll';
 import { InMemoryBookRepository } from '../../infrastructure/InMemoryBookRepository';
 
 describe('BookGetAll should return all books', () => {

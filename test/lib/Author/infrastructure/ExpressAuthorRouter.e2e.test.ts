@@ -1,6 +1,6 @@
 import axios, { type AxiosInstance } from 'axios';
-import { AuthorStub } from '../domain/AuthorStub';
 import type { AuthorDto } from '../../../../src/lib/Author/application/UsesCases/UserSave/AuthorSaveDTO';
+import { AuthorStub } from '../domain/AuthorStub';
 
 describe('ExpressAuthorRouter', () => {
 	let api: AxiosInstance;

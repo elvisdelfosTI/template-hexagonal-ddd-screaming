@@ -5,12 +5,12 @@ import {
 	randPassword,
 } from '@ngneat/falso';
 import type { AuthorDto } from '../../../../src/lib/Author/application/UsesCases/UserSave/AuthorSaveDTO';
-import { AuthorId } from '../../../../src/lib/Author/domain/AuthorId';
-import { Author } from '../../../../src/lib/Author/domain/entities/Author';
-import { AuthorName } from '../../../../src/lib/Author/domain/AuthorName';
-import { AuthorEmail } from '../../../../src/lib/Author/domain/AuthorEmail';
-import { AuthorPassword } from '../../../../src/lib/Author/domain/AuthorPassword';
 import { AuthorAge } from '../../../../src/lib/Author/domain/AuthorAge';
+import { AuthorEmail } from '../../../../src/lib/Author/domain/AuthorEmail';
+import { AuthorId } from '../../../../src/lib/Author/domain/AuthorId';
+import { AuthorName } from '../../../../src/lib/Author/domain/AuthorName';
+import { AuthorPassword } from '../../../../src/lib/Author/domain/AuthorPassword';
+import { Author } from '../../../../src/lib/Author/domain/entities/Author';
 export const AuthorStub = {
 	generateDTO(): AuthorDto {
 		return {

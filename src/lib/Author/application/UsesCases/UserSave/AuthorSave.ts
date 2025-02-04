@@ -1,10 +1,10 @@
-import { Author } from '../../../domain/entities/Author';
+import { AuthorAge } from '../../../domain/AuthorAge';
 import { AuthorEmail } from '../../../domain/AuthorEmail';
 import { AuthorId } from '../../../domain/AuthorId';
 import { AuthorName } from '../../../domain/AuthorName';
 import { AuthorPassword } from '../../../domain/AuthorPassword';
 import type { IAuthorRepository } from '../../../domain/AuthorRepository';
-import { AuthorAge } from '../../../domain/AuthorAge';
+import { Author } from '../../../domain/entities/Author';
 import type { AuthorDto } from './AuthorSaveDTO';
 
 export class AuthorSave {

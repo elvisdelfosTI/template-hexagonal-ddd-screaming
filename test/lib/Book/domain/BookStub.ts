@@ -1,13 +1,13 @@
-import { randNumber, randWord, randPastDate } from '@ngneat/falso';
+import { randNumber, randPastDate, randWord } from '@ngneat/falso';
 import type { BookSaveDTO } from '../../../../src/lib/Book/application/UsesCases/BookSave/BookSaveDTO';
-import { Book } from '../../../../src/lib/Book/domain/entities/Book';
-import { BookId } from '../../../../src/lib/Book/domain/BookId';
-import { BookTitle } from '../../../../src/lib/Book/domain/BookTitle';
-import { BookPublishedDate } from '../../../../src/lib/Book/domain/BookPublishDate';
-import { BookPagesCount } from '../../../../src/lib/Book/domain/BookPagesCount';
 import { BookISBN } from '../../../../src/lib/Book/domain/BookISBN';
+import { BookId } from '../../../../src/lib/Book/domain/BookId';
 import { BookAuthorId } from '../../../../src/lib/Book/domain/BookIdAuthorId';
-  
+import { BookPagesCount } from '../../../../src/lib/Book/domain/BookPagesCount';
+import { BookPublishedDate } from '../../../../src/lib/Book/domain/BookPublishDate';
+import { BookTitle } from '../../../../src/lib/Book/domain/BookTitle';
+import { Book } from '../../../../src/lib/Book/domain/entities/Book';
+
 export const BookStub = {
 	generateDTO(): BookSaveDTO {
 		return {
@@ -28,5 +28,5 @@ export const BookStub = {
 			new BookISBN(this.generateDTO().ISBN),
 			new BookAuthorId(this.generateDTO().authorId),
 		);
-	}
-}
+	},
+};

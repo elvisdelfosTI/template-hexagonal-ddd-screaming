@@ -1,9 +1,9 @@
-import { BookGetById } from 'src/lib/Book/application/UsesCases/BookGetById/BookGetById';
-import { BookSave } from 'src/lib/Book/application/UsesCases/BookSave/BookSave';
+import { BookEdit } from '../../../../../src/lib/Book/application/UsesCases/BookEdit/BookEdit';
+import { BookGetById } from '../../../../../src/lib/Book/application/UsesCases/BookGetById/BookGetById';
+import { BookSave } from '../../../../../src/lib/Book/application/UsesCases/BookSave/BookSave';
+import { BookId } from '../../../../../src/lib/Book/domain/BookId';
 import { BookStub } from '../../domain/BookStub';
 import { InMemoryBookRepository } from '../../infrastructure/InMemoryBookRepository';
-import { BookEdit } from 'src/lib/Book/application/UsesCases/BookEdit/BookEdit';
-import { BookId } from 'src/lib/Book/domain/BookId';
 
 describe('BookEdit', () => {
 	test('should edit a book', async () => {

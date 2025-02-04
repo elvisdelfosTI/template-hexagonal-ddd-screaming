@@ -1,20 +1,29 @@
 {
 	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+
 	"vcs": {
 		"enabled": false,
 		"clientKind": "git",
 		"useIgnoreFile": false
 	},
+
 	"files": {
+		"include": ["src/**/*.ts", "test/**/*.ts"],
 		"ignoreUnknown": false,
 		"ignore": [
-			"node_modules/*",
-			"dist/*",
-			"!dist/",
+			"node_modules/",
+			"dist/",
 			"package-lock.json",
-			"tsconfig.json"
+			"yarn.lock",
+			"pnpm-lock.yaml",
+			"tsconfig.json",
+			".env",
+			".DS_Store",
+			".vscode/",
+			".idea/"
 		]
 	},
+
 	"formatter": {
 		"enabled": true,
 		"formatWithErrors": false,
@@ -25,32 +34,41 @@
 		"lineWidth": 80,
 		"lineEnding": "lf"
 	},
+
 	"organizeImports": {
 		"enabled": true
 	},
+
 	"linter": {
 		"enabled": true,
 		"rules": {
 			"recommended": true,
-			"suspicious": {
-				"noExplicitAny": "error"
+
+			"correctness": {
+				"noUnusedVariables": "error"
 			},
+
+			"style": {
+				"noUnusedTemplateLiteral": "error",
+				"noVar": "error"
+			},
+
 			"complexity": {
 				"useOptionalChain": "error"
 			},
-			"style": {
-				"noUnusedTemplateLiteral": "error"
-			},
-			"correctness": {
-				"noUnusedVariables": "off"
+
+			"suspicious": {
+				"noExplicitAny": "warn",
+				"noEmptyInterface": "warn"
 			}
 		}
 	},
+
 	"javascript": {
 		"formatter": {
 			"quoteStyle": "single",
 			"semicolons": "always"
 		},
-		"globals": ["window", "document", "console"]
+		"globals": ["window", "document", "console", "process", "setTimeout"]
 	}
 }

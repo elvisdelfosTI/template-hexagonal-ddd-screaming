@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from 'express';
-import ServiceContainer from '#shared/infrastructure/serviceContainer';
 import { StatusCodes } from 'http-status-codes';
+import ServiceContainer from '#shared/infrastructure/serviceContainer';
 
 export class ExpressBookController {
 	async getAll(_: Request, res: Response, next: NextFunction): Promise<void> {

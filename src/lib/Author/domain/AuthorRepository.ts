@@ -1,6 +1,6 @@
-import type { Author } from './entities/Author';
-import type { AuthorId } from './AuthorId';
 import type { AuthorEmail } from './AuthorEmail';
+import type { AuthorId } from './AuthorId';
+import type { Author } from './entities/Author';
 
 export interface IAuthorRepository {
 	save(author: Author): Promise<undefined | number>;

@@ -1,4 +1,4 @@
-import { BookSave } from 'src/lib/Book/application/UsesCases/BookSave/BookSave';
+import { BookSave } from '../../../../../src/lib/Book/application/UsesCases/BookSave/BookSave';
 import { BookStub } from '../../domain/BookStub';
 import { InMemoryBookRepository } from '../../infrastructure/InMemoryBookRepository';
 

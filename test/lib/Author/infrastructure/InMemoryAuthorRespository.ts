@@ -1,7 +1,7 @@
-import type { Author } from '../../../../src/lib/Author/domain/entities/Author';
-import type { IAuthorRepository } from '../../../../src/lib/Author/domain/AuthorRepository';
-import type { AuthorId } from '../../../../src/lib/Author/domain/AuthorId';
 import type { AuthorEmail } from '../../../../src/lib/Author/domain/AuthorEmail';
+import type { AuthorId } from '../../../../src/lib/Author/domain/AuthorId';
+import type { IAuthorRepository } from '../../../../src/lib/Author/domain/AuthorRepository';
+import type { Author } from '../../../../src/lib/Author/domain/entities/Author';
 
 export class InMemoryAuthorRepository implements IAuthorRepository {
 	private authors: Author[];
@@ -27,7 +27,7 @@ export class InMemoryAuthorRepository implements IAuthorRepository {
 
 	edit(author: Author): Promise<Author | undefined> {
 		const index = this.authors.findIndex(
-			(author) => author.id.value === author.id.value,
+			(existingAuthor) => existingAuthor.id.value === author.id.value,
 		);
 		if (index !== -1) {
 			this.authors[index].age.value = author.age.value;

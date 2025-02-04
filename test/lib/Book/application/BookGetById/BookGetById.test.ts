@@ -1,5 +1,5 @@
-import { BookGetById } from 'src/lib/Book/application/UsesCases/BookGetById/BookGetById';
-import { BookSave } from 'src/lib/Book/application/UsesCases/BookSave/BookSave';
+import { BookGetById } from '../../../../../src/lib/Book/application/UsesCases/BookGetById/BookGetById';
+import { BookSave } from '../../../../../src/lib/Book/application/UsesCases/BookSave/BookSave';
 import { BookStub } from '../../domain/BookStub';
 import { InMemoryBookRepository } from '../../infrastructure/InMemoryBookRepository';
 

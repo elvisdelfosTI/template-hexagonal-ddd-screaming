@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
 import type { AuthorDto } from '#author/application/UsesCases/UserSave/AuthorSaveDTO';
 import ServiceContainer from '#shared/infrastructure/serviceContainer';
-import { StatusCodes } from 'http-status-codes';
 
 export class ExpressAuthorController {
 	async getAll(_: Request, res: Response, next: NextFunction): Promise<void> {

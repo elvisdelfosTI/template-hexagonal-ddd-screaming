@@ -1,4 +1,5 @@
-import { encrypt } from '#common/encrypt/encrypt';
+import type { PrismaClient } from '@prisma/client';
+import type { AuthorDto } from '#author/application/UsesCases/UserSave/AuthorSaveDTO';
 import { AuthorAge } from '#author/domain/AuthorAge';
 import { AuthorEmail } from '#author/domain/AuthorEmail';
 import { AuthorId } from '#author/domain/AuthorId';
@@ -6,8 +7,7 @@ import { AuthorName } from '#author/domain/AuthorName';
 import { AuthorPassword } from '#author/domain/AuthorPassword';
 import type { IAuthorRepository } from '#author/domain/AuthorRepository';
 import { Author } from '#author/domain/entities/Author';
-import type { AuthorDto } from '#author/application/UsesCases/UserSave/AuthorSaveDTO';
-import type { PrismaClient } from '@prisma/client';
+import { encrypt } from '#common/encrypt/encrypt';
 
 export class PrismaAuthorRepository implements IAuthorRepository {
 	constructor(private _prisma: PrismaClient) {}
