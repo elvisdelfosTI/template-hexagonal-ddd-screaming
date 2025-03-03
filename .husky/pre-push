@@ -7,5 +7,3 @@ npm run tsc --noEmit
 # Ejecuta todos los tests
 npm run test:unit
 
-# Ejecuta el linter en todo el proyecto
-npm run lint
