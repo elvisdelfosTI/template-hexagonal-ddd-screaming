@@ -1,7 +1,7 @@
-import { AuthorId } from '../../../domain/AuthorId';
-import type { IAuthorRepository } from '../../../domain/AuthorRepository';
-import { AuthorNotFoundError } from '../../../domain/errors/AuthorNotFoundError';
-import type { AuthorDto } from '../UserSave/AuthorSaveDTO';
+import { AuthorId } from "#author/domain/AuthorId";
+import { IAuthorRepository } from "#author/domain/AuthorRepository";
+import { AuthorNotFoundError } from "#author/domain/errors/AuthorNotFoundError";
+import { AuthorDto } from "../UserSave/AuthorSaveDTO";
 
 export class AuthorEdit {
 	constructor(private readonly _repository: IAuthorRepository) {}

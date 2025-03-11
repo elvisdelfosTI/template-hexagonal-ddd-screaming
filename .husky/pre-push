@@ -7,3 +7,9 @@ npm run tsc --noEmit
 # Ejecuta todos los tests
 npm run test:unit
 
+# Ejecuta todos los tests de integración
+npm run test:integration
+
+# Ejecuta todos los tests de e2e
+npm run test:e2e
+

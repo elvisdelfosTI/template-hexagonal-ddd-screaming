@@ -1,5 +1,5 @@
-import { AuthorId } from '../../../domain/AuthorId';
-import type { IAuthorRepository } from '../../../domain/AuthorRepository';
+import { AuthorId } from "#author/domain/AuthorId";
+import { IAuthorRepository } from "#author/domain/AuthorRepository";
 
 export class AuthorDelete {
 	constructor(private readonly _repository: IAuthorRepository) {}

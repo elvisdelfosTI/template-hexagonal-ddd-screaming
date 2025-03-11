@@ -1,5 +1,5 @@
-import type { IAuthorRepository } from '../../../domain/AuthorRepository';
-import type { Author } from '../../../domain/entities/Author';
+import { IAuthorRepository } from "#author/domain/AuthorRepository";
+import { Author } from "#author/domain/entities/Author";
 
 export class AuthorGetAll {
 	constructor(private readonly authorRepository: IAuthorRepository) {}

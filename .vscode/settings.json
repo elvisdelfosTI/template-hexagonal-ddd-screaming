@@ -4,7 +4,13 @@
 	"editor.codeActionsOnSave": {
 		"source.fixAll.eslint": "explicit"
 	},
-	"cSpell.words": ["addgroup", "nodeuser", "oneofs", "tslog"],
+  "cSpell.ignorePaths": ["package.json"],
+	"cSpell.words": [
+		"addgroup",
+		"ngneat",
+		"nodeuser",
+		"oneofs",
+	],
 	"[dockerfile]": {
 		"editor.defaultFormatter": "ms-azuretools.vscode-docker"
 	}

@@ -81,7 +81,7 @@
 
 ## 1.2.0 (2025-01-16)
 
-* chore(release): 📦 1.2.0 [skip ci] ([59abf58](https://github.com/github-delfosti/pacasmayo-hexagonal/commit/59abf58))
+* chore(release): 📦 1.2.0 [skip ci] ([59abf58](https://gfithub.com/github-delfosti/pacasmayo-hexagonal/commit/59abf58))
 * feat: añade nueva funcionalidad ([00a36e7](https://github.com/github-delfosti/pacasmayo-hexagonal/commit/00a36e7))
 
 
