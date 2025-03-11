@@ -5,7 +5,7 @@
 npm run tsc --noEmit
 
 # Ejecuta todos los tests
-#npm run test:unit
+npm run test:unit
 
 # Ejecuta todos los tests de integración
 #npm run test:integration

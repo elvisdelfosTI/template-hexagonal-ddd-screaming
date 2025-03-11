@@ -1,12 +1,11 @@
-import { AuthorAge } from "#author/domain/AuthorAge";
-import { AuthorEmail } from "#author/domain/AuthorEmail";
-import { AuthorId } from "#author/domain/AuthorId";
-import { AuthorName } from "#author/domain/AuthorName";
-import { AuthorPassword } from "#author/domain/AuthorPassword";
-import { IAuthorRepository } from "#author/domain/AuthorRepository";
-import { Author } from "#author/domain/entities/Author";
-import { AuthorDto } from "./AuthorSaveDTO";
-
+import { AuthorAge } from '#author/domain/AuthorAge';
+import { AuthorEmail } from '#author/domain/AuthorEmail';
+import { AuthorId } from '#author/domain/AuthorId';
+import { AuthorName } from '#author/domain/AuthorName';
+import { AuthorPassword } from '#author/domain/AuthorPassword';
+import type { IAuthorRepository } from '#author/domain/AuthorRepository';
+import { Author } from '#author/domain/entities/Author';
+import type { AuthorDto } from './AuthorSaveDTO';
 
 export class AuthorSave {
 	constructor(private _repository: IAuthorRepository) {}

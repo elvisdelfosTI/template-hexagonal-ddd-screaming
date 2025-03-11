@@ -1,11 +1,11 @@
 import { Router } from 'express';
+import { ExpressAuthorController } from './ExpressAuthorController';
+import { verifyToken } from './middleware/Auth';
+import { responseFormatter } from './middleware/ResponseFormatter';
 import {
 	validateCreateAuthorDto,
 	validateEditAuthorDto,
 } from './middleware/Validation';
-import { ExpressAuthorController } from './ExpressAuthorController';
-import { responseFormatter } from './middleware/ResponseFormatter';
-import { verifyToken } from './middleware/Auth';
 const controller = new ExpressAuthorController();
 const authorRouter = Router();
 
