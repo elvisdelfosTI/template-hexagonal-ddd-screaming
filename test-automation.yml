@@ -3,7 +3,7 @@ trigger: none
 pr:
   branches:
     include:
-      - testing-1
+      - test-1
 
 pool:
   name: Azure Pipelines
