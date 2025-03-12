@@ -34,7 +34,8 @@
       "#book/*": ["src/lib/Book/*"],
       "#auth/*": ["src/lib/Auth/*"],
       "#shared/*": ["src/lib/shared/*"],
-      "#common/*": ["src/common/*"]
+      "#common/*": ["src/common/*"],
+      "#config/*": ["src/config/*"]
     },
     //  "paths": []
     // Specify a set of entries that re-map imports to additional lookup locations. */,

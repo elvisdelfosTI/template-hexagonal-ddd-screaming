@@ -12,28 +12,28 @@ import { BookGetAll } from '#book/application/UsesCases/BookGetAll/BookGetAll';
 import { BookGetById } from '#book/application/UsesCases/BookGetById/BookGetById';
 import { BookSave } from '#book/application/UsesCases/BookSave/BookSave';
 import { PrismaBookRepository } from '#book/infrastructure/database/PrismaBookRepository';
-import { prismaClient } from '../../../prisma';
+import { prismaClient } from '../../../config/Database.config';
 
 //const AuthorRepository = new InMemoryAuthorRepository();
 const BookRepository = new PrismaBookRepository(prismaClient);
 const AuthorRepository = new PrismaAuthorRepository(prismaClient);
 export default {
-	AuthorService: {
-		getAll: new AuthorGetAll(AuthorRepository),
-		getById: new AuthorGetById(AuthorRepository),
-		save: new AuthorSave(AuthorRepository),
-		delete: new AuthorDelete(AuthorRepository),
-		getByEmail: new AuthorGetByEmail(AuthorRepository),
-		update: new AuthorEdit(AuthorRepository),
-	},
-	BookService: {
-		getAll: new BookGetAll(BookRepository),
-		getById: new BookGetById(BookRepository),
-		save: new BookSave(BookRepository),
-		delete: new BookDelete(BookRepository),
-		update: new BookEdit(BookRepository),
-	},
-	AuthenticationService: {
-		login: new AuthSignIn(AuthorRepository),
-	},
+  AuthorService: {
+    getAll: new AuthorGetAll(AuthorRepository),
+    getById: new AuthorGetById(AuthorRepository),
+    save: new AuthorSave(AuthorRepository),
+    delete: new AuthorDelete(AuthorRepository),
+    getByEmail: new AuthorGetByEmail(AuthorRepository),
+    update: new AuthorEdit(AuthorRepository),
+  },
+  BookService: {
+    getAll: new BookGetAll(BookRepository),
+    getById: new BookGetById(BookRepository),
+    save: new BookSave(BookRepository),
+    delete: new BookDelete(BookRepository),
+    update: new BookEdit(BookRepository),
+  },
+  AuthenticationService: {
+    login: new AuthSignIn(AuthorRepository),
+  },
 };

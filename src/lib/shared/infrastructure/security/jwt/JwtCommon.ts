@@ -1,8 +1,8 @@
 import jsonwebtoken from 'jsonwebtoken';
 import { type ILogObj, Logger } from 'tslog';
-import type { IAuthRepository } from '../../lib/Auth/domain/AuthRepository';
-import { AuthTokenDto } from '../../lib/Auth/domain/AuthTokenDTO';
-import type { Auth } from '../../lib/Auth/domain/entities/Auth';
+import type { IAuthRepository } from '#auth/domain/AuthRepository';
+import { AuthTokenDto } from '#auth/domain/AuthTokenDTO';
+import { Auth } from '#auth/domain/entities/Auth';
 const log: Logger<ILogObj> = new Logger();
 
 export class JwtCommon implements IAuthRepository {

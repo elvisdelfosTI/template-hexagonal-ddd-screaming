@@ -1,7 +1,7 @@
 import { AuthorEmail } from '#author/domain/AuthorEmail';
 import type { IAuthorRepository } from '#author/domain/AuthorRepository';
-import { encrypt } from '#common/encrypt/encrypt';
-import { JwtCommon } from '#common/jwt/JwtCommon';
+import { encrypt } from '#shared/infrastructure/security/encrypt/encrypt';
+import { JwtCommon } from '#shared/infrastructure/security/jwt/JwtCommon';
 import { AuthEmail } from '../../domain/AuthEmail';
 import { AuthId } from '../../domain/AuthId';
 import type { AuthTokenDto } from '../../domain/AuthTokenDTO';

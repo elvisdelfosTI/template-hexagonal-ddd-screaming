@@ -7,7 +7,7 @@ import { AuthorName } from '#author/domain/AuthorName';
 import { AuthorPassword } from '#author/domain/AuthorPassword';
 import type { IAuthorRepository } from '#author/domain/AuthorRepository';
 import { Author } from '#author/domain/entities/Author';
-import { encrypt } from '#common/encrypt/encrypt';
+import { encrypt } from '#shared/infrastructure/security/encrypt/encrypt';
 
 export class PrismaAuthorRepository implements IAuthorRepository {
 	constructor(private _prisma: PrismaClient) {}

@@ -82,7 +82,7 @@ const AuthorGrpcServer = {
 
 				callback(null, response);
 			} catch (error) {
-				console.error('Error in GetAll:', error);
+				log.error('Error in GetAll:', error);
 				callback(
 					new Error(error instanceof Error ? error.message : 'Unknown error'),
 					null,

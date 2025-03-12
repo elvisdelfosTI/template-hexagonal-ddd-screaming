@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { AuthTokenDto } from '#auth/domain/AuthTokenDTO';
-import { JwtCommon } from '#common/jwt/JwtCommon';
+import { JwtCommon } from '#shared/infrastructure/security/jwt/JwtCommon';
 
 export const verifyToken = async (
 	req: Request,
