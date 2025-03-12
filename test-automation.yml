@@ -31,7 +31,7 @@ steps:
   displayName: 'Publicar reporte de cobertura'
   inputs:
     codeCoverageTool: 'Cobertura'
-    summaryFileLocation: '$(Build.SourcesDirectory)/test/config/coverage/cobertura-coverage.xml'
+    summaryFileLocation: '$(Build.SourcesDirectory)/coverage/cobertura-coverage.xml'
     reportDirectory: '$(Build.SourcesDirectory)/coverage'
 
 - task: BuildQualityChecks@9
