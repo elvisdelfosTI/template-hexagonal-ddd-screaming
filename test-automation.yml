@@ -26,14 +26,17 @@ steps:
   inputs:
     testResultsFiles: 'junit.xml'
     testRunTitle: 'Resultados de pruebas unitarias'
+    mergeTestResults: true
+    failTaskOnFailedTests: true
 
-- task: PublishCodeCoverage@2
+- task: PublishCodeCoverageResults@1
   displayName: 'Publicar reporte de cobertura'
   inputs:
+    codeCoverageTool: 'Cobertura'
     summaryFileLocation: '$(Build.SourcesDirectory)/coverage/cobertura-coverage.xml'
-    pathToSources: '$(Build.SourcesDirectory)/src'
+    reportDirectory: '$(Build.SourcesDirectory)/coverage'
+    additionalCodeCoverageFiles: '$(Build.SourcesDirectory)/coverage/**/*.*'
     failIfCoverageEmpty: true
-    codecoverageTool: 'Cobertura'
 
 - task: BuildQualityChecks@9
   displayName: 'Validar métricas de calidad'
