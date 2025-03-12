@@ -6,7 +6,8 @@ const rootDir = resolve(__dirname, '../..');
 const config: Config.InitialOptions = {
   preset: 'ts-jest',
   testEnvironment: 'node',
-  roots: ['<rootDir>/../'],
+  rootDir: process.cwd(),
+  roots: ['<rootDir>/src', '<rootDir>/test'],
   maxWorkers: 4,
   moduleDirectories: ['node_modules', 'src'],
   modulePaths: [rootDir],
@@ -19,10 +20,9 @@ const config: Config.InitialOptions = {
     'test/lib/.*/infrastructure/.*',
   ],
   collectCoverage: true,
-  coverageDirectory: '<rootDir>/../../coverage',
-  coverageReporters: ['text', 'cobertura', 'html'],
+  coverageReporters: ['lcov', 'text', 'cobertura'],
+  coverageDirectory: './coverage',
   verbose: true,
-  rootDir: '.',
   moduleNameMapper: {
     '^#author/(.*)$': resolve(rootDir, 'src/lib/Author/$1'),
     '^#(.*)$': resolve(rootDir, 'src/lib/$1'),
