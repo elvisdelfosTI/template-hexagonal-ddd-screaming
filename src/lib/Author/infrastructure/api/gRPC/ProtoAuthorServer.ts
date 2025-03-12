@@ -11,6 +11,7 @@ import {
 import * as protoLoader from '@grpc/proto-loader';
 import type { AuthorDto } from '#author/application/UsesCases/UserSave/AuthorSaveDTO';
 import ServiceContainer from '#shared/infrastructure/serviceContainer';
+import { log } from '#config/Logger.config';
 
 const url = dirname(require.resolve('./Author.proto'));
 

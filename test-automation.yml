@@ -24,7 +24,7 @@ steps:
 - task: PublishTestResults@2
   displayName: 'Publicar resultados de pruebas'
   inputs:
-    testResultsFiles: 'test/config/coverage/junit.xml'
+    testResultsFiles: 'junit.xml'
     testRunTitle: 'Resultados de pruebas unitarias'
 
 - task: PublishCodeCoverageResults@1
