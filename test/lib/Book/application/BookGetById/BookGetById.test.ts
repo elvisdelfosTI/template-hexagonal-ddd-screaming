@@ -4,15 +4,15 @@ import { BookStub } from '../../domain/BookStub';
 import { InMemoryBookRepository } from '../../infrastructure/InMemoryBookRepository';
 
 describe('BookGetById', () => {
-	test('should get a book by id', async () => {
-		const bookRepository = new InMemoryBookRepository([]);
-		const saveUseCase = new BookSave(bookRepository);
-		const book = BookStub.generateDTO();
-		await saveUseCase.execute(book);
+  test('should get a book by id', async () => {
+    const bookRepository = new InMemoryBookRepository([]);
+    const saveUseCase = new BookSave(bookRepository);
+    const book = BookStub.generateDTO();
+    await saveUseCase.execute(book);
 
-		const getByIdUseCase = new BookGetById(bookRepository);
-		const foundBook = await getByIdUseCase.execute(book.id);
-		expect(foundBook).toBeDefined();
-		expect(foundBook?.id.value).toBe(book.id);
-	});
+    const getByIdUseCase = new BookGetById(bookRepository);
+    const foundBook = await getByIdUseCase.execute(book.id);
+    expect(foundBook).toBeDefined();
+    expect(foundBook?.id.value).toBe(book.id);
+  });
 });

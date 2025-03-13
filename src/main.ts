@@ -1,13 +1,18 @@
-import { startGrpcServer } from '#config/grpc/grpcserver';
-import { startHttpServer } from '#config/http/express/server';
-import { config, typeServer } from '#config/Environment.config';
-(async () => {
-  if (config.NODE_ENV !== typeServer.PROD) {
-    await import('module-alias/register');
-  }
-  await Promise.allSettled(
-    [
+import { log } from '@config/Logger.config';
+import { startGrpcServer } from '@config/grpc/gRPCServer';
+import { startHttpServer } from '@config/http/express/server';
+
+const main = async () => {
+  try {
+    const [httpServer, grpcServer] = await Promise.all([
       startHttpServer(),
-      startGrpcServer()
+      startGrpcServer(),
     ]);
-})();
+    return { httpServer, grpcServer };
+  } catch (error) {
+    log.error('❌ Server startup failed:', error);
+    process.exit(1);
+  }
+};
+
+main();

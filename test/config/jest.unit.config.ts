@@ -24,8 +24,8 @@ const config: Config.InitialOptions = {
   coverageDirectory: './coverage',
   verbose: true,
   moduleNameMapper: {
-    '^#author/(.*)$': resolve(rootDir, 'src/lib/Author/$1'),
-    '^#(.*)$': resolve(rootDir, 'src/lib/$1'),
+    '^@author/(.*)$': resolve(rootDir, 'src/lib/Author/$1'),
+    '^@(.*)$': resolve(rootDir, 'src/lib/$1'),
   },
   transform: {
     '^.+\\.ts$': [

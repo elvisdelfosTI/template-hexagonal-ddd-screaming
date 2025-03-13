@@ -14,6 +14,10 @@ Este proyecto es un servicio para la gestión de libros y autores, que permite r
 > [!IMPORTANT]  
 > Se recomienda instalar la extension de biome en el editor de codigo que se encuentra en la carpeta `/.vscode/extension.json`
 
+> [!IMPORTANT]  
+> docker-comose esta dewsactiualziado Se recomienda instalar la extension de biome en el editor de codigo que se encuentra en la carpeta `/.vscode/extension.json`
+
+
 ## Estructura del Proyecto
 
 - **src/application/UsesCases/**: Contiene los casos de uso para la gestión de libros y autores.
@@ -117,3 +121,7 @@ Este proyecto es un servicio para la gestión de libros y autores, que permite r
 ## Licencia
 
 Este proyecto está bajo la Licencia MIT.# pacasmayo-hexagonal
+
+
+
+variables de entorno

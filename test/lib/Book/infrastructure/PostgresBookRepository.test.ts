@@ -9,83 +9,83 @@ import { AuthorStub } from '../../Author/domain/AuthorStub';
 import { BookStub } from '../../Book/domain/BookStub';
 
 describe('PostgresBookRepository', () => {
-	let authorId: number;
+  let authorId: number;
 
-	beforeAll(async () => {
-		// Crear un autor para usar en las pruebas
-		const authorRepository = new PrismaAuthorRepository(prismaClient);
-		const author = AuthorStub.generate();
-		await authorRepository.save(author);
-		authorId = author.id.value;
-	});
+  beforeAll(async () => {
+    // Crear un autor para usar en las pruebas
+    const authorRepository = new PrismaAuthorRepository(prismaClient);
+    const author = AuthorStub.generate();
+    await authorRepository.save(author);
+    authorId = author.id.value;
+  });
 
-	afterAll(async () => {
-		// Limpiar el autor creado
-		const authorRepository = new PrismaAuthorRepository(prismaClient);
-		await authorRepository.delete(new AuthorId(authorId));
-	});
-	const createBookWithValidAuthor = () => {
-		const book = BookStub.generate();
-		book.authorId = new BookAuthorId(authorId);
-		return book;
-	};
+  afterAll(async () => {
+    // Limpiar el autor creado
+    const authorRepository = new PrismaAuthorRepository(prismaClient);
+    await authorRepository.delete(new AuthorId(authorId));
+  });
+  const createBookWithValidAuthor = () => {
+    const book = BookStub.generate();
+    book.authorId = new BookAuthorId(authorId);
+    return book;
+  };
 
-	it('should create a book', async () => {
-		const repository = new PrismaBookRepository(prismaClient);
-		const book = createBookWithValidAuthor();
-		await repository.save(book);
-		const savedBook = await repository.getById(new BookId(book.id.value));
-		expect(savedBook).toBeDefined();
-		expect(savedBook?.id.value).toBe(book.id.value);
-		expect(savedBook?.title.value).toBe(book.title.value);
-		await repository.delete(book.id);
-	});
+  it('should create a book', async () => {
+    const repository = new PrismaBookRepository(prismaClient);
+    const book = createBookWithValidAuthor();
+    await repository.save(book);
+    const savedBook = await repository.getById(new BookId(book.id.value));
+    expect(savedBook).toBeDefined();
+    expect(savedBook?.id.value).toBe(book.id.value);
+    expect(savedBook?.title.value).toBe(book.title.value);
+    await repository.delete(book.id);
+  });
 
-	it('should get book by id', async () => {
-		const repository = new PrismaBookRepository(prismaClient);
-		const book = createBookWithValidAuthor();
-		await repository.save(book);
-		const foundBook = await repository.getById(new BookId(book.id.value));
-		expect(foundBook).toBeDefined();
-		expect(foundBook?.ISBN.value).toBe(book.ISBN.value);
-		await repository.delete(book.id);
-	});
+  it('should get book by id', async () => {
+    const repository = new PrismaBookRepository(prismaClient);
+    const book = createBookWithValidAuthor();
+    await repository.save(book);
+    const foundBook = await repository.getById(new BookId(book.id.value));
+    expect(foundBook).toBeDefined();
+    expect(foundBook?.ISBN.value).toBe(book.ISBN.value);
+    await repository.delete(book.id);
+  });
 
-	it('should get all books', async () => {
-		const repository = new PrismaBookRepository(prismaClient);
-		const book1 = createBookWithValidAuthor();
-		const book2 = createBookWithValidAuthor();
-		await repository.save(book1);
-		await repository.save(book2);
+  it('should get all books', async () => {
+    const repository = new PrismaBookRepository(prismaClient);
+    const book1 = createBookWithValidAuthor();
+    const book2 = createBookWithValidAuthor();
+    await repository.save(book1);
+    await repository.save(book2);
 
-		const books = await repository.getAll();
-		expect(books.length).toBeGreaterThanOrEqual(2);
+    const books = await repository.getAll();
+    expect(books.length).toBeGreaterThanOrEqual(2);
 
-		await repository.delete(book1.id);
-		await repository.delete(book2.id);
-	});
+    await repository.delete(book1.id);
+    await repository.delete(book2.id);
+  });
 
-	it('should edit a book', async () => {
-		const repository = new PrismaBookRepository(prismaClient);
-		const book = createBookWithValidAuthor();
-		await repository.save(book);
+  it('should edit a book', async () => {
+    const repository = new PrismaBookRepository(prismaClient);
+    const book = createBookWithValidAuthor();
+    await repository.save(book);
 
-		const updatedTitle = 'Updated Title';
-		book.title = new BookTitle(updatedTitle);
-		await repository.edit(book);
+    const updatedTitle = 'Updated Title';
+    book.title = new BookTitle(updatedTitle);
+    await repository.edit(book);
 
-		const editedBook = await repository.getById(new BookId(book.id.value));
-		expect(editedBook?.title.value).toBe(updatedTitle);
-		await repository.delete(book.id);
-	});
+    const editedBook = await repository.getById(new BookId(book.id.value));
+    expect(editedBook?.title.value).toBe(updatedTitle);
+    await repository.delete(book.id);
+  });
 
-	it('should delete a book', async () => {
-		const repository = new PrismaBookRepository(prismaClient);
-		const book = createBookWithValidAuthor();
-		await repository.save(book);
+  it('should delete a book', async () => {
+    const repository = new PrismaBookRepository(prismaClient);
+    const book = createBookWithValidAuthor();
+    await repository.save(book);
 
-		await repository.delete(book.id);
-		const deletedBook = await repository.getById(new BookId(book.id.value));
-		expect(deletedBook).toBeUndefined();
-	});
+    await repository.delete(book.id);
+    const deletedBook = await repository.getById(new BookId(book.id.value));
+    expect(deletedBook).toBeUndefined();
+  });
 });
