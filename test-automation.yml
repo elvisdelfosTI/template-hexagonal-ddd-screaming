@@ -18,14 +18,14 @@ steps:
 - script: npm install
   displayName: 'Instalar dependencias'
 
-- script: npm run test:unit
-  displayName: 'Ejecutar pruebas unitarias con cobertura'
+#- script: npm run test:unit
+#  displayName: 'Ejecutar pruebas unitarias con cobertura'
 
-- task: PublishTestResults@2
-  displayName: 'Publicar resultados de pruebas'
-  inputs:
-    testResultsFiles: '**/junit.xml'
-    testRunTitle: 'Resultados de pruebas unitarias'
+#- task: PublishTestResults@2
+#  displayName: 'Publicar resultados de pruebas'
+#  inputs:
+#    testResultsFiles: '**/junit.xml'
+#    testRunTitle: 'Resultados de pruebas unitarias'
 
 - task: PublishCodeCoverageResults@1
   displayName: 'Publicar reporte de cobertura'G

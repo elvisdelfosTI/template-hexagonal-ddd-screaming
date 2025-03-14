@@ -22,7 +22,7 @@ const environmentSchema = z.object({
     .string()
     .transform((val) => Number.parseInt(val, 10))
     .default('3000'),
-  DATABASE_URL: z.string(),
+  ARCHETYPE_HEXAGONAL_DATABASE_URL: z.string(),
   PORT_GRPC: z
     .string()
     .transform((val) => Number.parseInt(val, 10))

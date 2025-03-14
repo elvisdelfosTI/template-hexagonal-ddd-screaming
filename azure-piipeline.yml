@@ -1,0 +1,37 @@
+trigger:
+  branches:
+    include:
+    - feature/*
+    - master
+
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      ref: master
+      name: RP-AZ-ARQ-FRAMEWORK/PIPELINES_TEMPLATES
+
+extends:
+  template: workflow-templates\nodejs-backend-cloudrun-deploy.yaml@templates
+
+  parameters:
+    container_image_name: arquetype-hexagonal-backend
+    artifact_region_url: us-east1-docker.pkg.dev
+
+    environment_dev: 'DEVELOPMENT'
+    gcp_project_name_dev: 'pe-pacasmayo-arquitect-gcp-dev'
+    sc_gcp_container_registry_name_dev: 'gcr-artifact-registry-arq-hexagonal-dev'
+    gcp_artifact_registry_name_dev: 'arq-hexagonal-docker-registry-dev'
+    gcp_secure_file_dev: 'pe-pacasmayo-arquitect-gcp-private-key-dev.json'
+
+    environment_qas: 'TRAINING'
+    gcp_project_name_qas: 'pe-pacasmayo-arquitect-gcp-qas'
+    sc_gcp_container_registry_name_qas: 'gcr-artifact-registry-arq-hexagonal-qas'
+    gcp_artifact_registry_name_qas: 'arq-hexagonal-docker-registry-qas'
+    gcp_secure_file_qas: 'pe-pacasmayo-arquitect-gcp-private-key-qas.json'
+
+    environment_prd: 'PRODUCTION'
+    gcp_project_name_prd: 'pe-pacasmayo-arquitect-gcp-prd'
+    sc_gcp_container_registry_name_prd: 'gcr-artifact-registry-arq-hexagonal-prd'
+    gcp_artifact_registry_name_prd: 'arq-hexagonal-docker-registry-prd'
+    gcp_secure_file_prd: 'pe-pacasmayo-arquitect-gcp-private-key-prd.json'

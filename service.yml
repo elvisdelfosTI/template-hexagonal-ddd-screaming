@@ -1,0 +1,61 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: $(SRVYAML_SERVICE_NAME_BACKEND)
+  labels:
+    cloud.googleapis.com/location: $(SRVYAML_REGION)
+  annotations:
+    run.googleapis.com/ingress: all
+    run.googleapis.com/ingress-status: all
+spec:
+  template:
+    metadata:
+      labels:
+        run.googleapis.com/startupProbeType: Default
+      annotations:
+        autoscaling.knative.dev/minScale: '$(SRVYAML_MIN_SCALE_BACKEND)'
+        autoscaling.knative.dev/maxScale: '$(SRVYAML_MAX_SCALE_BACKEND)'
+        run.googleapis.com/startup-cpu-boost: "$(SRVYAML_STARTUP_CPU_BOOST_BACKEND)"
+        run.googleapis.com/cloudsql-instances: $(SRVYAML_CLOUDSQL_INSTANCE)
+    spec:
+      containerConcurrency: 50
+      timeoutSeconds: 300
+      containers:
+      - image: $(SRVYAML_REGION)-docker.pkg.dev/$(PROJECT_ID)/$(SRVYAML_REGISTRY_NAME)/$(SRVYAML_CONTAINER_BACKEND):$(Build.BuildId)
+        ports:
+        - name: http1
+          containerPort: 8080
+        resources:
+          limits:
+            cpu: $(SRVYAML_RESOURCE_CPU_BACKEND)
+            memory: $(SRVYAML_RESOURCE_MEMORY_BACKEND)
+        env:
+        - name: DB_NAME
+        valueFrom:
+            secretKeyRef:
+              key: latest
+              name: '$(ARCHETYPE_HEXAGONAL_DATABASE_URL)'
+        - name: ARCHETYPE_HEXAGONAL_API_JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: latest
+              name: '$(ARCHETYPE_HEXAGONAL_API_JWT_SECRET)'
+        - name: ARCHETYPE_HEXAGONAL_API_JWT_EXPIRES
+          valueFrom:
+            secretKeyRef:
+              key: latest
+              name: '$(ARCHETYPE_HEXAGONAL_API_JWT_EXPIRES)'
+#        - name: FRONT_URL
+#          value: '$(ARCHILAYER_URL_FRONT)'
+
+        - name: LOGGING
+          value: 'true'
+        startupProbe:
+          timeoutSeconds: 240
+          failureThreshold: 1
+          periodSeconds: 240
+          tcpSocket:
+            port: 8080
+  traffic:
+  - percent: 100
+    latestRevision: true
