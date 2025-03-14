@@ -4,11 +4,11 @@ import type { Book } from '../../../domain/entities/Book';
 import { BookNotFoundError } from '../../../domain/errors/BookNotFoundError';
 
 export class BookGetById {
-	constructor(private readonly _repository: IBookRepository) {}
+  constructor(private readonly _repository: IBookRepository) {}
 
-	async execute(id: number): Promise<Book> {
-		const book = await this._repository.getById(new BookId(id));
-		if (!book) throw new BookNotFoundError('Book not found');
-		return book;
-	}
+  async execute(id: number): Promise<Book> {
+    const book = await this._repository.getById(new BookId(id));
+    if (!book) throw new BookNotFoundError('Book not found');
+    return book;
+  }
 }
