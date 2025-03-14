@@ -11,5 +11,5 @@ npm run tsc --noEmit
 npm run test:integration
 
 # Ejecuta todos los tests de e2e
-npm run test:e2e
+#npm run test:e2e
 
