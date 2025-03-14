@@ -19,7 +19,7 @@ services:
       - '3000:3000'
       - '3001:3001'
     environment:
-      - DATABASE_URL=postgresql://TEST_USER:TEST_PASSWORD@db:5432/TEST_DB?schema=public
+      - ARCHETYPE_HEXAGONAL_DATABASE_URL=postgresql://TEST_USER:TEST_PASSWORD@db:5432/TEST_DB?schema=public
       - PORT=3001
     depends_on:
       - db
