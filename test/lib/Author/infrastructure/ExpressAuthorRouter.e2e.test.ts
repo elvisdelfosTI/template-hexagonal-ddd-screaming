@@ -21,8 +21,8 @@ describe('ExpressAuthorRouter', () => {
     author: Omit<AuthorDto, 'id'>,
   ): Promise<number> => {
     const response = await api.post('/author', author);
-    expect(response.status).toBe(200);
-    return response.data.data.id;
+    expect(response.status).toBe(201);
+    return response.data.data;
   };
 
   const loginAuthor = async (credentials: {
@@ -31,8 +31,13 @@ describe('ExpressAuthorRouter', () => {
   }): Promise<string> => {
     const response = await api.post('/auth/login', credentials);
     expect(response.status).toBe(200);
-    const token = response.data.data?.token;
-    if (!token) throw new Error('No token received from login');
+
+    const fullToken = response.data.token;
+    if (!fullToken || typeof fullToken !== 'string') {
+      throw new Error('No token received from login');
+    }
+
+    const token = fullToken.replace('Bearer ', '');
     return token;
   };
 
@@ -48,9 +53,8 @@ describe('ExpressAuthorRouter', () => {
 
   describe('GET /author', () => {
     it('should get all authors', async () => {
-      // Arrange
       const author = AuthorStub.generateDTOWithoutId();
-      const id = await createAuthor(author);
+      const data = await createAuthor(author);
       const token = await loginAuthor({
         email: author.email,
         password: author.password,
@@ -61,7 +65,7 @@ describe('ExpressAuthorRouter', () => {
       expect(response.status).toBe(200);
       expect(Array.isArray(response.data.data)).toBe(true);
 
-      await deleteAuthor(id, token);
+      await deleteAuthor(data, token);
     }, 10000);
   });
 
@@ -112,7 +116,7 @@ describe('ExpressAuthorRouter', () => {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      expect(response.status).toBe(201);
+      expect(response.status).toBe(200);
       const getResponse = await api.get(`/author/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
