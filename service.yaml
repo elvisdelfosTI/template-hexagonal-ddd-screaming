@@ -30,6 +30,8 @@ spec:
             cpu: $(SRVYAML_RESOURCE_CPU_BACKEND)
             memory: $(SRVYAML_RESOURCE_MEMORY_BACKEND)
         env:
+        - name: PORT
+          value: "8080"
         - name: ARCHETYPE_HEXAGONAL_DATABASE_URL
           valueFrom:
             secretKeyRef:

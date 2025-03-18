@@ -20,10 +20,10 @@ const environmentSchema = z.object({
       typeServer.LOCAL,
     ])
     .default(typeServer.DEV),
-  PORT_REST: z
+  PORT: z
     .string()
     .transform((val) => Number.parseInt(val, 10))
-    .default('3000'),
+    .default('8080'),
   ARCHETYPE_HEXAGONAL_DATABASE_URL: z.string(),
   PORT_GRPC: z
     .string()
