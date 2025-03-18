@@ -34,12 +34,12 @@ spec:
           valueFrom:
             secretKeyRef:
               key: latest
-              name: '$(ARCHETYPE_HEXAGONAL_DATABASE_URL)'
+              name: ARCHETYPE_HEXAGONAL_DATABASE_URL
         - name: ARCHETYPE_HEXAGONAL_API_JWT_SECRET
           valueFrom:
             secretKeyRef:
               key: latest
-              name: '$(ARCHETYPE_HEXAGONAL_API_JWT_SECRET)'
+              name: ARCHETYPE_HEXAGONAL_API_JWT_SECRET
         - name: ARCHETYPE_HEXAGONAL_API_JWT_EXPIRES
           valueFrom:
             secretKeyRef:
