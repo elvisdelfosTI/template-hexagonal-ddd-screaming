@@ -2,8 +2,7 @@ FROM node:22-alpine AS base
 
 WORKDIR /app
 
-ENV ENV=production \
-    PORT=3000
+ENV ENV=production
 
 RUN apk add --no-cache openssl curl && \
     addgroup --system --gid 1001 nodejs && \

@@ -24,7 +24,7 @@ spec:
       - image: $(SRVYAML_REGION)-docker.pkg.dev/$(PROJECT_ID)/$(SRVYAML_REGISTRY_NAME)/$(SRVYAML_CONTAINER_BACKEND):$(Build.BuildId)
         ports:
         - name: http1
-          containerPort: 8080
+          containerPort: 80
         resources:
           limits:
             cpu: $(SRVYAML_RESOURCE_CPU_BACKEND)
