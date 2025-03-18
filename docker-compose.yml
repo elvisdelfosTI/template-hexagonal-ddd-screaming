@@ -1,7 +1,6 @@
-version: '3.8'
-
 services:
   db:
+    container_name: library-db
     image: postgres:12-alpine
     environment:
       POSTGRES_USER: TEST_USER
@@ -12,15 +11,17 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
   api:
+    container_name: library-api
     build:
       context: .
       target: runner
     ports:
       - '3000:3000'
-      - '3001:3001'
+      - '50051:50051'
     environment:
       - ARCHETYPE_HEXAGONAL_DATABASE_URL=postgresql://TEST_USER:TEST_PASSWORD@db:5432/TEST_DB?schema=public
-      - PORT=3001
+      - ARCHETYPE_HEXAGONAL_API_JWT_SECRET=1nI77xBfuSHbXs33dJtMYwG8
+      - ARCHETYPE_HEXAGONAL_API_JWT_EXPIRES=5h
     depends_on:
       - db
 volumes:

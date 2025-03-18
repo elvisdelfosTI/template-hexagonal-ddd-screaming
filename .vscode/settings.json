@@ -4,7 +4,7 @@
 	"editor.codeActionsOnSave": {
 		"source.fixAll.eslint": "explicit"
 	},
-  "cSpell.ignorePaths": ["package.json", "dist/**", "node_modules/**"],
+  "cSpell.ignorePaths": ["package.json", "dist/**", "node_modules/**","Dockerfile" ],
 	"cSpell.words": [
 		"addgroup",
 		"ngneat",

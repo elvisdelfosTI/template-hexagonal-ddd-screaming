@@ -1,6 +1,7 @@
 import type { IAuthRepository } from '@auth/domain/AuthRepository';
 import { AuthTokenDto } from '@auth/domain/AuthTokenDTO';
 import type { Auth } from '@auth/domain/entities/Auth';
+import { config } from '@config/Environment.config';
 import jsonwebtoken from 'jsonwebtoken';
 import { type ILogObj, Logger } from 'tslog';
 const log: Logger<ILogObj> = new Logger();
@@ -28,12 +29,11 @@ export class JwtCommon implements IAuthRepository {
         {
           data: auth.mapToPrimitives(),
         },
-        process.env.ARCHETYPE_HEXAGONAL_API_JWT_SECRET || 'SECRET',
+        config.ARCHETYPE_HEXAGONAL_API_JWT_SECRET || 'SECRET',
         {
           expiresIn:
-            Number.parseInt(
-              process.env.ARCHETYPE_HEXAGONAL_API_JWT_EXPIRES || '5',
-            ) * 3600,
+            Number.parseInt(config.ARCHETYPE_HEXAGONAL_API_JWT_EXPIRES || '5') *
+            3600,
         },
       );
       return new AuthTokenDto(`Bearer ${token}`);

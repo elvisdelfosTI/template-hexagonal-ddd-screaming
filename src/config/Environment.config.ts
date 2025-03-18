@@ -1,4 +1,6 @@
+import dotenv from 'dotenv';
 import { z } from 'zod';
+dotenv.config();
 
 export enum typeServer {
   DEV = 'development',
@@ -18,7 +20,7 @@ const environmentSchema = z.object({
       typeServer.LOCAL,
     ])
     .default(typeServer.DEV),
-  PORT: z
+  PORT_REST: z
     .string()
     .transform((val) => Number.parseInt(val, 10))
     .default('3000'),
@@ -27,12 +29,8 @@ const environmentSchema = z.object({
     .string()
     .transform((val) => Number.parseInt(val, 10))
     .default('50051'),
+  ARCHETYPE_HEXAGONAL_API_JWT_SECRET: z.string(),
+  ARCHETYPE_HEXAGONAL_API_JWT_EXPIRES: z.string(),
 });
-
-declare global {
-  namespace NodeJS {
-    interface ProcessEnv extends z.infer<typeof environmentSchema> {}
-  }
-}
 
 export const config = environmentSchema.parse(process.env);
