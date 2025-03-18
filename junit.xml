@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="9" failures="0" errors="0" time="10.182">
-  <testsuite name="AuthorEdit" errors="0" failures="0" skipped="0" timestamp="2025-03-18T22:33:44" time="6.496" tests="1">
-    <testcase classname="AuthorEdit should edit an author" name="AuthorEdit should edit an author" time="0.023">
+<testsuites name="jest tests" tests="9" failures="0" errors="0" time="12.102">
+  <testsuite name="BookEdit" errors="0" failures="0" skipped="0" timestamp="2025-03-18T22:39:22" time="7.755" tests="1">
+    <testcase classname="BookEdit should edit a book" name="BookEdit should edit a book" time="0.024">
     </testcase>
   </testsuite>
-  <testsuite name="BookCreate" errors="0" failures="0" skipped="0" timestamp="2025-03-18T22:33:51" time="0.225" tests="1">
-    <testcase classname="BookCreate should create a book" name="BookCreate should create a book" time="0.011">
+  <testsuite name="BookGetAll should return all books" errors="0" failures="0" skipped="0" timestamp="2025-03-18T22:39:29" time="0.34" tests="1">
+    <testcase classname="BookGetAll should return all books should return all books" name="BookGetAll should return all books should return all books" time="0.007">
     </testcase>
   </testsuite>
-  <testsuite name="BookGetAll should return all books" errors="0" failures="0" skipped="0" timestamp="2025-03-18T22:33:51" time="0.302" tests="1">
-    <testcase classname="BookGetAll should return all books should return all books" name="BookGetAll should return all books should return all books" time="0.006">
+  <testsuite name="BookCreate" errors="0" failures="0" skipped="0" timestamp="2025-03-18T22:39:30" time="0.364" tests="1">
+    <testcase classname="BookCreate should create a book" name="BookCreate should create a book" time="0.008">
     </testcase>
   </testsuite>
-  <testsuite name="BookDelete" errors="0" failures="0" skipped="0" timestamp="2025-03-18T22:33:51" time="0.088" tests="1">
+  <testsuite name="BookGetById" errors="0" failures="0" skipped="0" timestamp="2025-03-18T22:39:30" time="0.297" tests="1">
+    <testcase classname="BookGetById should get a book by id" name="BookGetById should get a book by id" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="BookDelete" errors="0" failures="0" skipped="0" timestamp="2025-03-18T22:39:31" time="0.197" tests="1">
     <testcase classname="BookDelete should delete a book" name="BookDelete should delete a book" time="0.002">
     </testcase>
   </testsuite>
-  <testsuite name="BookGetById" errors="0" failures="0" skipped="0" timestamp="2025-03-18T22:33:51" time="0.139" tests="1">
-    <testcase classname="BookGetById should get a book by id" name="BookGetById should get a book by id" time="0.001">
+  <testsuite name="AuthorGetAll" errors="0" failures="0" skipped="0" timestamp="2025-03-18T22:39:31" time="0.305" tests="1">
+    <testcase classname="AuthorGetAll should return all authors" name="AuthorGetAll should return all authors" time="0.008">
     </testcase>
   </testsuite>
-  <testsuite name="AuthorGetAll" errors="0" failures="0" skipped="0" timestamp="2025-03-18T22:33:51" time="0.036" tests="1">
-    <testcase classname="AuthorGetAll should return all authors" name="AuthorGetAll should return all authors" time="0.001">
+  <testsuite name="AuthorDelete" errors="0" failures="0" skipped="0" timestamp="2025-03-18T22:39:21" time="10.821" tests="1">
+    <testcase classname="AuthorDelete should delete an author" name="AuthorDelete should delete an author" time="0.016">
     </testcase>
   </testsuite>
-  <testsuite name="AuthorDelete" errors="0" failures="0" skipped="0" timestamp="2025-03-18T22:33:44" time="8.038" tests="1">
-    <testcase classname="AuthorDelete should delete an author" name="AuthorDelete should delete an author" time="0.008">
+  <testsuite name="AuthorCreate" errors="0" failures="0" skipped="0" timestamp="2025-03-18T22:39:21" time="10.945" tests="1">
+    <testcase classname="AuthorCreate should create an author" name="AuthorCreate should create an author" time="0.039">
     </testcase>
   </testsuite>
-  <testsuite name="BookEdit" errors="0" failures="0" skipped="0" timestamp="2025-03-18T22:33:44" time="8.665" tests="1">
-    <testcase classname="BookEdit should edit a book" name="BookEdit should edit a book" time="0.007">
-    </testcase>
-  </testsuite>
-  <testsuite name="AuthorCreate" errors="0" failures="0" skipped="0" timestamp="2025-03-18T22:33:44" time="9.023" tests="1">
-    <testcase classname="AuthorCreate should create an author" name="AuthorCreate should create an author" time="0.006">
+  <testsuite name="AuthorEdit" errors="0" failures="0" skipped="0" timestamp="2025-03-18T22:39:22" time="10.574" tests="1">
+    <testcase classname="AuthorEdit should edit an author" name="AuthorEdit should edit an author" time="0.01">
     </testcase>
   </testsuite>
 </testsuites>
