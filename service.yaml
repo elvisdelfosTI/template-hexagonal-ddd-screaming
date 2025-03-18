@@ -44,7 +44,7 @@ spec:
           valueFrom:
             secretKeyRef:
               key: latest
-              name: '$(ARCHETYPE_HEXAGONAL_API_JWT_EXPIRES)'
+              name: ARCHETYPE_HEXAGONAL_API_JWT_EXPIRES
 #       - name: FRONT_URL
 #         value: '$(ARCHILAYER_URL_FRONT)'
 
