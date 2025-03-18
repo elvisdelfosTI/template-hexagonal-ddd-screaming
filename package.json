@@ -16,7 +16,7 @@
 		"check": "biome check .",
 		"check:fix": "biome check --write .",
 		"start": "node dist/main.js",
-    "prod":"npm run migrate:init && node dist/main.js",
+    "prod": "npm run migrate:prod && node dist/main.js",
     "build": "tsc && cpx \"src/**/*.proto\" dist/ && cpx \"prisma/**/*.prisma\" dist/prisma/ && tsc-alias",
 		"dev": "tsx --require tsconfig-paths/register --inspect --watch ./src/main.ts",
 		"dev:docker": "docker compose -f docker-compose.test.yml up -d && sleep 3 && dotenv -e .env.test --  npm run migrate && dotenv -e .env.test -- tsx --inspect --watch ./src/main.ts",

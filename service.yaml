@@ -30,6 +30,8 @@ spec:
             cpu: $(SRVYAML_RESOURCE_CPU_BACKEND)
             memory: $(SRVYAML_RESOURCE_MEMORY_BACKEND)
         env:
+        - name: PORT
+          value: "8080"
         - name: ARCHETYPE_HEXAGONAL_DATABASE_URL
           valueFrom:
             secretKeyRef:
@@ -51,9 +53,9 @@ spec:
         - name: LOGGING
           value: 'true'
         startupProbe:
-          timeoutSeconds: 240
-          failureThreshold: 1
-          periodSeconds: 240
+          timeoutSeconds: 300
+          failureThreshold: 3
+          periodSeconds: 10
           tcpSocket:
             port: 8080
   traffic:
