@@ -28,5 +28,4 @@ COPY --from=builder --chown=nodeuser:nodejs /app/node_modules ./node_modules
 COPY --from=builder --chown=nodeuser:nodejs /app/package.json ./
 USER nodeuser
 
-EXPOSE ${PORT}
 CMD ["npm", "run", "prod"]
