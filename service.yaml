@@ -55,7 +55,7 @@ spec:
           failureThreshold: 1
           periodSeconds: 240
           tcpSocket:
-            port: 8080
+            port: 80
   traffic:
   - percent: 100
     latestRevision: true
