@@ -29,4 +29,4 @@ COPY --from=builder --chown=nodeuser:nodejs /app/package.json ./
 COPY --from=builder --chown=nodeuser:nodejs /app/prisma ./prisma
 USER nodeuser
 
-CMD ["npm", "run", "prod"]
+CMD ["npm", "run", "start"]
