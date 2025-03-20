@@ -7,11 +7,12 @@ import { db } from './drizzle/drizzle';
 const clientDb = db;
 
 const checkDatabase = async () => {
-  const result = await clientDb.execute('SELECT 1');
-  if (result) {
-    log.info('🗄️  Database is connected Successfully');
-  } else {
+  try {
+    const result = await clientDb.execute('SELECT 1');
+    log.error(result);
+  } catch (error) {
     log.error('❌ Database is not connected');
+    log.error(error);
   }
 };
 
