@@ -10,7 +10,7 @@ import { Book } from '@book/domain/entities/Book';
 import type { PrismaClient } from 'node_modules/.prisma/client/index';
 
 export class PrismaBookRepository implements IBookRepository {
-  constructor(private _prisma: PrismaClient) {}
+  constructor(private _prisma: PrismaClient) { }
 
   async edit(book: BookSaveDTO): Promise<Book | undefined> {
     await this._prisma.book.update({

@@ -5,18 +5,20 @@ import { AuthorDelete } from '@author/application/UsesCases/AuthorDelete/AuthorD
 import { AuthorEdit } from '@author/application/UsesCases/AuthorEdit/AuthorEdit';
 import { AuthorGetAll } from '@author/application/UsesCases/AuthorGetAll/AuthorGetAll';
 import { AuthorSave } from '@author/application/UsesCases/UserSave/AuthorSave';
+import { DrizzleAuthorRepository } from '@author/infrastructure/database/DrizzleAuthorRepository';
 import { PrismaAuthorRepository } from '@author/infrastructure/database/PrismaAuthorRepository';
 import { BookDelete } from '@book/application/UsesCases/BookDelete/BookDelete';
 import { BookEdit } from '@book/application/UsesCases/BookEdit/BookEdit';
 import { BookGetAll } from '@book/application/UsesCases/BookGetAll/BookGetAll';
 import { BookGetById } from '@book/application/UsesCases/BookGetById/BookGetById';
 import { BookSave } from '@book/application/UsesCases/BookSave/BookSave';
+import { DrizzleBookRepository } from '@book/infrastructure/database/DizzleBookRepository';
 import { PrismaBookRepository } from '@book/infrastructure/database/PrismaBookRepository';
-import { prismaClient } from '@config/Database.config';
+import { prismaClient } from '@config/database/prisma/prisma';
 
 //const AuthorRepository = new InMemoryAuthorRepository();
-const BookRepository = new PrismaBookRepository(prismaClient);
-const AuthorRepository = new PrismaAuthorRepository(prismaClient);
+const BookRepository = new DrizzleBookRepository();
+const AuthorRepository = new DrizzleAuthorRepository();
 export default {
   AuthorService: {
     getAll: new AuthorGetAll(AuthorRepository),

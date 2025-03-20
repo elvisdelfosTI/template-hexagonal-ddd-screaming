@@ -11,7 +11,7 @@ export class JwtCommon implements IAuthRepository {
     try {
       const decoded = jsonwebtoken.verify(
         token.value,
-        process.env.ARCHETYPE_HEXAGONAL_API_JWT_SECRET || 'SECRET',
+        config.ARCHETYPE_HEXAGONAL_API_JWT_SECRET,
       );
       return decoded as string;
     } catch (error) {
@@ -29,7 +29,7 @@ export class JwtCommon implements IAuthRepository {
         {
           data: auth.mapToPrimitives(),
         },
-        config.ARCHETYPE_HEXAGONAL_API_JWT_SECRET || 'SECRET',
+        config.ARCHETYPE_HEXAGONAL_API_JWT_SECRET,
         {
           expiresIn:
             Number.parseInt(config.ARCHETYPE_HEXAGONAL_API_JWT_EXPIRES || '5') *

@@ -32,9 +32,8 @@ const configureMiddlewares = () => {
 
 export function startHttpServer() {
   configureMiddlewares();
-  const PORT = process.env.PORT || config.PORT;
+  const PORT = config.PORT;
   app.listen(PORT, () => {
-    log.info('🗄️  Database is connected Successfully');
     log.info('🚀 HTTP Server is running Successfully');
   });
 }

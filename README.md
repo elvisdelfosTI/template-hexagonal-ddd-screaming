@@ -8,6 +8,23 @@ Este proyecto es un servicio para la gestión de libros y autores, que permite r
 <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExd3NtdGM3MDBrMzA3a25tOXVheHNxMzVhb2MxdTl3ODJ0ZmRlM2hmZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1nPdOCiWBw3YOzA9G9/giphy.gif" width="150"/>
 </p>
 
+> [!IMPORTANT]  
+> Se ha cambiado de prisma a Drizzle com ORM`
+> ```json
+  "dependencies": {
+	  "@prisma/client": "6.1.0"
+    "prisma": "6.1.0",
+  }
+  "scripts" :{
+    "generate": "npx prisma generate",
+		"migrate": "npx prisma migrate dev",
+    "migrate:prod": "npx prisma migrate deploy --schema=./dist/prisma/schema.prisma",
+    "migrate:init": "npx prisma migrate dev --name init --schema=./dist/prisma/schema.prisma",
+    "build": "tsc && cpx \"src/**/*.proto\" dist/ && cpx \"prisma/**/*.prisma\" dist/prisma/ && tsc-alias"
+  }
+	
+
+
 > [!TIP]
 > Se recomienda editores de código basados en **VSCode**
 

@@ -8,15 +8,22 @@ describe('AuthorCreate', () => {
   let authorMock: AuthorDto;
   let authorRepository: IAuthorRepository;
   let useCase: AuthorSave;
-  beforeAll(() => {
+
+
+  beforeAll(async () => {
+    // Arrange
     authorMock = AuthorStub.generateDTO();
     authorRepository = new InMemoryAuthorRepository([]);
     useCase = new AuthorSave(authorRepository);
+    await useCase.execute(authorMock);
   });
 
   test('should create an author', async () => {
-    await useCase.execute(authorMock);
+    // Act
     const authors = await authorRepository.getAll();
+    // Assert
     expect(authors).toHaveLength(1);
   });
+
+
 });
