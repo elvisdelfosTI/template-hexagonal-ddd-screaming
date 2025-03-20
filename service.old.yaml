@@ -65,6 +65,34 @@ spec:
             secretKeyRef:
               key: latest
               name: ARCHETYPE_HEXAGONAL_API_JWT_EXPIRES
+      timeoutSeconds: 300
+      containers:
+      - image: $(SRVYAML_REGION)-docker.pkg.dev/$(PROJECT_ID)/$(SRVYAML_REGISTRY_NAME)/$(SRVYAML_CONTAINER_BACKEND):$(Build.BuildId)
+        ports:
+        - name: http1
+          containerPort: 8080
+        resources:
+          limits:
+            cpu: $(SRVYAML_RESOURCE_CPU_BACKEND)
+            memory: $(SRVYAML_RESOURCE_MEMORY_BACKEND)
+        env:
+        - name: ARCHETYPE_HEXAGONAL_DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              key: latest
+              name: ARCHETYPE_HEXAGONAL_DATABASE_URL
+        - name: ARCHETYPE_HEXAGONAL_API_JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: latest
+              name: ARCHETYPE_HEXAGONAL_API_JWT_SECRET
+        - name: ARCHETYPE_HEXAGONAL_API_JWT_EXPIRES
+          valueFrom:
+            secretKeyRef:
+              key: latest
+              name: ARCHETYPE_HEXAGONAL_API_JWT_EXPIRES
+#       - name: FRONT_URL
+#         value: '$(ARCHILAYER_URL_FRONT)'
 
         - name: LOGGING
           value: 'true'
@@ -77,3 +105,4 @@ spec:
   traffic:
   - percent: 100
     latestRevision: true
+postgresql://arquetipo-user:EQ1FPMPl76gyz@35.202.8.86:5432/db-arquetipo-dev?host=/cloudsql/pe-pacasmayo-arquitect-gcp-dev:us-central1:db-auditservice-dev&schema=public
