@@ -9,7 +9,6 @@ describe('AuthorCreate', () => {
   let authorRepository: IAuthorRepository;
   let useCase: AuthorSave;
 
-
   beforeAll(async () => {
     // Arrange
     authorMock = AuthorStub.generateDTO();
@@ -24,6 +23,4 @@ describe('AuthorCreate', () => {
     // Assert
     expect(authors).toHaveLength(1);
   });
-
-
 });
