@@ -25,7 +25,7 @@ const environmentSchema = z.object({
     .transform((val) => Number.parseInt(val, 10))
     .default('8080'),
 
-  ARCHETYPE_HEXAGONAL_DATABASE_URL: z.string(),
+  //ARCHETYPE_HEXAGONAL_DATABASE_URL: z.string(),
   ARCHETYPE_HEXAGONAL_DATABASE_NAME: z.string(),
   ARCHETYPE_HEXAGONAL_DATABASE_HOST: z.string(),
   ARCHETYPE_HEXAGONAL_DATABASE_PORT: z
