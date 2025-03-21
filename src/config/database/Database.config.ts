@@ -10,6 +10,7 @@ const checkDatabase = async () => {
   try {
     const result = await clientDb.execute('SELECT 1');
     log.error(result);
+    log.error('✅ Database is connected');
   } catch (error) {
     log.error('❌ Database is not connected');
     log.error(error);
