@@ -15,7 +15,6 @@ export class AuthSignIn {
   async execute(email: string, password: string): Promise<AuthTokenDto> {
     const user = await this.authorRepository.getByEmail(new AuthorEmail(email));
     if (!user) {
-      console.log(user, 'user');
       throw new AuthInvalidCredentialsError();
     }
     const isCorrect = await encrypt.comparePassword(

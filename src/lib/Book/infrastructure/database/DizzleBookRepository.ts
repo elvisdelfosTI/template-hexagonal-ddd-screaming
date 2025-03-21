@@ -24,7 +24,6 @@ export class DrizzleBookRepository implements IBookRepository {
     });
   }
   async getAll(): Promise<BookEntity[]> {
-    console.log('getAll book');
     const books = await db.query.book.findMany();
     return books.map(
       (book: Record<string, unknown>) =>
