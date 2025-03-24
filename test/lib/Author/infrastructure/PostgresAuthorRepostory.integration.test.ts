@@ -1,7 +1,7 @@
 import { AuthorId } from '../../../../src/lib/Author/domain/AuthorId';
 import { AuthorName } from '../../../../src/lib/Author/domain/AuthorName';
-import { AuthorStub } from '../domain/AuthorStub';
 import { DrizzleAuthorRepository } from '../../../../src/lib/Author/infrastructure/database/DrizzleAuthorRepository';
+import { AuthorStub } from '../domain/AuthorStub';
 
 describe('PostgresAuthorRepository', () => {
   let repository: DrizzleAuthorRepository;

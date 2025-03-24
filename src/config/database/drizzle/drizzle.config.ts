@@ -12,6 +12,6 @@ export default defineConfig({
     user: config.ARCHETYPE_HEXAGONAL_DATABASE_USER,
     password: config.ARCHETYPE_HEXAGONAL_DATABASE_PASSWORD,
     //ssl: { rejectUnauthorized: false }, //NOTE: This is to avoid the SSL error
-    ssl:false
+    ssl: false,
   },
 });
