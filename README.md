@@ -116,3 +116,6 @@ El proyecto utiliza Swagger para generar documentacion comandos principales:
 
 ## Licencia
 Este proyecto está bajo la Licencia MIT.
+
+
+docker compose -f docker-compose.test.yml down --remove-orphans

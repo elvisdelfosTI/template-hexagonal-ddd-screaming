@@ -83,4 +83,7 @@ export class DrizzleAuthorRepository implements IAuthorRepository {
         )
       : undefined;
   }
+  async deleteHardAll(): Promise<void> {
+    await db.delete(AuthorTable);
+  }
 }

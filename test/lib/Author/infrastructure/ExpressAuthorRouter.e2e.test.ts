@@ -8,7 +8,7 @@ describe('ExpressAuthorRouter', () => {
   let api: AxiosInstance;
 
   beforeAll(() => {
-    const port = process.env.PORT_REST || 3000;
+    const port = 3000;
     api = axios.create({
       baseURL: `http://localhost:${port}/api/v1`,
       validateStatus: (status) => {
