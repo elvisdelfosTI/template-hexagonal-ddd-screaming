@@ -11,34 +11,44 @@ resources:
       ref: feature/test
       name: RP-AZ-ARQ-FRAMEWORK/PIPELINES_TEMPLATES
 
-jobs:
-  - job: Run_Tests
+stages:
+  - stage: Run_Tests
     displayName: "Run Unit Tests"
-    steps:
-      - template: workflow-templates\nodejs-run-tests.yaml@templates  
+    jobs:
+      - job: Run_Tests
+        displayName: "Run Unit Tests"
+        condition: |
+          or(
+            eq(variables['environment'], 'DEVELOPMENT'), 
+            and(
+              eq(variables['environment'], 'TRAINING'), 
+              succeeded()
+            )
+          )
+        steps:
+          - template: workflow-templates\nodejs-run-tests.yaml@templates
+            parameters:
+              environment: $(environment)
 
-  - job: Deploy
+  - stage: Deploy
     displayName: "Deploy Application"
     dependsOn: Run_Tests
     condition: succeeded()
-    steps:
-      - template: workflow-templates\nodejs-backend-cloudrun-deploy.yaml@templates 
+    jobs:
+      - template: workflow-templates\nodejs-backend-cloudrun-deploy.yaml@templates
         parameters:
           container_image_name: $(SRVYAML_CONTAINER_BACKEND)
           artifact_region_url: $(SRVYAML_REGION)-docker.pkg.dev
-
           environment_dev: 'DEVELOPMENT'
           gcp_project_name_dev: 'pe-pacasmayo-arquitect-gcp-dev'
           sc_gcp_container_registry_name_dev: 'gcr-artifact-registry-arq-hexagonal-dev'
           gcp_artifact_registry_name_dev: 'arq-hexagonal-docker-registry-dev'
           gcp_secure_file_dev: 'pe-pacasmayo-arq-hexagonal-gcp-private-key-dev.json'
-
           environment_qas: 'TRAINING'
           gcp_project_name_qas: 'pe-pacasmayo-arquitect-gcp-qas'
           sc_gcp_container_registry_name_qas: 'gcr-artifact-registry-arq-hexagonal-qas'
           gcp_artifact_registry_name_qas: 'arq-hexagonal-docker-registry-qas'
           gcp_secure_file_qas: 'pe-pacasmayo-arq-hexagonal-azdeploy-gcp-private-key-qas.json'
-
           environment_prd: 'PRODUCTION'
           gcp_project_name_prd: 'pe-pacasmayo-arquitect-gcp-prd'
           sc_gcp_container_registry_name_prd: 'gcr-artifact-registry-arq-hexagonal-prd'
