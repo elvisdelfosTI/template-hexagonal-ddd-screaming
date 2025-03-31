@@ -37,7 +37,7 @@ stages:
     dependsOn: Tests
     condition: always()
     jobs:
-      - template: workflow-templates/nodejs-backend-cloudrun-deploy.yaml@templates
+      - template: workflow-templates\nodejs-backend-cloudrun-deploy.yaml@templates
         parameters:
           container_image_name: $(SRVYAML_CONTAINER_BACKEND)
           artifact_region_url: $(SRVYAML_REGION)-docker.pkg.dev
