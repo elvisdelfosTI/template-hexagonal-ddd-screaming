@@ -1,19 +1,18 @@
 trigger:
   branches:
     include:
-    - feature/*
-    - master
+      - feature/*
+      - master
 
 resources:
   repositories:
     - repository: templates
       type: git
-      ref: master
+      ref: feature/test
       name: RP-AZ-ARQ-FRAMEWORK/PIPELINES_TEMPLATES
 
 extends:
   template: workflow-templates\nodejs-backend-cloudrun-deploy.yaml@templates
-
   parameters:
     container_image_name: $(SRVYAML_CONTAINER_BACKEND)
     artifact_region_url: $(SRVYAML_REGION)-docker.pkg.dev

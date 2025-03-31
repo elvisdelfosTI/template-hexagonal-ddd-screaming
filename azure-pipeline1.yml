@@ -8,27 +8,16 @@ resources:
   repositories:
     - repository: templates
       type: git
-      ref: feature/test
+      ref: master
       name: RP-AZ-ARQ-FRAMEWORK/PIPELINES_TEMPLATES
 
 stages:
   - stage: Run_Tests
     displayName: "Run Unit Tests"
     jobs:
-      - job: Run_Tests
-        displayName: "Run Unit Tests"
-        condition: |
-          or(
-            eq(variables['environment'], 'DEVELOPMENT'), 
-            and(
-              eq(variables['environment'], 'TRAINING'), 
-              succeeded()
-            )
-          )
-        steps:
-          - template: workflow-templates\nodejs-run-tests.yaml@templates
-            parameters:
-              environment: $(environment)
+      - template: workflow-templates\nodejs-run-tests.yaml@templates
+        parameters:
+          environment: $(environment)
 
   - stage: Deploy
     displayName: "Deploy Application"

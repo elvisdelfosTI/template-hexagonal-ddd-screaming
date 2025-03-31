@@ -1,19 +1,46 @@
-trigger:
+trigger: none
+
+pr:
   branches:
     include:
-      - feature/*
       - master
 
-resources:
-  repositories:
-    - repository: templates
-      type: git
-      ref: feature/test
-      name: RP-AZ-ARQ-FRAMEWORK/PIPELINES_TEMPLATES
+pool:
+  name: Azure Pipelines
+  demands: java
+  
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '22.x'
+  displayName: 'Instalar Node.js'
 
-stages:
-  - stage: Run_Tests
-    displayName: "Run Unit Tests"
-    jobs:
-      - template: workflow-templates\nodejs-run-tests.yaml@templates
+- script: npm install
+  displayName: 'Instalar dependencias'
 
+- script: npm run test:unit
+  displayName: 'Ejecutar pruebas unitarias con cobertura'
+
+- task: PublishTestResults@2
+  displayName: 'Publicar resultados de pruebas'
+  inputs:
+    testResultsFiles: '**/junit.xml'
+    testRunTitle: 'Resultados de pruebas unitarias'
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publicar reporte de cobertura'
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(Build.SourcesDirectory)/coverage/cobertura-coverage.xml'
+    reportDirectory: '$(Build.SourcesDirectory)/coverage'
+
+- task: BuildQualityChecks@9
+  displayName: 'Validar métricas de calidad'
+  inputs:
+    checkCoverage: true
+    coverageType: 'line'
+    coverageThreshold: '70'
+    onlyFailBuildOnCoverageDecrease: false
+    checkTests: true
+    testResultsFailOption: 'fixed'
+    minimumFailedTests: '0'
