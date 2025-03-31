@@ -8,20 +8,20 @@ resources:
   repositories:
     - repository: templates
       type: git
-      ref: feature/test
+      ref: master
       name: RP-AZ-ARQ-FRAMEWORK/PIPELINES_TEMPLATES
 
-stages:
-  - stage: Run_Tests
+jobs:
+  - job: Run_Tests
     displayName: "Run Unit Tests"
-    jobs:
+    steps:
       - template: workflow-templates\nodejs-run-tests.yaml@templates  
 
-  - stage: Deploy
+  - job: Deploy
     displayName: "Deploy Application"
-    dependsOn: Run_Tests 
+    dependsOn: Run_Tests
     condition: succeeded()
-    jobs:
+    steps:
       - template: workflow-templates\nodejs-backend-cloudrun-deploy.yaml@templates 
         parameters:
           container_image_name: $(SRVYAML_CONTAINER_BACKEND)
