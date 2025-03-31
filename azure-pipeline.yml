@@ -1,8 +1,8 @@
 trigger:
   branches:
     include:
-    - feature/*
-    - master
+      - feature/*
+      - master
 
 resources:
   repositories:
@@ -11,9 +11,26 @@ resources:
       ref: master
       name: RP-AZ-ARQ-FRAMEWORK/PIPELINES_TEMPLATES
 
+jobs:
+- job: Run_Tests
+  displayName: "Run Unit Tests"
+  steps:
+    - task: Npm@1
+      displayName: 'Execute Unit Tests'
+      inputs:
+        command: 'custom'
+        customCommand: 'run test'
+      condition: |
+        or(
+          eq(variables['environment_dev'], 'DEVELOPMENT'), 
+          and(
+            eq(variables['environment_qas'], 'TRAINING'), 
+            succeeded()
+          )
+        )
+
 extends:
   template: workflow-templates\nodejs-backend-cloudrun-deploy.yaml@templates
-
   parameters:
     container_image_name: $(SRVYAML_CONTAINER_BACKEND)
     artifact_region_url: $(SRVYAML_REGION)-docker.pkg.dev
