@@ -8,7 +8,7 @@ resources:
   repositories:
     - repository: templates
       type: git
-      ref: master
+      ref: feature/test
       name: RP-AZ-ARQ-FRAMEWORK/PIPELINES_TEMPLATES
 
 jobs:
