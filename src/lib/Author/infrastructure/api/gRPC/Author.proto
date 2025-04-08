@@ -1,0 +1,36 @@
+syntax = "proto3";
+package author;
+
+service AuthorService {
+  rpc GetAll (AuthorListRequest) returns (AuthorListResponse);
+  rpc CreateAuthor (CreateAuthorRequest) returns ( AuthorCreateResponse);
+}
+
+message AuthorListRequest { }
+message AuthorRequest {
+  int32 id = 1;
+}
+
+message CreateAuthorRequest {
+  int32 id = 1;
+  string name = 2;
+  string email = 3;
+  string password = 4;
+  int32 age = 5;
+}
+
+message AuthorCreateResponse {
+  int32 id = 1;
+}
+
+message AuthorResponse {
+  int32 id = 1;
+  string name = 2;
+  string email = 3;
+  string password = 4;
+  int32 age = 5;
+}
+
+message AuthorListResponse {
+  repeated AuthorResponse authors = 1;
+}
