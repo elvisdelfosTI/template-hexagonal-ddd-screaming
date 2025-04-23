@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("ARCHETYPE_HEXAGONAL_DATABASE_URL")
 }
 
 model Author {

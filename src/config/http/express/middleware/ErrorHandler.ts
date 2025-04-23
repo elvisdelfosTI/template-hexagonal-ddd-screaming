@@ -1,3 +1,4 @@
+import { log } from '@config/Logger.config';
 import type { ErrorRequestHandler } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
@@ -8,6 +9,7 @@ export const errorHandler: ErrorRequestHandler = (
   _next,
 ) => {
   if (err instanceof Error) {
+    log.error('err', err);
     if (err.message.includes('Unique constraint failed')) {
       res.status(StatusCodes.CONFLICT).json({
         status: StatusCodes.NOT_FOUND,

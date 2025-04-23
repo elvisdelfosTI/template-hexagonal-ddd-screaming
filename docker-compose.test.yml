@@ -1,12 +1,10 @@
-version: '3.8'
-
 services:
   postgres_test:
-    image: postgres:12-alpine
+    image: postgres:latest
     container_name: integration-tests-db
     environment:
-      POSTGRES_USER: testuser
-      POSTGRES_PASSWORD: testpassword
-      POSTGRES_DB: testdb
+      POSTGRES_USER: arquetipo-user
+      POSTGRES_PASSWORD: EQ1FPMPl76gyz
+      POSTGRES_DB: db-arquetipo-dev
     ports:
-      - '5433:5432'
+      - '5432:5432'

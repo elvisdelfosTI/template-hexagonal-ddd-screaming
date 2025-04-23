@@ -8,7 +8,7 @@ describe('ExpressAuthorRouter', () => {
   let api: AxiosInstance;
 
   beforeAll(() => {
-    const port = process.env.PORT_REST || 3000;
+    const port = 3000;
     api = axios.create({
       baseURL: `http://localhost:${port}/api/v1`,
       validateStatus: (status) => {
@@ -31,13 +31,11 @@ describe('ExpressAuthorRouter', () => {
   }): Promise<string> => {
     const response = await api.post('/auth/login', credentials);
     expect(response.status).toBe(200);
-
-    const fullToken = response.data.token;
+    const fullToken = response.data.data.token;
     if (!fullToken || typeof fullToken !== 'string') {
       throw new Error('No token received from login');
     }
-
-    const token = fullToken.replace('Bearer ', '');
+    const token = fullToken;
     return token;
   };
 
@@ -46,7 +44,7 @@ describe('ExpressAuthorRouter', () => {
     token: string,
   ): Promise<void> => {
     const response = await api.delete(`/author/${authorId}`, {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: token },
     });
     expect(response.status).toBe(200);
   };
@@ -60,7 +58,7 @@ describe('ExpressAuthorRouter', () => {
         password: author.password,
       });
       const response = await api.get('/author', {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: token },
       });
       expect(response.status).toBe(200);
       expect(Array.isArray(response.data.data)).toBe(true);
@@ -78,7 +76,7 @@ describe('ExpressAuthorRouter', () => {
     });
 
     const response = await api.get(`/author/${id}`, {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: token },
     });
 
     expect(response.status).toBe(200);
@@ -113,12 +111,12 @@ describe('ExpressAuthorRouter', () => {
 
       const updatedAuthor = { ...author, name: 'Walter White', id };
       const response = await api.put('/author', updatedAuthor, {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: token },
       });
 
       expect(response.status).toBe(200);
       const getResponse = await api.get(`/author/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: token },
       });
       expect(getResponse.data.data.name).toBe('Walter White');
 

@@ -1,21 +1,18 @@
-import { PrismaClient } from '@prisma/client';
 import { AuthorId } from '../../../../src/lib/Author/domain/AuthorId';
 import { AuthorName } from '../../../../src/lib/Author/domain/AuthorName';
-import { PrismaAuthorRepository } from '../../../../src/lib/Author/infrastructure/database/PrismaAuthorRepository';
+import { DrizzleAuthorRepository } from '../../../../src/lib/Author/infrastructure/database/DrizzleAuthorRepository';
 import { AuthorStub } from '../domain/AuthorStub';
 
 describe('PostgresAuthorRepository', () => {
-  let prisma: PrismaClient;
-  let repository: PrismaAuthorRepository;
+  let repository: DrizzleAuthorRepository;
   beforeAll(async () => {
-    prisma = new PrismaClient();
-    repository = new PrismaAuthorRepository(prisma);
+    repository = new DrizzleAuthorRepository();
   });
   beforeEach(async () => {
-    await prisma.author.deleteMany();
+    await repository.deleteHardAll();
   });
   afterAll(async () => {
-    await prisma.$disconnect();
+    await repository.deleteHardAll();
   });
 
   it('should create an author', async () => {

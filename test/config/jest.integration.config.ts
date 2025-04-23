@@ -23,6 +23,7 @@ const config: Config.InitialOptions = {
     '^@prisma$': resolve(__dirname, '../../src/prisma'),
     '^test/(.*)$': resolve(__dirname, '../../test/$1'),
     '^src/(.*)$': resolve(__dirname, '../../src/$1'),
+    '@config/(.*)$': resolve(__dirname, '../../src/config/$1'),
   },
   moduleDirectories: ['node_modules', 'src'],
   verbose: true,

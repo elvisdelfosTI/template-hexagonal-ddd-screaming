@@ -22,9 +22,7 @@ export async function startGrpcServer() {
             reject(error);
             return;
           }
-          log.info(
-            `🥾 gRPC Server running at grpc://localhost:${config.PORT_GRPC}`,
-          );
+          log.info('🥾 gRPC Server is running Successfully');
           resolve();
         },
       );

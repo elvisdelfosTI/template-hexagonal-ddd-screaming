@@ -1,9 +1,8 @@
-FROM node:20-alpine AS base
+FROM node:22-alpine AS base
 
 WORKDIR /app
 
-ENV ENV=production \
-    PORT=3000
+ENV ENV=production
 
 RUN apk add --no-cache openssl curl && \
     addgroup --system --gid 1001 nodejs && \
@@ -27,12 +26,7 @@ FROM base AS runner
 COPY --from=builder --chown=nodeuser:nodejs /app/dist ./dist
 COPY --from=builder --chown=nodeuser:nodejs /app/node_modules ./node_modules
 COPY --from=builder --chown=nodeuser:nodejs /app/package.json ./
-
+COPY --from=builder --chown=nodeuser:nodejs /app/prisma ./prisma
 USER nodeuser
 
-# Health check
-#HEALTHCHECK --interval=30s --timeout=3s \
-#    CMD curl -f http://localhost:${PORT}/health || exit 1
-
-EXPOSE ${PORT}
-CMD ["npm", "start"]
+CMD ["npm", "run", "start"]

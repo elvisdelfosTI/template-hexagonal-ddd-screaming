@@ -3,12 +3,12 @@ trigger: none
 pr:
   branches:
     include:
-      - test-1
+      - master
 
 pool:
   name: Azure Pipelines
   demands: java
-
+  
 steps:
 - task: NodeTool@0
   inputs:
@@ -28,7 +28,7 @@ steps:
     testRunTitle: 'Resultados de pruebas unitarias'
 
 - task: PublishCodeCoverageResults@1
-  displayName: 'Publicar reporte de cobertura'G
+  displayName: 'Publicar reporte de cobertura'
   inputs:
     codeCoverageTool: 'Cobertura'
     summaryFileLocation: '$(Build.SourcesDirectory)/coverage/cobertura-coverage.xml'
